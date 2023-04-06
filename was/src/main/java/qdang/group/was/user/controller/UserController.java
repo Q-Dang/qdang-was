@@ -1,2 +1,4 @@
-package qdang.group.was.user.controller;public class UserController {
+package qdang.group.was.user.controller;
+
+public class UserController {
 }
