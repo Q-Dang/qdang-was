@@ -1,19 +1,15 @@
 package com.q_dang.was;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
-@RestController
+@Controller
 public class TestController {
 
-    @RequestMapping("/")
-    public String test1() {
-        return "test1";
-    }
-
+    @ResponseBody
     @RequestMapping("/test")
     public String test2() {
         return "test2";
     }
-
 }
