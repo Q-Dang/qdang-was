@@ -1,8 +1,8 @@
-package com.q_dang.was;
+package qdang.group.was;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class TestController {
@@ -10,6 +10,6 @@ public class TestController {
     @ResponseBody
     @RequestMapping("/test")
     public String test2() {
-        return "test2";
+        return "hello";
     }
 }
