@@ -9,6 +9,12 @@ public class TestController {
 
     @ResponseBody
     @RequestMapping("/test")
+    public String test1() {
+        return "hello";
+    }
+
+    @ResponseBody
+    @RequestMapping()
     public String test2() {
         return "hello";
     }
