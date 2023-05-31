@@ -6,30 +6,30 @@ import qdang.group.was.global.exception.ErrorType;
 public class ApiResponse {
 
     public static ResponseEntity<?> success(SuccessType successType){
-        JsonResponse<Object> response = new JsonResponse<>(successType.getHttpStatusCode(), successType.getMessage());
+        SuccessResponse<Object> response = new SuccessResponse<>(successType.getHttpStatusCode(), successType.getMessage());
         return ResponseEntity
                 .status(successType.getHttpStatusCode())
                 .body(response);
     }
 
     public static <T> ResponseEntity<?> success(SuccessType successType, T data){
-        JsonResponse<T> response = new JsonResponse<>(successType.getHttpStatusCode(), successType.getMessage(), data);
+        SuccessResponse<T> response = new SuccessResponse<>(successType.getHttpStatusCode(), successType.getMessage(), data);
         return ResponseEntity
                 .status(successType.getHttpStatusCode())
                 .body(response);
     }
 
     public static ResponseEntity<?> error(ErrorType errorType) {
-        JsonResponse<Object> response = new JsonResponse<>(errorType.getHttpStatusCode(), errorType.getMessage());
+        FailResponse response = new FailResponse(errorType.getStatusCode(), errorType.getMessage());
         return ResponseEntity
-                .status(errorType.getHttpStatusCode())
+                .status(errorType.getStatusCode())
                 .body(response);
     }
 
     public static ResponseEntity<?> error(ErrorType errorType, String message) {
-        JsonResponse<Object> response = new JsonResponse<>(errorType.getHttpStatusCode(), message);
+        FailResponse response = new FailResponse(errorType.getStatusCode(), message);
         return ResponseEntity
-                .status(errorType.getHttpStatusCode())
+                .status(errorType.getStatusCode())
                 .body(response);
     }
 }
