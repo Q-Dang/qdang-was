@@ -2,8 +2,8 @@ package qdang.group.was.global.exception;
 
 public class UnauthorizedException extends BusinessException {
 
-    public UnauthorizedException(ErrorType errorType) {
-        super(errorType);
+    public UnauthorizedException(ErrorType errorType, String message) {
+        super(errorType, message);
     }
 
     public UnauthorizedException() {

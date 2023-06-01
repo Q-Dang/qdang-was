@@ -9,17 +9,17 @@ public class BusinessException extends RuntimeException {
         this.errorType = errorType;
     }
 
-//    public BusinessException(ErrorType errorType, String message) {
-//        super(message);
-//        this.errorType = errorType;
-//    }
-
-
-//    public ErrorType getErrorType() {
-//        return errorType;
-//    }
-
-    public int getHttpStatusCode() {
-        return errorType.getHttpStatusCode();
+    public BusinessException(ErrorType errorType, String message) {
+        super(message);
+        this.errorType = errorType;
     }
+
+
+    public ErrorType getErrorType() {
+        return errorType;
+    }
+
+//    public int getHttpStatusCode() {
+//        return errorType.getHttpStatusCode();
+//    }
 }
