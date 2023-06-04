@@ -1,17 +1,27 @@
 package qdang.group.was.user.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
+import qdang.group.was.matchProcess.domain.MatchProcess;
+import qdang.group.was.userMatch.domain.UserMatch;
+
+import java.util.List;
 
 @Getter
-@Entity
+@Entity(name = "q_user")
 public class User {
 
     @Id
-    @Column(name = "USER_ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "q_user_id")
     private Long id;
+
+    @OneToMany(mappedBy = "user")
+    private List<UserMatch> userMatchList;
+
+    @OneToMany(mappedBy = "user")
+    private List<MatchProcess> matchProcessList;
+
 
     private String username;
     private String phone;
@@ -36,4 +46,6 @@ public class User {
     private String agreeUpdateAt;
     private String accessAt;
     private String accessCount;
+
+
 }
