@@ -1,39 +1,35 @@
 package qdang.group.was.user.controller.dto.request;
 
+import java.time.LocalDate;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import qdang.group.was.user.service.dto.request.SignUpRequest;
+import qdang.group.was.user.service.dto.request.SignUpInfo;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class PostSignUpRequest {
+public class SignUpRequest {
 
+    @NotNull
+    @NotEmpty
     private String username;
-    private String phone;
-    private String password;
-    private String accessToken;
-    private String fcmToken;
-    private String profileImage;
-    private String birthday;
-    private String gender;
-    private String address;
-    private String detailAddress;
-    private String joinStaff;
-    private String restingTf;
-    private String leaveTf;
-    private String phoneAuthCode;
-    private String phoneAuthAt;
-    private String phoneAuthSuccess;
-    private String phoneAuthTf;
-    private String joinAt;
-    private String joinPermitUserId;
-    private String joinAgree;
-    private String agreeUpdateAt;
-    private String accessAt;
-    private String accessCount;
 
-    public SignUpRequest newSignUpRequest() {
-        return SignUpRequest.builder().build();
+    @NotNull
+    private String password;
+
+    @NotNull
+    private LocalDate birthday;
+
+    @NotNull
+    @NotEmpty
+    private int gender;
+
+    @NotNull
+    private int proficiency;
+
+    public SignUpInfo newSignUpInfo() {
+        return SignUpInfo.of(username, password, birthday, gender, proficiency);
     }
 }

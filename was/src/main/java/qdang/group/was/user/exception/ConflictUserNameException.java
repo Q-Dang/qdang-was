@@ -3,9 +3,9 @@ package qdang.group.was.user.exception;
 import qdang.group.was.global.exception.BusinessException;
 import qdang.group.was.global.exception.ErrorType;
 
-public class AlreadyExistUserException extends BusinessException {
+public class ConflictUserNameException extends BusinessException {
 
-	public AlreadyExistUserException() {
+	public ConflictUserNameException() {
 		super(ErrorType.ALREADY_EXIST_USER_EXCEPTION);
 	}
 }
