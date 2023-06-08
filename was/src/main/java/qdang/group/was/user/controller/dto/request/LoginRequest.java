@@ -1,5 +1,6 @@
 package qdang.group.was.user.controller.dto.request;
 
+import javax.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,9 +8,15 @@ import qdang.group.was.user.service.dto.request.LoginInfo;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class PostLoginRequest {
+public class LoginRequest {
 
-    public LoginInfo newLoginRequest() {
-        return LoginInfo.builder().build();
+    @NotNull
+    private String username;
+
+    @NotNull
+    private String password;
+
+    public LoginInfo newLoginInfo() {
+        return LoginInfo.of(username, password);
     }
 }

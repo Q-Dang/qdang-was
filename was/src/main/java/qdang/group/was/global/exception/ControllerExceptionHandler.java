@@ -12,6 +12,7 @@ import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import qdang.group.was.global.response.ApiResponse;
 
 @Slf4j
@@ -68,6 +69,11 @@ public class ControllerExceptionHandler {
 		return ApiResponse.error(ErrorType.VALIDATION_WRONG_HTTP_METHOD_EXCEPTION);
 	}
 
+	// 나중에 수정하기
+	@ExceptionHandler(IllegalArgumentException.class)
+	public ResponseEntity<?> illegalArgumentExceptionAdvice(IllegalArgumentException e) {
+		return ApiResponse.error(ErrorType.INVALID_ARGUMENT_EXCEPTION);
+	}
 	/**
 	 * 500 Error
 	 * Internal Server Error

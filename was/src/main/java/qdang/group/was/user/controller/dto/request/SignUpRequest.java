@@ -1,6 +1,7 @@
 package qdang.group.was.user.controller.dto.request;
 
 import java.time.LocalDate;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import lombok.AccessLevel;
@@ -13,17 +14,17 @@ import qdang.group.was.user.service.dto.request.SignUpInfo;
 public class SignUpRequest {
 
     @NotNull
-    @NotEmpty
     private String username;
 
     @NotNull
+    @NotBlank
+    @NotEmpty
     private String password;
 
     @NotNull
     private LocalDate birthday;
 
     @NotNull
-    @NotEmpty
     private int gender;
 
     @NotNull
