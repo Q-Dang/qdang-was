@@ -7,7 +7,7 @@ public class UnauthorizedException extends BusinessException {
     }
 
     public UnauthorizedException() {
-        super(ErrorType.TOKEN_TIME_EXPIRED_EXCEPTION);
+        super(ErrorType.VALIDATION_UNAUTHORIZED_EXCEPTION);
     }
 }
 

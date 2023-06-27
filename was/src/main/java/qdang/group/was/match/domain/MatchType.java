@@ -1,6 +1,5 @@
 package qdang.group.was.match.domain;
 
-import jakarta.persistence.Embeddable;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

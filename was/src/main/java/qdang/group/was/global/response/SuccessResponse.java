@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class JsonResponse<T> {
+public class SuccessResponse<T> {
 
     private final int code;
     private final String message;
