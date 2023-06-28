@@ -10,4 +10,3 @@ public class UnauthorizedException extends BusinessException {
         super(ErrorType.VALIDATION_UNAUTHORIZED_EXCEPTION);
     }
 }
-

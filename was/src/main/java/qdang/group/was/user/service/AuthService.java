@@ -1,16 +1,19 @@
 package qdang.group.was.user.service;
 
+import qdang.group.was.global.jwt.TokenInfo;
 import qdang.group.was.user.service.dto.request.LoginInfo;
 import qdang.group.was.user.service.dto.request.SignUpInfo;
-import qdang.group.was.user.service.dto.response.JwtToken;
+import qdang.group.was.user.service.dto.response.TokenCollection;
 
 public interface AuthService {
 
 	void signUp(SignUpInfo request);
 
-	JwtToken login(LoginInfo request);
+	TokenCollection login(LoginInfo request);
 
-	boolean isPresentUserName(String username);
+	TokenCollection generateTokenCollection(TokenInfo tokenInfo);
+
+	boolean isPresentUserId(String userId);
 
 	boolean isWrongPassword(String rawPassword, String encodedPassword);
 }

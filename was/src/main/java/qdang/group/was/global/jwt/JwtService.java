@@ -1,4 +1,4 @@
-package qdang.group.was.global.config.jwt;
+package qdang.group.was.global.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -7,9 +7,10 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.Base64;
 import java.util.Date;
-import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import qdang.group.was.global.exception.ErrorType;
@@ -18,39 +19,37 @@ import qdang.group.was.global.exception.UnauthorizedException;
 @Service
 public class JwtService {
 
-	@Value("${jwt.secret}")
-	private String jwtSecret;
+	private final Key accesskey;
+	private final Key refreshKey;
+	private final Integer accessExpired;
+	private final Integer refreshExpired;
 
-	@PostConstruct
-	protected void init() {
-		jwtSecret = Base64.getEncoder()
-			.encodeToString(jwtSecret.getBytes(StandardCharsets.UTF_8));
+	public JwtService(JwtProperty jwtProperty) {
+		byte[] accessKeyBytes = jwtProperty.getAccessKey().getBytes(StandardCharsets.UTF_8);
+		byte[] refreshKeyBytes = jwtProperty.getRefreshKey().getBytes(StandardCharsets.UTF_8);
+		accesskey = Keys.hmacShaKeyFor(accessKeyBytes);
+		refreshKey = Keys.hmacShaKeyFor(refreshKeyBytes);
+		accessExpired = jwtProperty.getAccessExpiredMin();
+		refreshExpired = jwtProperty.getRefreshExpiredDay();
 	}
 
-	// JWT 토큰 발급
-	public String issuedToken(Long userId) {
-		String strUserId = String.valueOf(userId);
-		final Date now = new Date();
-
-		// 클레임 생성
-		final Claims claims = Jwts.claims()
-			.setSubject("access_token")
-			.setIssuedAt(now)
-			.setExpiration(new Date(now.getTime() + 120 * 60 * 1000L));
-
-		//private claim 등록
-		claims.put("userId", strUserId);
-
+	public String createAccessToken(TokenInfo tokenInfo) {
 		return Jwts.builder()
+			.setSubject("access_token")
 			.setHeaderParam(Header.TYPE , Header.JWT_TYPE)
-			.setClaims(claims)
-			.signWith(getSigningKey())
+			.setClaims(tokenInfo.getPayload())
+			.setExpiration(Date.from(Instant.now().plus(accessExpired, ChronoUnit.MINUTES)))
+			.signWith(accesskey)
 			.compact();
 	}
 
-	private Key getSigningKey() {
-		final byte[] keyBytes = jwtSecret.getBytes(StandardCharsets.UTF_8);
-		return Keys.hmacShaKeyFor(keyBytes);
+	public String createRefreshToken() {
+		return Jwts.builder()
+			.setSubject("refresh_token")
+			.setHeaderParam(Header.TYPE , Header.JWT_TYPE)
+			.setExpiration(Date.from(Instant.now().plus(refreshExpired, ChronoUnit.DAYS)))
+			.signWith(refreshKey)
+			.compact();
 	}
 
 	// JWT 토큰 검증
@@ -68,7 +67,7 @@ public class JwtService {
 
 	private Claims getBody(final String token) {
 		return Jwts.parserBuilder()
-			.setSigningKey(getSigningKey())
+			.setSigningKey(accesskey)
 			.build()
 			.parseClaimsJws(token)
 			.getBody();

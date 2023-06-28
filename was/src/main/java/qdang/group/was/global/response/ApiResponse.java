@@ -5,18 +5,15 @@ import qdang.group.was.global.exception.ErrorType;
 
 public class ApiResponse {
 
-    public static ResponseEntity<?> success(SuccessType successType){
-        SuccessResponse<Object> response = new SuccessResponse<>(successType.getHttpStatusCode(), successType.getMessage());
+    public static ResponseEntity success(SuccessType successType){
         return ResponseEntity
-                .status(successType.getHttpStatusCode())
-                .body(response);
+            .status(successType.getHttpStatus()).build();
     }
 
     public static <T> ResponseEntity<?> success(SuccessType successType, T data){
-        SuccessResponse<T> response = new SuccessResponse<>(successType.getHttpStatusCode(), successType.getMessage(), data);
         return ResponseEntity
-                .status(successType.getHttpStatusCode())
-                .body(response);
+                .status(successType.getHttpStatus())
+                .body(data);
     }
 
     public static ResponseEntity<?> error(ErrorType errorType) {

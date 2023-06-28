@@ -11,8 +11,9 @@ import qdang.group.was.user.domain.User;
 @Builder(access = AccessLevel.PRIVATE)
 public class SignUpInfo {
 
-	private String username;
+	private String userId;
 	private String password;
+	private String username;
 	private LocalDate birthday;
 	private int gender;
 	private int proficiency;
@@ -21,11 +22,12 @@ public class SignUpInfo {
 		password = passwordEncoder.encode(password);
 	}
 
-	public static SignUpInfo of(String username, String password, LocalDate birthday, int gender,
-		int proficiency) {
+	public static SignUpInfo of(String userId, String password, String username, LocalDate birthday,
+		int gender, int proficiency) {
 		return SignUpInfo.builder()
-			.username(username)
+			.userId(userId)
 			.password(password)
+			.username(username)
 			.birthday(birthday)
 			.gender(gender)
 			.proficiency(proficiency)
@@ -33,6 +35,6 @@ public class SignUpInfo {
 	}
 
 	public User newUser() {
-		return User.of(username, password, birthday, gender, proficiency);
+		return User.of(userId, password, username, birthday, gender, proficiency);
 	}
 }

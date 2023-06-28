@@ -9,12 +9,12 @@ import lombok.Getter;
 @Builder(access = AccessLevel.PRIVATE)
 public class LoginInfo {
 
-	private String username;
+	private String userId;
 	private String password;
 
-	public static LoginInfo of(String username, String password) {
+	public static LoginInfo of(String userId, String password) {
 		return LoginInfo.builder()
-			.username(username)
+			.userId(userId)
 			.password(password)
 			.build();
 	}

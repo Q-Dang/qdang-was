@@ -3,6 +3,8 @@ package qdang.group.was.user.domain;
 import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,19 +27,22 @@ public class User {
 	@Column(name = "q_user_id")
 	private Long id;
 
+
 	@OneToMany(mappedBy = "user")
 	private List<UserMatch> userMatchList;
 
 	@OneToMany(mappedBy = "user")
 	private List<MatchProcess> matchProcessList;
 
-
-	private String username;
+	private String userId;
 	private String password;
+	private String username;
 	private LocalDate birthday;
 	private int gender;
 	private int proficiency;
 
+	@Enumerated(EnumType.STRING)
+	private UserRole userRole;
 	private String phone;
 	private String accessToken;
 	private String fcmToken;
@@ -59,15 +64,17 @@ public class User {
 	private String accessCount;
 
 	public static User of(
-		String username,
+		String userId,
 		String password,
+		String username,
 		LocalDate birthday,
 		int gender,
 		int proficiency
 	) {
 		return User.builder()
-			.username(username)
+			.userId(userId)
 			.password(password)
+			.username(username)
 			.birthday(birthday)
 			.gender(gender)
 			.proficiency(proficiency)
