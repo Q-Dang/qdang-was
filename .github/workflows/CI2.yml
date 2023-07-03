@@ -41,3 +41,4 @@ jobs:
       with:
         arguments: build
 #         build-root-directory: ./notification
+        build-root-directory: ./was
