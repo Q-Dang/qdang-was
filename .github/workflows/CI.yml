@@ -29,13 +29,14 @@ jobs:
         echo "${{ secrets.QDANG_CI_YAML }}" > ./application.yaml
       shell: bash
       
-      ## 2) 스프링 프로젝트 jar 파일 빌드
     - name: Grant execute permission for gradlew
       run: chmod +x ./was/gradlew
-      
+
     - name: Build with Gradle
-      run: ./was/gradlew build
-      
+      run: |
+        cd ./was
+        ./gradlew build
+        
 #       ## 3) Docker Hub에 이미지 push 하기
 #     - name: Docker build
 #       run: |
