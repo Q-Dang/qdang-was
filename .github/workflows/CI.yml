@@ -1,11 +1,10 @@
 name: CI with Gradle
 
 on:
+  push:
+    branches: [ "develop", "releases/**", "master" ]
   pull_request:
     branches: [ "develop", "releases/**", "master" ]
-#       - develop
-#       - releases/**
-#       - master
 
 permissions:
   contents: read
@@ -22,8 +21,7 @@ jobs:
       with:
         java-version: '17'
         distribution: 'temurin'
-        
-      ## 1) git ignore에 등록된 application.properties 파일 생성해주기
+
     - name: make application.yaml
       run: |
         cd ./was/src/main/resources
