@@ -26,17 +26,17 @@ jobs:
       ## 1) git ignore에 등록된 application.properties 파일 생성해주기
     - name: make application.yaml
       run: |
-        cd ./src/main/resources
-        touch ./application.yaml
+        cd ./was/src/main/resources
+        touch ./was/application.yaml
         echo "${{ secrets.QDANG_CI_YAML }}" > ./application.yaml
       shell: bash
       
       ## 2) 스프링 프로젝트 jar 파일 빌드
     - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
+      run: chmod +x ./was/gradlew
       
     - name: Build with Gradle
-      run: ./gradlew build
+      run: ./was/gradlew build
       
 #       ## 3) Docker Hub에 이미지 push 하기
 #     - name: Docker build
