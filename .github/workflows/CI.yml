@@ -27,7 +27,7 @@ jobs:
     - name: make application.yaml
       run: |
         cd ./was/src/main/resources
-        touch ./was/application.yaml
+        touch ./application.yaml
         echo "${{ secrets.QDANG_CI_YAML }}" > ./application.yaml
       shell: bash
       
