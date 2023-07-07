@@ -13,24 +13,19 @@ import qdang.group.was.user.service.dto.request.SignUpInfo;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class SignUpRequest {
 
-    @NotNull
-    private String username;
+    private String userId;
 
-    @NotNull
-    @NotBlank
-    @NotEmpty
     private String password;
 
-    @NotNull
+    private String username;
+
     private LocalDate birthday;
 
-    @NotNull
     private int gender;
 
-    @NotNull
     private int proficiency;
 
     public SignUpInfo newSignUpInfo() {
-        return SignUpInfo.of(username, password, birthday, gender, proficiency);
+        return SignUpInfo.of(userId, password, username, birthday, gender, proficiency);
     }
 }

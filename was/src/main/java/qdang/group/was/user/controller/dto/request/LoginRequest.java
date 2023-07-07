@@ -11,12 +11,12 @@ import qdang.group.was.user.service.dto.request.LoginInfo;
 public class LoginRequest {
 
     @NotNull
-    private String username;
+    private String userId;
 
     @NotNull
     private String password;
 
     public LoginInfo newLoginInfo() {
-        return LoginInfo.of(username, password);
+        return LoginInfo.of(userId, password);
     }
 }

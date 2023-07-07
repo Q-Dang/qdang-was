@@ -14,7 +14,7 @@ import qdang.group.was.user.controller.dto.request.LoginRequest;
 import qdang.group.was.user.controller.dto.request.SignUpRequest;
 import qdang.group.was.user.controller.dto.response.LoginResponse;
 import qdang.group.was.user.service.AuthService;
-import qdang.group.was.user.service.dto.response.JwtToken;
+import qdang.group.was.user.service.dto.response.TokenCollection;
 
 @RequestMapping("/api/v1/auth")
 @RestController
@@ -34,7 +34,8 @@ public class AuthController {
 	@PostMapping("/login")
 	@Operation(summary = "로그인", description = "기본 유저 로그인")
 	public ResponseEntity<?> login(@RequestBody LoginRequest request) {
-		JwtToken jwtToken = authService.login(request.newLoginInfo());
+		TokenCollection jwtToken = authService.login(request.newLoginInfo());
 		return ApiResponse.success(SuccessType.LOGIN_SUCCESS, LoginResponse.from(jwtToken));
 	}
+
 }
