@@ -1,10 +1,10 @@
-DROP TABLE IF EXISTS `q_user`;
-DROP TABLE IF EXISTS `q_match`;
-DROP TABLE IF EXISTS `q_user_match`;
-DROP TABLE IF EXISTS `q_match_process`;
-DROP TABLE IF EXISTS `q_user_match_process`;
-DROP TABLE IF EXISTS `phone_auth`;
-DROP TABLE IF EXISTS `access_logaccess_log`;
+# DROP TABLE IF EXISTS `q_user`;
+# DROP TABLE IF EXISTS `q_match`;
+# DROP TABLE IF EXISTS `q_user_match`;
+# DROP TABLE IF EXISTS `q_match_process`;
+# DROP TABLE IF EXISTS `q_user_match_process`;
+# DROP TABLE IF EXISTS `phone_auth`;
+# DROP TABLE IF EXISTS `access_log`;
 
 CREATE TABLE `q_user` (
                           `id`	bigint	NOT NULL	PRIMARY KEY AUTO_INCREMENT,
@@ -76,6 +76,7 @@ CREATE TABLE `q_user_match` (
                                 `inning_count`	int	NOT NULL	DEFAULT 0,
                                 `succeed_inning_count`	int	NOT NULL	DEFAULT 0,
                                 `failed_inning_count`	int	NOT NULL	DEFAULT 0,
+                                `slugging_count`	int	NOT NULL	DEFAULT 0,
                                 FOREIGN KEY (user_id) REFERENCES q_user (id),
                                 FOREIGN KEY (match_id) REFERENCES q_match (id)
 );
