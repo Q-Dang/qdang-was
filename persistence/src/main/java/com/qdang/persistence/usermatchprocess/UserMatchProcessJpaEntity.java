@@ -2,6 +2,7 @@ package com.qdang.persistence.usermatchprocess;
 
 import com.qdang.persistence.matchprocess.MatchProcessJpaEntity;
 import com.qdang.persistence.user.UserJpaEntity;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -17,10 +18,14 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 @Getter
 @Entity
 @Table(name = "q_user_match_process")
+@DynamicInsert
+@DynamicUpdate
 @Builder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -30,40 +35,52 @@ public class UserMatchProcessJpaEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Integer score;
-
-    private Integer finishCushionScore;
-
-    private Integer finishBankShotScore;
-
-    private Integer ranking;
-
-    @Enumerated(value = EnumType.STRING)
-    private UserMatchStatusJpa status;
-
-    private Integer maxHighRun;
-
-    private Integer highRun;
-
-    private Integer deltaScore;
-
-    @Enumerated(value = EnumType.STRING)
-    private TurnTypeJpa turnType;
-
-    private Boolean isMyTurn;
-
-    private Integer inningCount;
-
-    private Integer succeedInningCount;
-
-    private Integer failedInningCount;
-
-
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false)
     private UserJpaEntity user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "match_process_id")
+    @JoinColumn(name = "match_process_id", nullable = false)
     private MatchProcessJpaEntity matchProcess;
+
+    @Column(nullable = false)
+    private Integer score;
+
+    @Column(nullable = false)
+    private Integer finishCushionScore;
+
+    @Column(nullable = false)
+    private Integer finishBankShotScore;
+
+    @Column(nullable = false)
+    private Integer ranking;
+
+    @Enumerated(value = EnumType.STRING)
+    @Column(nullable = false)
+    private UserMatchStatusJpa status;
+
+    @Column(nullable = false)
+    private Integer maxHighRun;
+
+    @Column(nullable = false)
+    private Integer highRun;
+
+    @Column(nullable = false)
+    private Integer deltaScore;
+
+    @Enumerated(value = EnumType.STRING)
+    @Column(nullable = false)
+    private TurnTypeJpa turnType;
+
+    @Column(nullable = false)
+    private Boolean isMyTurn;
+
+    @Column(nullable = false)
+    private Integer inningCount;
+
+    @Column(nullable = false)
+    private Integer succeedInningCount;
+
+    @Column(nullable = false)
+    private Integer failedInningCount;
 }
