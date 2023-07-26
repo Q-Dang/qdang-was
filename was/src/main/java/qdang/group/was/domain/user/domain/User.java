@@ -1,0 +1,90 @@
+package qdang.group.was.domain.user.domain;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import lombok.*;
+import qdang.group.was.domain.matchProcess.domain.MatchProcess;
+import qdang.group.was.domain.userMatch.domain.UserMatch;
+
+import java.util.List;
+
+@Getter
+@Entity
+@Table(name = "q_user")
+@Builder(access = AccessLevel.PRIVATE)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class User {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
+	@Enumerated(EnumType.STRING)
+	private UserRole userRole;
+
+	private String userId;
+	private String password;
+	private String username;
+	private LocalDate birthday;
+	private String gender;
+	private Integer proficiency;
+	private String phone;
+	private String fcmToken;
+	private String profileImage;
+	private String address;
+	private String detailAddress;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "join_staff")
+	private User joinStaff;
+
+	private Boolean isResting;
+	private Boolean isLeaving;
+	private String phoneAuthCode;
+	private LocalDateTime phoneAuthAt;
+	private Boolean isPhoneAuth;
+
+	private LocalDateTime joinAt;
+	private Boolean joinAgree;
+	private LocalDateTime agreeUpdateAt;
+	private LocalDateTime accessAt;
+	private Integer accessCount;
+
+	@OneToMany(mappedBy = "user")
+	private List<UserMatch> userMatchList;
+
+	@OneToMany(mappedBy = "user")
+	private List<MatchProcess> matchProcessList;
+
+	public static User of(
+		String userId,
+		String password,
+		String username,
+		LocalDate birthday,
+		String gender,
+		int proficiency
+	) {
+		return User.builder()
+			.userId(userId)
+			.password(password)
+			.username(username)
+			.birthday(birthday)
+			.gender(gender)
+			.proficiency(proficiency)
+			.build();
+	}
+
+
+}
