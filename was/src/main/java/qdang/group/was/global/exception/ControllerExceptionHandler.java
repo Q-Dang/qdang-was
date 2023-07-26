@@ -65,6 +65,7 @@ public class ControllerExceptionHandler {
 	 */
 	@ExceptionHandler(HttpRequestMethodNotSupportedException.class)
 	public ResponseEntity<?> handleDateTimeFormatException2(HttpRequestMethodNotSupportedException e) {
+		System.out.println(e.getMessage());
 		return ApiResponse.error(ErrorType.VALIDATION_WRONG_HTTP_METHOD_EXCEPTION);
 	}
 
