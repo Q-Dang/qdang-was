@@ -1,7 +1,7 @@
 package com.qdang.api.user.adapter.in.request;
 
-import com.qdang.api.user.service.dto.request.SignUpInfo;
-import java.time.LocalDate;
+import com.qdang.api.user.application.port.in.command.SignUpCommand;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,19 +10,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class SignUpRequest {
 
-    private String userId;
+    @Schema(description = "로그인 아이디")
+    private String loginId;
 
+    @Schema(description = "비밀번호")
     private String password;
 
-    private String username;
-
-    private LocalDate birthday;
-
-    private String gender;
-
-    private int proficiency;
-
-    public SignUpInfo newSignUpInfo() {
-        return SignUpInfo.of(userId, password, username, birthday, gender, proficiency);
+    public SignUpCommand toSignUpCommand() {
+        return SignUpCommand.of(loginId, password);
     }
 }

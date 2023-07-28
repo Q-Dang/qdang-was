@@ -12,5 +12,5 @@ public enum MatchType {
     FOUR_BALL(1),
     POCKET_BALL(0);
 
-    private final int matchTypeCode;
+    private final int code;
 }

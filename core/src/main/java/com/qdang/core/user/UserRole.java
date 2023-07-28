@@ -1,5 +1,6 @@
 package com.qdang.core.user;
 
 public enum UserRole {
-	MEMBER, ADMIN
+	MEMBER, ADMIN,
+	member, admin,
 }

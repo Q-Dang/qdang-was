@@ -1,6 +1,6 @@
 package com.qdang.global.jwt;
 
-import com.qdang.core.user.User;
+import com.qdang.api.user.domain.User;
 import java.util.HashMap;
 import java.util.Map;
 import lombok.AccessLevel;

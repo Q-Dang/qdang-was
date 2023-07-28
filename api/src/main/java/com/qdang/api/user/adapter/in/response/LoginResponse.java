@@ -1,6 +1,7 @@
 package com.qdang.api.user.adapter.in.response;
 
-import com.qdang.api.user.service.dto.response.TokenCollection;
+import com.qdang.api.user.domain.TokenCollection;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +10,10 @@ import lombok.Getter;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class LoginResponse {
 
+	@Schema(description = "JWT access token")
 	private String accessToken;
+
+	@Schema(description = "JWT refresh token")
 	private String refreshToken;
 
 	public static LoginResponse from(TokenCollection jwtToken) {

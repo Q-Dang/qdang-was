@@ -2,3 +2,6 @@ rootProject.name = 'WAS'
 include 'api'
 include 'core'
 include 'library'
+include 'adapter'
+include 'application'
+

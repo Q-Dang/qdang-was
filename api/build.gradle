@@ -4,8 +4,8 @@ war {enabled = false}
 bootJar {enabled = true}
 jar {enabled = false}
 
-group = 'com.qdang'
-version = '1.0'
+//group = 'com.qdang'
+//version = '1.0'
 
 dependencies {
     implementation project(':core')
@@ -21,4 +21,8 @@ dependencies {
     // Swagger
     implementation 'org.springdoc:springdoc-openapi-ui:1.7.0'
 
+    // Mapper
+    implementation 'org.mapstruct:mapstruct:1.5.4.Final'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.4.Final'
+    annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
 }

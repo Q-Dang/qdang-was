@@ -1,6 +1,6 @@
 package com.qdang.global.exception;
 
-import com.qdang.global.response.ApiResponse;
+import com.qdang.global.response.HttpResponse;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.Objects;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +26,7 @@ public class ControllerExceptionHandler {
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	protected ResponseEntity<?> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
 		FieldError fieldError = Objects.requireNonNull(e.getFieldError());
-		return ApiResponse.error(ErrorType.VALIDATION_INPUT_EXCEPTION,
+		return HttpResponse.error(ErrorType.VALIDATION_INPUT_EXCEPTION,
 			String.format("%s. (%s)", fieldError.getDefaultMessage(), fieldError.getField()));
 	}
 
@@ -37,7 +37,7 @@ public class ControllerExceptionHandler {
 	@ExceptionHandler(BindException.class)
 	public ResponseEntity<?> handleBadRequest(BindException e) {
 		FieldError fieldError = Objects.requireNonNull(e.getFieldError());
-		return ApiResponse.error(ErrorType.VALIDATION_WRONG_TYPE_EXCEPTION,
+		return HttpResponse.error(ErrorType.VALIDATION_WRONG_TYPE_EXCEPTION,
 			String.format("%s (%s)", fieldError.getDefaultMessage(), fieldError.getField()));
 	}
 
@@ -47,7 +47,7 @@ public class ControllerExceptionHandler {
 	 */
 	@ExceptionHandler(HttpMessageNotReadableException.class)
 	public ResponseEntity<?> handleDateTimeFormatException1(HttpMessageNotReadableException e) {
-		return ApiResponse.error(ErrorType.VALIDATION_INPUT_EXCEPTION);
+		return HttpResponse.error(ErrorType.VALIDATION_INPUT_EXCEPTION);
 	}
 
 	/**
@@ -56,7 +56,7 @@ public class ControllerExceptionHandler {
 	 */
 	@ExceptionHandler(SQLIntegrityConstraintViolationException.class)
 	public ResponseEntity<?> handleConstraintViolationException(SQLIntegrityConstraintViolationException e) {
-		return ApiResponse.error(ErrorType.VALIDATION_INPUT_EXCEPTION);
+		return HttpResponse.error(ErrorType.VALIDATION_INPUT_EXCEPTION);
 	}
 
 	/**
@@ -65,13 +65,13 @@ public class ControllerExceptionHandler {
 	 */
 	@ExceptionHandler(HttpRequestMethodNotSupportedException.class)
 	public ResponseEntity<?> handleDateTimeFormatException2(HttpRequestMethodNotSupportedException e) {
-		return ApiResponse.error(ErrorType.VALIDATION_WRONG_HTTP_METHOD_EXCEPTION);
+		return HttpResponse.error(ErrorType.VALIDATION_WRONG_HTTP_METHOD_EXCEPTION);
 	}
 
 	// 나중에 수정하기
 	@ExceptionHandler(IllegalArgumentException.class)
 	public ResponseEntity<?> illegalArgumentExceptionAdvice(IllegalArgumentException e) {
-		return ApiResponse.error(ErrorType.INVALID_ARGUMENT_EXCEPTION);
+		return HttpResponse.error(ErrorType.INVALID_ARGUMENT_EXCEPTION);
 	}
 	/**
 	 * 500 Error
@@ -81,7 +81,7 @@ public class ControllerExceptionHandler {
 	protected ResponseEntity<?> handleInternalServerException(Exception e) {
 		System.out.println("e = " + e);
 		System.out.println("e.getClass() = " + e.getClass());
-		return ApiResponse.error(ErrorType.INTERNAL_SERVER_ERROR);
+		return HttpResponse.error(ErrorType.INTERNAL_SERVER_ERROR);
 	}
 
 	/**
@@ -89,6 +89,6 @@ public class ControllerExceptionHandler {
 	 */
 	@ExceptionHandler(BusinessException.class)
 	protected ResponseEntity<?> handleBusinessException(BusinessException e) {
-		return ApiResponse.error(e.getErrorType());
+		return HttpResponse.error(e.getErrorType());
 	}
 }
