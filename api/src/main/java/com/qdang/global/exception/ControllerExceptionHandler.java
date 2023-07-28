@@ -1,5 +1,7 @@
 package com.qdang.global.exception;
 
+import com.qdang.application.global.exception.BusinessException;
+import com.qdang.application.global.exception.ErrorType;
 import com.qdang.global.response.HttpResponse;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.Objects;

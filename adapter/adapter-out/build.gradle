@@ -1,0 +1,8 @@
+//bootWar {enabled = true}
+//war {enabled = false}
+//
+//bootJar {enabled = true}
+//jar {enabled = false}
+
+dependencies {
+}

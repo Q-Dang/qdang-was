@@ -1,6 +1,6 @@
 package com.qdang.api.user.adapter.in.request;
 
-import com.qdang.api.user.application.port.in.command.SignUpCommand;
+import com.qdang.application.user.port.in.command.SignUpCommand;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AccessLevel;
 import lombok.Getter;

@@ -60,7 +60,7 @@ subprojects {
 //	war {
 //		archiveName("ROOT.war")
 //	}
-//	bootWar {
-//		archiveName("ROOT.war")
-//	}
+	bootWar {
+		archiveName("ROOT.war")
+	}
 }

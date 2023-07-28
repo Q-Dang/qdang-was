@@ -1,8 +1,8 @@
 package com.qdang.api.match.adapter.in.request;
 
-import com.qdang.api.match.application.port.in.command.StartMatchCommand;
-import com.qdang.api.match.domain.MatchTargetScore;
-import com.qdang.core.match.MatchType;
+import com.qdang.application.match.domain.MatchTargetScore;
+import com.qdang.application.match.domain.MatchType;
+import com.qdang.application.match.port.in.command.StartMatchCommand;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 import java.util.stream.Collectors;

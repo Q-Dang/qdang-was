@@ -1,6 +1,6 @@
 package com.qdang.api.user.adapter.in.response;
 
-import com.qdang.api.user.domain.TokenCollection;
+import com.qdang.application.user.domain.TokenCollection;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

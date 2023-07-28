@@ -1,7 +1,7 @@
 package com.qdang.api.user.adapter.out.persistence;
 
 
-import com.qdang.core.user.UserJpaEntity;
+import com.qdang.persistence.user.UserJpaEntity;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 

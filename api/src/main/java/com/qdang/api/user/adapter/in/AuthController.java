@@ -3,10 +3,10 @@ package com.qdang.api.user.adapter.in;
 import com.qdang.api.user.adapter.in.request.LoginRequest;
 import com.qdang.api.user.adapter.in.request.SignUpRequest;
 import com.qdang.api.user.adapter.in.response.SignUpResponse;
-import com.qdang.api.user.application.port.in.LoginUseCase;
-import com.qdang.api.user.application.port.in.SignUpUseCase;
-import com.qdang.api.user.domain.TokenCollection;
 import com.qdang.api.user.adapter.in.response.LoginResponse;
+import com.qdang.application.user.domain.TokenCollection;
+import com.qdang.application.user.port.in.LoginUseCase;
+import com.qdang.application.user.port.in.SignUpUseCase;
 import com.qdang.global.response.FailResponse;
 import com.qdang.global.response.HttpResponse;
 import com.qdang.global.response.SuccessResponse;
@@ -39,7 +39,7 @@ public class AuthController {
 		@ApiResponse(
 			responseCode = "201",
 			description = "회원가입 성공",
-			content = @Content(schema = @Schema(implementation = SuccessResponse.class))),
+			content = @Content(schema = @Schema(implementation = SignUpResponse.class))),
 		@ApiResponse(
 			responseCode = "400",
 			description = "잘못된 요청입니다.",

@@ -4,11 +4,9 @@ war {enabled = false}
 bootJar {enabled = true}
 jar {enabled = false}
 
-//group = 'com.qdang'
-//version = '1.0'
-
 dependencies {
-    implementation project(':core')
+    implementation project(':application')
+    implementation project(':persistence')
     implementation project(':library')
 
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'

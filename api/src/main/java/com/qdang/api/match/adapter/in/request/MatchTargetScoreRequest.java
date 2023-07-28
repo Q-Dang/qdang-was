@@ -1,6 +1,6 @@
 package com.qdang.api.match.adapter.in.request;
 
-import com.qdang.api.match.domain.MatchTargetScore;
+import com.qdang.application.match.domain.MatchTargetScore;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AccessLevel;
 import lombok.Getter;

@@ -1,12 +1,12 @@
 package com.qdang.api.user.adapter.out;
 
 import com.qdang.api.user.adapter.out.persistence.UserRepositoryImpl;
-import com.qdang.api.user.application.port.out.CheckUserPort;
-import com.qdang.api.user.application.port.out.LoadUserPort;
-import com.qdang.api.user.application.port.out.SaveUserPort;
-import com.qdang.api.user.domain.User;
-import com.qdang.api.user.exception.NotFoundUserException;
-import com.qdang.core.user.UserJpaEntity;
+import com.qdang.application.user.domain.User;
+import com.qdang.application.user.exception.NotFoundUserException;
+import com.qdang.application.user.port.out.CheckUserPort;
+import com.qdang.application.user.port.out.LoadUserPort;
+import com.qdang.application.user.port.out.SaveUserPort;
+import com.qdang.persistence.user.UserJpaEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

@@ -1,11 +1,11 @@
 package com.qdang.api.user.adapter.in.request;
 
+import com.qdang.application.user.port.in.command.LoginCommand;
 import io.swagger.v3.oas.annotations.media.Schema;
 import javax.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import com.qdang.api.user.application.port.in.command.LoginCommand;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
