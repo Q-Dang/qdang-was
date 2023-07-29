@@ -11,5 +11,9 @@ public interface UserMatchRepository extends
 
 	UserMatchJpaEntity save(UserMatchJpaEntity userMatchJpaEntity);
 
+	List<UserMatchJpaEntity> saveAll(Iterable<UserMatchJpaEntity> userMatchJpaEntity);
+
 	List<UserMatchJpaEntity> findAllByUserId(Long userId);
+
+	List<UserMatchJpaEntity> findAllByMatchId(Long matchId);
 }

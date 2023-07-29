@@ -1,5 +1,6 @@
 package com.qdang.adapter.user;
 
+import com.qdang.application.match.domain.Match;
 import com.qdang.global.persistenceadapter.PersistenceAdapter;
 import com.qdang.application.user.domain.User;
 import com.qdang.application.user.exception.NotFoundUserException;
@@ -7,6 +8,8 @@ import com.qdang.application.user.port.out.CheckUserPort;
 import com.qdang.application.user.port.out.LoadUserPort;
 import com.qdang.application.user.port.out.SaveUserPort;
 import com.qdang.persistence.user.UserJpaEntity;
+import java.util.List;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -14,9 +17,9 @@ import lombok.extern.slf4j.Slf4j;
 @PersistenceAdapter
 @RequiredArgsConstructor
 public class UserPersistenceAdapter implements
-	LoadUserPort,
-	CheckUserPort,
-	SaveUserPort {
+		LoadUserPort,
+		CheckUserPort,
+		SaveUserPort {
 
 	private final UserRepository userRepository;
 	private final UserMapper userMapper;
@@ -24,45 +27,67 @@ public class UserPersistenceAdapter implements
 	@Override
 	public boolean hasUserByUsername(String username) {
 		return userRepository.findByUsername(username)
-			.isPresent();
+				.isPresent();
 	}
 
 	@Override
 	public boolean hasUserByLoginId(String loginId) {
 		return userRepository.findByLoginId(loginId)
-			.isPresent();
+				.isPresent();
 	}
 
 	@Override
 	public User loadById(Long userId) {
 		UserJpaEntity userJpaEntity =
-			userRepository.findById(userId)
-			.orElseThrow(NotFoundUserException::new);
+				userRepository.findById(userId)
+						.orElseThrow(NotFoundUserException::new);
 		return userMapper.mapToDomainEntity(userJpaEntity);
 	}
 
 	@Override
 	public User loadByUsername(String username) {
 		UserJpaEntity userJpaEntity =
-			userRepository.findByUsername(username)
-				.orElseThrow(NotFoundUserException::new);
+				userRepository.findByUsername(username)
+						.orElseThrow(NotFoundUserException::new);
 		return userMapper.mapToDomainEntity(userJpaEntity);
 	}
 
 	@Override
 	public User loadByLoginId(String loginId) {
 		UserJpaEntity userJpaEntity =
-			userRepository.findByLoginId(loginId)
-				.orElseThrow(NotFoundUserException::new);
+				userRepository.findByLoginId(loginId)
+						.orElseThrow(NotFoundUserException::new);
 		return userMapper.mapToDomainEntity(userJpaEntity);
+	}
+
+	@Override
+	public List<User> loadAllByMatchId(Long matchId) {
+		return userRepository
+				.findAllByMatchId(matchId)
+				.stream()
+				.map(userMapper::mapToDomainEntity)
+				.collect(Collectors.toList());
 	}
 
 	@Override
 	public User save(User user) {
 		UserJpaEntity userJpaEntity =
-			userMapper.mapToJpaEntity(user);
+				userMapper.mapToJpaEntity(user);
 		userRepository.save(userJpaEntity);
 		user = userMapper.mapToDomainEntity(userJpaEntity);
 		return user;
+	}
+
+	@Override
+	public List<User> saveAll(List<User> users) {
+		List<UserJpaEntity> userJpaEntities = users
+				.stream()
+				.map(userMapper::mapToJpaEntity)
+				.collect(Collectors.toList());
+		userRepository.saveAll(userJpaEntities);
+		return userJpaEntities
+				.stream()
+				.map(userMapper::mapToDomainEntity)
+				.collect(Collectors.toList());
 	}
 }

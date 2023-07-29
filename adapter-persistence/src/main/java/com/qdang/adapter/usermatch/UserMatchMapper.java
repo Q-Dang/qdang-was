@@ -26,23 +26,26 @@ public class UserMatchMapper implements GenericJpaMapper<UserMatch, UserMatchJpa
 		}
 
 		return UserMatch.builder()
-			.id(jpaEntity.getId())
-			.userId(jpaEntity.getUser().getId())
-			.matchId(jpaEntity.getMatch().getId())
-			.targetScore(jpaEntity.getTargetScore())
-			.finishCushionTargetScore(jpaEntity.getFinishCushionTargetScore())
-			.finishBankShotTargetScore(jpaEntity.getFinishBankShotTargetScore())
-			.isDeleted(jpaEntity.getIsDeleted())
-			.score(jpaEntity.getScore())
-			.finishCushionScore(jpaEntity.getFinishCushionScore())
-			.finishBankShotScore(jpaEntity.getFinishBankShotScore())
-			.ranking(jpaEntity.getRanking())
-			.maxHighRun(jpaEntity.getMaxHighRun())
-			.average(jpaEntity.getAverage())
-			.inningCount(jpaEntity.getInningCount())
-			.succeedInningCount(jpaEntity.getSucceedInningCount())
-			.failedInningCount(jpaEntity.getFailedInningCount())
-			.build();
+				.id(jpaEntity.getId())
+				.userId(jpaEntity.getUser().getId())
+				.matchId(jpaEntity.getMatch().getId())
+				.targetScore(jpaEntity.getTargetScore())
+				.finishCushionTargetScore(jpaEntity.getFinishCushionTargetScore())
+				.finishBankShotTargetScore(jpaEntity.getFinishBankShotTargetScore())
+				.createdAt(jpaEntity.getCreatedAt())
+				.updatedAt(jpaEntity.getUpdatedAt())
+				.isDeleted(jpaEntity.getIsDeleted())
+				.score(jpaEntity.getScore())
+				.finishCushionScore(jpaEntity.getFinishCushionScore())
+				.finishBankShotScore(jpaEntity.getFinishBankShotScore())
+				.ranking(jpaEntity.getRanking())
+				.maxHighRun(jpaEntity.getMaxHighRun())
+				.average(jpaEntity.getAverage())
+				.inningCount(jpaEntity.getInningCount())
+				.succeedInningCount(jpaEntity.getSucceedInningCount())
+				.failedInningCount(jpaEntity.getFailedInningCount())
+				.sluggingCount(jpaEntity.getSluggingCount())
+				.build();
 	}
 
 	@Override
@@ -51,28 +54,29 @@ public class UserMatchMapper implements GenericJpaMapper<UserMatch, UserMatchJpa
 			return null;
 		}
 		UserJpaEntity userJpaEntity = userRepository.findById(domain.getUserId())
-			.orElseThrow(NotFoundUserException::new);
+				.orElseThrow(NotFoundUserException::new);
 		MatchJpaEntity matchJpaEntity = matchRepository.findById(domain.getMatchId())
-			.orElseThrow(NotFoundMatchException::new);
+				.orElseThrow(NotFoundMatchException::new);
 		return UserMatchJpaEntity.builder()
-			.id(domain.getId())
-			.user(userJpaEntity)
-			.match(matchJpaEntity)
-			.targetScore(domain.getTargetScore())
-			.finishCushionTargetScore(domain.getFinishCushionTargetScore())
-			.finishBankShotTargetScore(domain.getFinishBankShotTargetScore())
-			.createdAt(domain.getCreatedAt())
-			.updatedAt(domain.getUpdatedAt())
-			.isDeleted(domain.getIsDeleted())
-			.score(domain.getScore())
-			.finishCushionScore(domain.getFinishCushionScore())
-			.finishBankShotScore(domain.getFinishBankShotScore())
-			.ranking(domain.getRanking())
-			.maxHighRun(domain.getMaxHighRun())
-			.average(domain.getAverage())
-			.inningCount(domain.getInningCount())
-			.succeedInningCount(domain.getSucceedInningCount())
-			.failedInningCount(domain.getFailedInningCount())
-			.build();
+				.id(domain.getId())
+				.user(userJpaEntity)
+				.match(matchJpaEntity)
+				.targetScore(domain.getTargetScore())
+				.finishCushionTargetScore(domain.getFinishCushionTargetScore())
+				.finishBankShotTargetScore(domain.getFinishBankShotTargetScore())
+				.createdAt(domain.getCreatedAt())
+				.updatedAt(domain.getUpdatedAt())
+				.isDeleted(domain.getIsDeleted())
+				.score(domain.getScore())
+				.finishCushionScore(domain.getFinishCushionScore())
+				.finishBankShotScore(domain.getFinishBankShotScore())
+				.ranking(domain.getRanking())
+				.maxHighRun(domain.getMaxHighRun())
+				.average(domain.getAverage())
+				.inningCount(domain.getInningCount())
+				.succeedInningCount(domain.getSucceedInningCount())
+				.failedInningCount(domain.getFailedInningCount())
+				.sluggingCount(domain.getSluggingCount())
+				.build();
 	}
 }

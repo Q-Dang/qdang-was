@@ -29,11 +29,12 @@ public class UserMatchProcessPersistenceAdapter implements
 
 	@Override
 	public List<UserMatchProcess> saveAll(List<UserMatchProcess> userMatchProcessList) {
-		List<UserMatchProcessJpaEntity> jpaEntities = userMatchProcessList
+		List<UserMatchProcessJpaEntity> userMatchProcessJpaEntities = userMatchProcessList
 				.stream()
 				.map(userMatchProcessMapper::mapToJpaEntity)
 				.collect(Collectors.toList());
-		return userMatchProcessRepository.saveAll(jpaEntities)
+		userMatchProcessRepository.saveAll(userMatchProcessJpaEntities);
+		return userMatchProcessJpaEntities
 				.stream()
 				.map(userMatchProcessMapper::mapToDomainEntity)
 				.collect(Collectors.toList());
