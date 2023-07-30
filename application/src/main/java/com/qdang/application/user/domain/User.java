@@ -1,5 +1,6 @@
 package com.qdang.application.user.domain;
 
+import com.qdang.application.usermatch.domain.UserMatch;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import lombok.AccessLevel;
@@ -62,7 +63,7 @@ public class User {
 				.build();
 	}
 
-	public void update(
+	public void updateProfile(
 			String username,
 			LocalDate birthday,
 			Gender gender,
@@ -71,6 +72,20 @@ public class User {
 		this.birthday = birthday;
 		this.gender = gender;
 		this.proficiency = proficiency;
+	}
+
+	public void applyUserMatchRecord(UserMatch userMatch) {
+		this.average = (this.average * this.matchCount + userMatch.getAverage()) / (matchCount + 1);
+		this.matchCount++;
+		this.highRun = Math.max(this.highRun, userMatch.getMaxHighRun());
+		this.totalInningCount += userMatch.getInningCount();
+		this.succeedInningCount += userMatch.getSucceedInningCount();
+		this.failedInningCount += userMatch.getFailedInningCount();
+		this.sluggingCount += userMatch.getSluggingCount();
+		if (totalInningCount != 0) {
+			this.battingAverage = this.succeedInningCount/ this.totalInningCount * 100;
+			this.sluggingPercentage = this.sluggingCount / this.totalInningCount * 100;
+		}
 	}
 
 	public void encodePassword(PasswordEncoder passwordEncoder) {
@@ -84,6 +99,5 @@ public class User {
 			return true;
 		}
 		return false;
-		// Todo: 예외 처리 말고 return 값으로!
 	}
 }
