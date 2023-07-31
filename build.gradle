@@ -34,11 +34,11 @@ subprojects {
 		implementation 'org.springframework.boot:spring-boot-starter-web'
 		testImplementation 'org.springframework.boot:spring-boot-starter-test'
 		implementation 'org.springframework.boot:spring-boot-starter-actuator'
+		providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 
 		compileOnly 'org.projectlombok:lombok'
 		annotationProcessor 'org.projectlombok:lombok'
 
-//		providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 
 		// JWT
 		runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
@@ -48,9 +48,6 @@ subprojects {
 		// Spring Security
 		implementation 'org.springframework.boot:spring-boot-starter-security'
 		testImplementation 'org.springframework.security:spring-security-test'
-
-		// Swagger
-//	implementation 'org.springdoc:springdoc-openapi-ui:1.7.0'
 	}
 
 	tasks.named('test') {

@@ -1,8 +1,17 @@
-//bootWar {enabled = true}
-//war {enabled = false}
-//
-//bootJar {enabled = true}
-//jar {enabled = false}
+bootWar {enabled = true}
+war {enabled = false}
+
+bootJar {enabled = true}
+jar {enabled = false}
 
 dependencies {
+    implementation project(':adapter:adapter-out')
+    implementation project(':application')
+    implementation project(':persistence')
+    implementation project(':library')
+
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    // Swagger
+    implementation 'org.springdoc:springdoc-openapi-ui:1.7.0'
 }
