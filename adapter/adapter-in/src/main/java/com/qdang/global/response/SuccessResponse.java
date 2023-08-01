@@ -8,6 +8,6 @@ import lombok.Getter;
 @AllArgsConstructor
 public class SuccessResponse {
 
-	@Schema(description = "성공 메세자")
+	@Schema(description = "성공 메세지")
 	private String message;
 }

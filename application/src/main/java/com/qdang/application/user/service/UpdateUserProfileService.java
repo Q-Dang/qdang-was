@@ -8,16 +8,17 @@ import com.qdang.application.user.domain.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
 public class UpdateUserProfileService implements UpdateUserProfileUseCase {
 
-	private final PasswordEncoder passwordEncoder;
 	private final LoadUserPort loadUserPort;
 	private final SaveUserPort saveUserPort;
 
 	@Override
+	@Transactional
 	public void updateUserProfile(UpdateUserProfileCommand command) {
 		User user = loadUserPort.loadById(command.getUserId());
 		user.update(

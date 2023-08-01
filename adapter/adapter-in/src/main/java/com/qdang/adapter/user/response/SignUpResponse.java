@@ -1,5 +1,6 @@
 package com.qdang.adapter.user.response;
 
+import com.qdang.application.user.domain.TokenCollection;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -9,10 +10,13 @@ import lombok.Getter;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class SignUpResponse {
 
-	@Schema(description = "생성된 userId")
-	private Long userId;
+	@Schema(description = "JWT access token")
+	private String accessToken;
 
-	public static SignUpResponse from(Long userId) {
-		return new SignUpResponse(userId);
+	@Schema(description = "JWT refresh token")
+	private String refreshToken;
+
+	public static SignUpResponse from(TokenCollection jwtToken) {
+		return new SignUpResponse(jwtToken.getAccessToken(), jwtToken.getRefreshToken());
 	}
 }

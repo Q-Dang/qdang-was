@@ -50,8 +50,8 @@ public class AuthController {
 	})
 	@PostMapping("/signup")
 	public ResponseEntity<?> singUp(@RequestBody SignUpRequest request) {
-		Long userId = signUpUseCase.signUp(request.toSignUpCommand());
-		return HttpResponse.success(SuccessType.SIGNUP_SUCCESS, SignUpResponse.from(userId));
+		TokenCollection jwtToken = signUpUseCase.signUp(request.toSignUpCommand());
+		return HttpResponse.success(SuccessType.SIGNUP_SUCCESS, SignUpResponse.from(jwtToken));
 	}
 
 	@Operation(summary = "로그인", description = "기본 유저 로그인")

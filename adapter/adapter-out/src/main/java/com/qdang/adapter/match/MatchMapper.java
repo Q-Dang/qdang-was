@@ -1,21 +1,66 @@
 package com.qdang.adapter.match;
 
 import com.qdang.application.match.domain.Match;
+import com.qdang.application.match.domain.MatchType;
 import com.qdang.library.mapper.GenericJpaMapper;
 import com.qdang.persistence.match.MatchJpaEntity;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
+import com.qdang.persistence.match.MatchTypeJpa;
+import org.springframework.stereotype.Component;
 
-@Mapper(componentModel = "spring")
-public interface MatchMapper extends GenericJpaMapper<Match, MatchJpaEntity> {
-
-	@Override
-	@Mapping(target = "matchType",
-		expression = "java(MatchType.getMatchType(matchJpaEntity.getMatchTypeCode()))")
-	Match mapToDomainEntity(MatchJpaEntity matchJpaEntity);
+@Component
+public class MatchMapper implements GenericJpaMapper<Match, MatchJpaEntity> {
 
 	@Override
-	@Mapping(target = "matchTypeCode", source = "match.matchType.code")
-	@Mapping(target = "matchTypeName", source = "match.matchType.name")
-	MatchJpaEntity mapToJpaEntity(Match match);
+	public Match mapToDomainEntity(MatchJpaEntity matchJpaEntity) {
+		if (matchJpaEntity == null) {
+			return null;
+		}
+
+		return Match.builder()
+			.id(matchJpaEntity.getId())
+			.createdAt(matchJpaEntity.getCreatedAt())
+			.updatedAt(matchJpaEntity.getUpdatedAt())
+			.isDeleted(matchJpaEntity.getIsDeleted())
+			.isValid(matchJpaEntity.getIsValid())
+			.endAt(matchJpaEntity.getEndAt())
+			.duration(matchJpaEntity.getDuration())
+			.userCount(matchJpaEntity.getUserCount())
+			.matchType(matchTypeToDomain(matchJpaEntity.getMatchTypeName()))
+			.build();
+	}
+
+	@Override
+	public MatchJpaEntity mapToJpaEntity(Match match) {
+		if (match == null) {
+			return null;
+		}
+
+		return MatchJpaEntity.builder()
+			.id(match.getId())
+			.createdAt(match.getCreatedAt())
+			.updatedAt(match.getUpdatedAt())
+			.isDeleted(match.getIsDeleted())
+			.isValid(match.getIsValid())
+			.endAt(match.getEndAt())
+			.duration(match.getDuration())
+			.userCount(match.getUserCount())
+			.matchTypeCode(matchTypeToJpa(match.getMatchType()))
+			.matchTypeName(matchTypeToJpa(match.getMatchType()))
+			.build();
+	}
+
+	private MatchType matchTypeToDomain(MatchTypeJpa matchTypeJpa) {
+		if ( matchTypeJpa == null ) {
+			return null;
+		}
+		return MatchType.valueOf(matchTypeJpa.name());
+	}
+
+	private MatchTypeJpa matchTypeToJpa(MatchType matchType) {
+		if ( matchType == null ) {
+			return null;
+		}
+		return MatchTypeJpa.valueOf(matchType.name());
+	}
+
 }

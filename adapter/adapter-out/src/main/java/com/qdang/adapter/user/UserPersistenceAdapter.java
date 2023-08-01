@@ -6,6 +6,7 @@ import com.qdang.application.user.exception.NotFoundUserException;
 import com.qdang.application.user.port.out.CheckUserPort;
 import com.qdang.application.user.port.out.LoadUserPort;
 import com.qdang.application.user.port.out.SaveUserPort;
+import com.qdang.persistence.match.MatchTypeJpa;
 import com.qdang.persistence.user.UserJpaEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

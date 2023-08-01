@@ -1,5 +1,6 @@
 package com.qdang.application.user.port.in.command;
 
+import com.qdang.application.user.domain.Gender;
 import java.time.LocalDate;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -12,14 +13,14 @@ public class UpdateUserProfileCommand {
 	private Long userId;
 	private String username;
 	private LocalDate birthday;
-	private String gender;
+	private Gender gender;
 	private int proficiency;
 
 	public static UpdateUserProfileCommand of(
 		Long userId,
 		String username,
 		LocalDate birthday,
-		String gender,
+		Gender gender,
 		int proficiency) {
 		return UpdateUserProfileCommand.builder()
 			.userId(userId)

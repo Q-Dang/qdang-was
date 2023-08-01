@@ -1,5 +1,6 @@
 package com.qdang.adapter.user;
 
+import com.qdang.global.resolver.UserId;
 import com.qdang.global.response.FailResponse;
 import com.qdang.global.response.HttpResponse;
 import com.qdang.global.response.SuccessResponse;
@@ -9,6 +10,7 @@ import com.qdang.adapter.user.response.CheckValidationUsernameResponse;
 import com.qdang.application.user.port.in.CheckValidationUsernameUseCase;
 import com.qdang.application.user.port.in.UpdateUserProfileUseCase;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -19,6 +21,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -64,8 +67,7 @@ public class UserController {
 	@ApiResponses(value = {
 		@ApiResponse(
 			responseCode = "204",
-			description = "프로필 수정 성공",
-			content = @Content(schema = @Schema(implementation = SuccessResponse.class))),
+			description = "프로필 수정 성공"),
 		@ApiResponse(
 			responseCode = "400",
 			description = "잘못된 요청입니다.",
@@ -77,9 +79,10 @@ public class UserController {
 	})
 	@PatchMapping("/profile")
 	public ResponseEntity<?> updateUserProfile(
+		@Parameter(hidden = true) @UserId Long userId,
 		@RequestBody UpdateUserProfileRequest request
 	) {
-		updateUserProfileUseCase.updateUserProfile(request.toUpdateUserProfileCommand());
+		updateUserProfileUseCase.updateUserProfile(request.toUpdateUserProfileCommand(userId));
 		return HttpResponse.success(SuccessType.UPDATE_RESOURCE_SUCCESS);
 	}
 }

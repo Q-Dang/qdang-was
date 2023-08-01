@@ -3,6 +3,8 @@ package com.qdang.persistence.match;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,9 +30,11 @@ public class MatchJpaEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Integer matchTypeCode;
+    @Enumerated(value = EnumType.ORDINAL)
+    private MatchTypeJpa matchTypeCode;
 
-    private String matchTypeName;
+    @Enumerated(value = EnumType.STRING)
+    private MatchTypeJpa matchTypeName;
 
     private LocalDateTime createdAt;
 

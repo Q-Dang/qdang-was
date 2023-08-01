@@ -1,5 +1,6 @@
 package com.qdang.adapter.user.request;
 
+import com.qdang.application.user.domain.Gender;
 import com.qdang.application.user.port.in.command.UpdateUserProfileCommand;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.time.LocalDate;
@@ -12,9 +13,6 @@ import org.hibernate.validator.constraints.Range;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class UpdateUserProfileRequest {
 
-	@Schema(description = "프로필 변경 유저 아이디")
-	private Long userId;
-
 	@Schema(description = "닉네임")
 	private String username;
 
@@ -22,14 +20,13 @@ public class UpdateUserProfileRequest {
 	private LocalDate birthday;
 
 	@Schema(description = "성별")
-	private String gender;
+	private Gender gender;
 
 	@Schema(description = "1~5숙련도")
 	@Range(min = 1, max = 5)
 	private Integer proficiency;
 
-	public UpdateUserProfileCommand toUpdateUserProfileCommand() {
+	public UpdateUserProfileCommand toUpdateUserProfileCommand(Long userId ) {
 		return UpdateUserProfileCommand.of(userId, username, birthday, gender, proficiency);
 	}
-
 }

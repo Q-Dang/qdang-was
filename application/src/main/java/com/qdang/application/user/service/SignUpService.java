@@ -1,5 +1,8 @@
 package com.qdang.application.user.service;
 
+import com.qdang.application.global.jwt.JwtService;
+import com.qdang.application.global.jwt.TokenInfo;
+import com.qdang.application.user.domain.TokenCollection;
 import com.qdang.application.user.domain.UserRole;
 import com.qdang.application.user.exception.ConflictUserNameException;
 import com.qdang.application.user.port.in.SignUpUseCase;
@@ -17,18 +20,25 @@ import org.springframework.transaction.annotation.Transactional;
 public class SignUpService implements SignUpUseCase {
 
 	private final PasswordEncoder passwordEncoder;
+	private final JwtService jwtService;
 	private final SaveUserPort saveUserPort;
 	private final CheckUserPort checkUserPort;
 
 	@Override
 	@Transactional
-	public Long signUp(SignUpCommand request) {
+	public TokenCollection signUp(SignUpCommand request) {
 		if (checkUserPort.hasUserByLoginId(request.getLoginId())) {
 			throw new ConflictUserNameException();
 		}
 		User user = User.of(request.getLoginId(), request.getPassword(), UserRole.MEMBER);
 		user.encodePassword(passwordEncoder);
-		User saveUser = saveUserPort.save(user);
-		return saveUser.getId();
+		saveUserPort.save(user);
+		return generateTokenCollection(TokenInfo.from(user));
+	}
+
+	public TokenCollection generateTokenCollection(TokenInfo tokenInfo) {
+		String accessToken = jwtService.createAccessToken(tokenInfo);
+		String refreshToken = jwtService.createRefreshToken();
+		return TokenCollection.of(accessToken, refreshToken);
 	}
 }

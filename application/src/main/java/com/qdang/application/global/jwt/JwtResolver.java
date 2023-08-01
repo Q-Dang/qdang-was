@@ -46,6 +46,6 @@ public class JwtResolver {
 
 	public String getJwtContents(String token) {
 		final Claims claims = getBody(token);
-		return (String) claims.get("userId");
+		return String.valueOf(claims.get("userId"));
 	}
 }

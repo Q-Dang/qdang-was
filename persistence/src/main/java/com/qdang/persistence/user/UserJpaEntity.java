@@ -6,6 +6,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -34,12 +36,14 @@ public class UserJpaEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	private String userRole;
+	@Enumerated(value = EnumType.STRING)
+	private UserRoleJpa userRole;
 	private String loginId;
 	private String password;
 	private String username;
 	private LocalDate birthday;
-	private String gender;
+	@Enumerated(value = EnumType.STRING)
+	private GenderJpa gender;
 	private Integer proficiency;
 	private String phone;
 	private String fcmToken;

@@ -2,6 +2,7 @@ package com.qdang.application.user.domain;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import javax.print.attribute.standard.MediaSize.Other;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,7 +21,7 @@ public class User {
 	private String password;
 	private String username;
 	private LocalDate birthday;
-	private String gender;
+	private Gender gender;
 	private Integer proficiency;
 	private String phone;
 	private String fcmToken;
@@ -54,7 +55,7 @@ public class User {
 	public void update(
 		String username,
 		LocalDate birthday,
-		String gender,
+		Gender gender,
 		Integer proficiency) {
 		this.username = username;
 		this.birthday = birthday;
