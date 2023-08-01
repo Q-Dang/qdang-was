@@ -1,4 +1,4 @@
-package com.qdang.adapter.global.response;
+package com.qdang.global.response;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

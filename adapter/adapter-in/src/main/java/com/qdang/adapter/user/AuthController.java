@@ -1,8 +1,8 @@
 package com.qdang.adapter.user;
 
-import com.qdang.adapter.global.response.FailResponse;
-import com.qdang.adapter.global.response.HttpResponse;
-import com.qdang.adapter.global.response.SuccessType;
+import com.qdang.global.response.FailResponse;
+import com.qdang.global.response.HttpResponse;
+import com.qdang.global.response.SuccessType;
 import com.qdang.adapter.user.request.LoginRequest;
 import com.qdang.adapter.user.request.SignUpRequest;
 import com.qdang.adapter.user.response.LoginResponse;

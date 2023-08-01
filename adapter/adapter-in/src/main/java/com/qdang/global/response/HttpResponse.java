@@ -1,4 +1,4 @@
-package com.qdang.adapter.global.response;
+package com.qdang.global.response;
 
 import com.qdang.application.global.exception.ErrorType;
 import org.springframework.http.ResponseEntity;

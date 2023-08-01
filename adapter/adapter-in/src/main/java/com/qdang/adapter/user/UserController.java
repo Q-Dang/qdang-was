@@ -1,9 +1,9 @@
 package com.qdang.adapter.user;
 
-import com.qdang.adapter.global.response.FailResponse;
-import com.qdang.adapter.global.response.HttpResponse;
-import com.qdang.adapter.global.response.SuccessResponse;
-import com.qdang.adapter.global.response.SuccessType;
+import com.qdang.global.response.FailResponse;
+import com.qdang.global.response.HttpResponse;
+import com.qdang.global.response.SuccessResponse;
+import com.qdang.global.response.SuccessType;
 import com.qdang.adapter.user.request.UpdateUserProfileRequest;
 import com.qdang.adapter.user.response.CheckValidationUsernameResponse;
 import com.qdang.application.user.port.in.CheckValidationUsernameUseCase;

@@ -1,7 +1,7 @@
 package com.qdang.adapter.match;
 
-import com.qdang.adapter.global.response.HttpResponse;
-import com.qdang.adapter.global.response.SuccessType;
+import com.qdang.global.response.HttpResponse;
+import com.qdang.global.response.SuccessType;
 import com.qdang.adapter.match.request.StartMatchRequest;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
