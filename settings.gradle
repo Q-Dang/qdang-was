@@ -1,9 +1,11 @@
 rootProject.name = 'WAS'
 include(
-        'adapter:adapter-in',
-        'adapter:adapter-out',
+        'adapter-in',
+        'adapter-out',
         'application',
         'library',
         'persistence'
 )
+include 'adapter-in'
+include 'adapter-out'
 
