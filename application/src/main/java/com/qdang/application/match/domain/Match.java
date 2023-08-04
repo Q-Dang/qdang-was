@@ -7,7 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
-// TODO: Domain 모델로 고치기
 @Getter
 @Builder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
@@ -30,5 +29,11 @@ public class Match {
 				.matchType(matchType)
 				.userCount(userCount)
 				.build();
+	}
+
+	public void quit(LocalTime duration) {
+		this.isValid = true;
+		this.endAt = LocalDateTime.now();
+		this.duration = duration;
 	}
 }
