@@ -6,4 +6,6 @@ import java.util.List;
 public interface LoadUserMatchPort {
 
 	List<UserMatch> loadAllByUserId(Long userId);
+
+	List<UserMatch> loadAllByMatchId(Long matchId);
 }
