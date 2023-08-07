@@ -1,2 +1,2 @@
 # qdang-was
-Q-Dang Backend
+당구 경기 기록 서비스
