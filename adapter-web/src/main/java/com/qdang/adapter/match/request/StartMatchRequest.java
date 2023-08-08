@@ -22,6 +22,7 @@ public class StartMatchRequest {
 	private MatchType matchType;
 
 	@Schema(description = "유저 수, 1~4명")
+	@NotNull(message = "{match.userCount.notnull}")
 	@Range(min = 1, max = 4, message = "{match.userCount.range}")
 	private Integer userCount;
 

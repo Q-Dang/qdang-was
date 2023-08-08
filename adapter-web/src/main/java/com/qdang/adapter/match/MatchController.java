@@ -1,8 +1,10 @@
 package com.qdang.adapter.match;
 
+import com.qdang.adapter.match.request.QuitMatchRequest;
 import com.qdang.adapter.match.request.RecordMatchProcessRequest;
 import com.qdang.adapter.match.response.StartMatchResponse;
 import com.qdang.application.match.domain.Match;
+import com.qdang.application.match.port.in.QuitGameUseCase;
 import com.qdang.application.match.port.in.RecordMatchProcessUseCase;
 import com.qdang.application.match.port.in.StartMatchUseCase;
 import com.qdang.global.adapter.WebAdapter;
@@ -15,6 +17,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,6 +34,7 @@ public class MatchController {
 
 	private final StartMatchUseCase startMatchUseCase;
 	private final RecordMatchProcessUseCase recordMatchProcessUseCase;
+	private final QuitGameUseCase quitGameUseCase;
 
 	@Operation(summary = "게임 생성 및 매칭 시작")
 	@ApiResponse(
@@ -39,7 +43,7 @@ public class MatchController {
 	@PostMapping
 	public ResponseEntity<StartMatchResponse> startMatch(
 			@UserId Long userId,
-			@RequestBody StartMatchRequest request
+			@Valid @RequestBody StartMatchRequest request
 	) {
 		Match match = startMatchUseCase.startMatch(request.toStartMatchCommand());
 		return HttpResponse.success(
@@ -54,10 +58,22 @@ public class MatchController {
 	@PostMapping("/processes")
 	public ResponseEntity<Void> recordMatchProcess(
 			@UserId Long userId,
-			@RequestBody RecordMatchProcessRequest request
+			@Valid @RequestBody RecordMatchProcessRequest request
 	) {
 		recordMatchProcessUseCase.recordMatchProcess(request.toRecordMatchProcessCommand());
 		return HttpResponse.success(SuccessType.UPDATE_RESOURCE_SUCCESS);
 	}
 
+	@Operation(summary = "경기 종료")
+	@ApiResponse(
+			responseCode = "204",
+			description = "경기 종료 성공")
+	@PostMapping("/quit")
+	public ResponseEntity<Void> quitMatch(
+			@UserId Long userId,
+			@Valid @RequestBody QuitMatchRequest request
+	) {
+		quitGameUseCase.quitGame(request.toQuitMatchCommand(userId));
+		return HttpResponse.success(SuccessType.UPDATE_RESOURCE_SUCCESS);
+	}
 }
