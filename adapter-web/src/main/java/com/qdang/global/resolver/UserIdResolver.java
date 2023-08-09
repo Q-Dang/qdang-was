@@ -22,6 +22,7 @@ public class UserIdResolver implements HandlerMethodArgumentResolver {
 
 	private final JwtResolver jwtResolver;
 	private static final String HEADER_PREFIX = "Bearer ";
+	private static final String AUTHORIZATION_HEADER = "Authorization";
 
 	@Override
 	public boolean supportsParameter(MethodParameter parameter) {
@@ -37,7 +38,7 @@ public class UserIdResolver implements HandlerMethodArgumentResolver {
 			WebDataBinderFactory binderFactory) {
 
 		final HttpServletRequest request = (HttpServletRequest) webRequest.getNativeRequest();
-		final String bearerHeader = request.getHeader("Authorization");
+		final String bearerHeader = request.getHeader(AUTHORIZATION_HEADER);
 		log.info("bearerHeader = {}", bearerHeader);
 
 		if (!StringUtils.hasText(bearerHeader) || !bearerHeader.startsWith(HEADER_PREFIX)) {
@@ -47,7 +48,9 @@ public class UserIdResolver implements HandlerMethodArgumentResolver {
 		if (!jwtResolver.verifyToken(token)) {
 			throw new BusinessException(
 					ErrorType.INVALID_JWT_TOKEN_EXCEPTION,
-					String.format("USER_ID를 가져오지 못했습니다. (%s - %s)", parameter.getClass(),
+					String.format(
+							"USER_ID를 가져오지 못했습니다. (%s - %s)",
+							parameter.getClass(),
 							parameter.getMethod()));
 		}
 		final String tokenContents = jwtResolver.getJwtContents(token);
@@ -56,7 +59,9 @@ public class UserIdResolver implements HandlerMethodArgumentResolver {
 			return Long.parseLong(tokenContents);
 		} catch (NumberFormatException e) {
 			throw new RuntimeException(
-					String.format("USER_ID를 가져오지 못했습니다. (%s - %s)", parameter.getClass(),
+					String.format(
+							"USER_ID를 가져오지 못했습니다. (%s - %s)",
+							parameter.getClass(),
 							parameter.getMethod()));
 		}
 	}
