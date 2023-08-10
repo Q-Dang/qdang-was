@@ -1,5 +1,6 @@
 package com.qdang.adapter.user;
 
+import com.qdang.global.pathmatch.V1;
 import com.qdang.global.response.FailResponse;
 import com.qdang.global.response.HttpResponse;
 import com.qdang.global.response.SuccessType;
@@ -24,8 +25,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@V1
 @RestController
-@RequestMapping("/api/v1/auth")
+@RequestMapping("/auth")
 @RequiredArgsConstructor
 @Tag(name = "Auth", description = "Auth API Document")
 public class AuthController {

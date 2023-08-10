@@ -1,11 +1,17 @@
 package com.qdang.global.config;
 
+import com.qdang.global.pathmatch.V1;
 import com.qdang.global.resolver.UserIdResolver;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.util.AntPathMatcher;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.method.HandlerTypePredicate;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
+import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.util.UrlPathHelper;
 
 @Configuration
 @RequiredArgsConstructor
@@ -13,8 +19,21 @@ public class WebConfig implements WebMvcConfigurer {
 
 	private final UserIdResolver userIdResolver;
 
+
+	@Override
+	public void configurePathMatch(PathMatchConfigurer configurer) {
+		configurer
+				.setUseTrailingSlashMatch(true)
+				.addPathPrefix("/api/v1", HandlerTypePredicate.forAnnotation(V1.class))
+				.setPathMatcher(new AntPathMatcher())
+				.setUrlPathHelper(new UrlPathHelper())
+		;
+	}
+
 	@Override
 	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
 		resolvers.add(userIdResolver);
 	}
+
+
 }
