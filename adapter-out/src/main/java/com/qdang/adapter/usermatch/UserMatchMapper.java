@@ -1,7 +1,7 @@
 package com.qdang.adapter.usermatch;
 
-import com.qdang.adapter.match.persistence.MatchRepositoryImpl;
-import com.qdang.adapter.user.persistence.UserRepositoryImpl;
+import com.qdang.adapter.match.MatchRepository;
+import com.qdang.adapter.user.UserRepository;
 import com.qdang.application.match.exception.NotFoundMatchException;
 import com.qdang.application.user.exception.NotFoundUserException;
 import com.qdang.application.usermatch.domain.UserMatch;
@@ -16,8 +16,8 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class UserMatchMapper implements GenericJpaMapper<UserMatch, UserMatchJpaEntity> {
 
-	private final UserRepositoryImpl userRepository;
-	private final MatchRepositoryImpl matchRepository;
+	private final UserRepository userRepository;
+	private final MatchRepository matchRepository;
 
 	@Override
 	public UserMatch mapToDomainEntity(UserMatchJpaEntity userMatchJpaEntity) {

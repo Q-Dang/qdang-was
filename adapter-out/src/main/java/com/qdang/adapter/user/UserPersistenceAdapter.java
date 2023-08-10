@@ -1,7 +1,6 @@
 package com.qdang.adapter.user;
 
-import com.qdang.adapter.global.persistenceadapter.PersistenceAdapter;
-import com.qdang.adapter.user.persistence.UserRepositoryImpl;
+import com.qdang.global.persistenceadapter.PersistenceAdapter;
 import com.qdang.application.user.domain.User;
 import com.qdang.application.user.exception.NotFoundUserException;
 import com.qdang.application.user.port.out.CheckUserPort;
@@ -17,7 +16,7 @@ public class UserPersistenceAdapter implements
 	CheckUserPort,
 	SaveUserPort {
 
-	private final UserRepositoryImpl userRepository;
+	private final UserRepository userRepository;
 	private final UserMapper userMapper;
 
 	@Override

@@ -1,10 +1,11 @@
 package com.qdang.adapter.usermatch.persistence;
 
+import com.qdang.adapter.usermatch.UserMatchRepository;
 import com.qdang.persistence.usermatch.UserMatchJpaEntity;
-import java.util.List;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.Repository;
 
-public interface UserMatchRepositoryImpl extends JpaRepository<UserMatchJpaEntity, Long> {
+public interface UserMatchRepositoryImpl extends
+		Repository<UserMatchJpaEntity, Long>,
+		UserMatchRepository {
 
-	List<UserMatchJpaEntity> findAllByUserId(Long userId);
 }

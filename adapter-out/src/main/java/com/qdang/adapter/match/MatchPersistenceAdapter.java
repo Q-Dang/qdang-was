@@ -1,7 +1,6 @@
 package com.qdang.adapter.match;
 
-import com.qdang.adapter.global.persistenceadapter.PersistenceAdapter;
-import com.qdang.adapter.match.persistence.MatchRepositoryImpl;
+import com.qdang.global.persistenceadapter.PersistenceAdapter;
 import com.qdang.application.match.domain.Match;
 import com.qdang.application.match.port.out.LoadMatchPort;
 import com.qdang.application.match.port.out.SaveMatchPort;
@@ -14,7 +13,7 @@ public class MatchPersistenceAdapter implements
 	LoadMatchPort,
 	SaveMatchPort {
 
-	private final MatchRepositoryImpl matchRepository;
+	private final MatchRepository matchRepository;
 	private final MatchMapper matchMapper;
 
 	@Override

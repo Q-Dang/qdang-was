@@ -1,7 +1,6 @@
 package com.qdang.adapter.usermatch;
 
-import com.qdang.adapter.global.persistenceadapter.PersistenceAdapter;
-import com.qdang.adapter.usermatch.persistence.UserMatchRepositoryImpl;
+import com.qdang.global.persistenceadapter.PersistenceAdapter;
 import com.qdang.application.usermatch.domain.UserMatch;
 import com.qdang.application.usermatch.port.out.LoadUserMatchPort;
 import com.qdang.application.usermatch.port.out.SaveUserMatchPort;
@@ -16,7 +15,7 @@ public class UserMatchPersistenceAdapter implements
 	LoadUserMatchPort,
 	SaveUserMatchPort {
 
-	private final UserMatchRepositoryImpl userMatchRepository;
+	private final UserMatchRepository userMatchRepository;
 	private final UserMatchMapper userMatchMapper;
 
 	@Override

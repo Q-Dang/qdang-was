@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
+// Todo : 도메인 모델로 수정하기
 @Getter
 @Builder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)

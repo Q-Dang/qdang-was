@@ -1,4 +1,4 @@
-package com.qdang.adapter;
+package com.qdang;
 
 import org.springframework.context.annotation.ComponentScan;
 

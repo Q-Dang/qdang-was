@@ -1,12 +1,12 @@
 package com.qdang.adapter.user.persistence;
 
 
+import com.qdang.adapter.user.UserRepository;
 import com.qdang.persistence.user.UserJpaEntity;
-import java.util.Optional;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.Repository;
 
-public interface UserRepositoryImpl extends JpaRepository<UserJpaEntity, Long> {
+public interface UserRepositoryImpl extends
+		Repository<UserJpaEntity, Long>,
+		UserRepository {
 
-	Optional<UserJpaEntity> findByUsername(String username);
-	Optional<UserJpaEntity> findByLoginId(String loginId);
 }

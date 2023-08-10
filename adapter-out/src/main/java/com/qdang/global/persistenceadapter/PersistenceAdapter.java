@@ -1,4 +1,4 @@
-package com.qdang.adapter.global.persistenceadapter;
+package com.qdang.global.persistenceadapter;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
