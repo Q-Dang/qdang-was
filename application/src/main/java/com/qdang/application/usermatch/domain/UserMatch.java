@@ -13,8 +13,8 @@ import lombok.Getter;
 public class UserMatch {
 
 	private Long id;
-//	private UserJpaEntity user;
-//	private MatchJpaEntity match;
+	private Long userId;
+	private Long matchId;
 	private Integer targetScore;
 	private Integer finishCushionTargetScore;
 	private Integer finishBankShotTargetScore;
@@ -30,4 +30,19 @@ public class UserMatch {
 	private Integer inningCount;
 	private Integer succeedInningCount;
 	private Integer failedInningCount;
+
+	public static UserMatch of(
+		Long userId,
+		Long matchId,
+		Integer targetScore,
+		Integer finishCushionTargetScore,
+		Integer finishBankShotTargetScore) {
+		return UserMatch.builder()
+			.userId(userId)
+			.matchId(matchId)
+			.targetScore(targetScore)
+			.finishCushionTargetScore(finishCushionTargetScore)
+			.finishBankShotTargetScore(finishBankShotTargetScore)
+			.build();
+	}
 }

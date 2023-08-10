@@ -2,6 +2,7 @@ package com.qdang.adapter.match;
 
 import com.qdang.adapter.match.persistence.MatchRepositoryImpl;
 import com.qdang.application.match.domain.Match;
+import com.qdang.application.match.port.out.LoadMatchPort;
 import com.qdang.application.match.port.out.SaveMatchPort;
 import com.qdang.persistence.match.MatchJpaEntity;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class MatchPersistenceAdapter implements
+	LoadMatchPort,
 	SaveMatchPort {
 
 	private final MatchRepositoryImpl matchRepository;
@@ -19,6 +21,12 @@ public class MatchPersistenceAdapter implements
 	public Match save(Match match) {
 		MatchJpaEntity matchJpaEntity = matchMapper.mapToJpaEntity(match);
 		matchRepository.save(matchJpaEntity);
+		return matchMapper.mapToDomainEntity(matchJpaEntity);
+	}
+
+	@Override
+	public Match loadById(Long matchId) {
+		MatchJpaEntity matchJpaEntity = matchRepository.findById(matchId).orElseThrow();
 		return matchMapper.mapToDomainEntity(matchJpaEntity);
 	}
 }

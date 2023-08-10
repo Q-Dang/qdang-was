@@ -16,6 +16,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,7 +27,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
-//@CrossOrigin
 @Tag(name = "Auth", description = "Auth API Document")
 public class AuthController {
 
@@ -49,9 +49,11 @@ public class AuthController {
 			content = @Content(schema = @Schema(implementation = FailResponse.class)))
 	})
 	@PostMapping("/signup")
-	public ResponseEntity<?> singUp(@RequestBody SignUpRequest request) {
+	public ResponseEntity<?> singUp(@Valid @RequestBody SignUpRequest request) {
 		TokenCollection jwtToken = signUpUseCase.signUp(request.toSignUpCommand());
-		return HttpResponse.success(SuccessType.SIGNUP_SUCCESS, SignUpResponse.from(jwtToken));
+		return HttpResponse.success(
+			SuccessType.SIGNUP_SUCCESS,
+			SignUpResponse.from(jwtToken));
 	}
 
 	@Operation(summary = "로그인", description = "기본 유저 로그인")
@@ -72,7 +74,9 @@ public class AuthController {
 	@PostMapping("/login")
 	public ResponseEntity<?> login(@RequestBody LoginRequest request) {
 		TokenCollection jwtToken = loginUseCase.login(request.toLoginInfo());
-		return HttpResponse.success(SuccessType.LOGIN_SUCCESS, LoginResponse.from(jwtToken));
+		return HttpResponse.success(
+			SuccessType.LOGIN_SUCCESS,
+			LoginResponse.from(jwtToken));
 	}
 
 }
