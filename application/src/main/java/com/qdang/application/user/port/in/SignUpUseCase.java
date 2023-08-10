@@ -5,5 +5,6 @@ import com.qdang.application.user.domain.TokenCollection;
 import com.qdang.application.user.port.in.command.SignUpCommand;
 
 public interface SignUpUseCase {
-	TokenCollection signUp(SignUpCommand request);
+
+	TokenCollection signUp(SignUpCommand command);
 }

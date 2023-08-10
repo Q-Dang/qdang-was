@@ -1,4 +1,4 @@
-package com.qdang.application.global.exception;
+package com.qdang.global.exception;
 
 public class UnauthorizedException extends BusinessException {
 

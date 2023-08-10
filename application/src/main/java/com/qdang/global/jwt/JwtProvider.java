@@ -1,4 +1,4 @@
-package com.qdang.application.global.jwt;
+package com.qdang.global.jwt;
 
 import io.jsonwebtoken.Header;
 import io.jsonwebtoken.Jwts;

@@ -1,6 +1,6 @@
 package com.qdang.application.user.service;
 
-import com.qdang.application.global.usecase.UseCase;
+import com.qdang.global.usecase.UseCase;
 import com.qdang.application.user.port.in.CheckValidationUsernameUseCase;
 import com.qdang.application.user.port.out.CheckUserPort;
 import lombok.RequiredArgsConstructor;

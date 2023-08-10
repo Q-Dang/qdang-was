@@ -1,6 +1,6 @@
 package com.qdang.global.response;
 
-import com.qdang.application.global.exception.ErrorType;
+import com.qdang.global.exception.ErrorType;
 import org.springframework.http.ResponseEntity;
 
 public class HttpResponse {

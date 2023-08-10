@@ -1,4 +1,4 @@
-package com.qdang.application.global.usecase;
+package com.qdang.global.usecase;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

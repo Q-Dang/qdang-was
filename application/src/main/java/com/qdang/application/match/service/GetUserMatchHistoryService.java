@@ -1,6 +1,6 @@
 package com.qdang.application.match.service;
 
-import com.qdang.application.global.usecase.UseCase;
+import com.qdang.global.usecase.UseCase;
 import com.qdang.application.match.domain.Match;
 import com.qdang.application.match.domain.MatchHistory;
 import com.qdang.application.match.port.in.GetUserMatchHistoryUseCase;
@@ -18,7 +18,6 @@ public class GetUserMatchHistoryService implements GetUserMatchHistoryUseCase {
 	private final LoadUserMatchPort loadUserMatchPort;
 	private final LoadMatchPort loadMatchPort;
 
-	// Todo : User Match 와 Match 를 짝지어서 리턴하는 함수 만들기
 	@Override
 	public List<MatchHistory> getMatchHistoryByUserId(Long userId) {
 		List<UserMatch> userMatches = loadUserMatchPort.loadAllByUserId(userId);

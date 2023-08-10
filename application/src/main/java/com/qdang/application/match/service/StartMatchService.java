@@ -1,6 +1,6 @@
 package com.qdang.application.match.service;
 
-import com.qdang.application.global.usecase.UseCase;
+import com.qdang.global.usecase.UseCase;
 import com.qdang.application.match.port.in.StartMatchUseCase;
 import com.qdang.application.match.port.in.command.StartMatchCommand;
 import com.qdang.application.match.port.out.SaveMatchPort;

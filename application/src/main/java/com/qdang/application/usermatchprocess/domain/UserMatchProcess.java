@@ -21,9 +21,47 @@ public class UserMatchProcess {
 	private Integer maxHighRun;
 	private Integer highRun;
 	private Integer deltaScore;
-	private String turnType;
+	private TurnType turnType;
 	private Boolean isMyTurn;
 	private Integer inningCount;
 	private Integer succeedInningCount;
 	private Integer failedInningCount;
+
+	public static UserMatchProcess of(
+			Long userId,
+			Integer score,
+			Integer finishCushionScore,
+			Integer finishBankShotScore,
+			Integer ranking,
+			UserMatchStatus status,
+			Integer maxHighRun,
+			Integer highRun,
+			Integer deltaScore,
+			TurnType turnType,
+			Boolean isMyTurn,
+			Integer inningCount,
+			Integer succeedInningCount,
+			Integer failedInningCount
+	) {
+		return UserMatchProcess.builder()
+				.userId(userId)
+				.score(score)
+				.finishCushionScore(finishCushionScore)
+				.finishBankShotScore(finishBankShotScore)
+				.ranking(ranking)
+				.status(status)
+				.maxHighRun(maxHighRun)
+				.highRun(highRun)
+				.deltaScore(deltaScore)
+				.turnType(turnType)
+				.isMyTurn(isMyTurn)
+				.inningCount(inningCount)
+				.succeedInningCount(succeedInningCount)
+				.failedInningCount(failedInningCount)
+				.build();
+	}
+
+	public void setMatchProcessId(Long matchProcessId) {
+		this.matchProcessId = matchProcessId;
+	}
 }

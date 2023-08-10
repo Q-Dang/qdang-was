@@ -1,6 +1,6 @@
 package com.qdang.adapter.match;
 
-import com.qdang.adapter.match.request.RecordTurnRequest;
+import com.qdang.adapter.match.request.RecordMatchProcessRequest;
 import com.qdang.adapter.match.response.StartMatchResponse;
 import com.qdang.application.match.domain.Match;
 import com.qdang.application.match.port.in.StartMatchUseCase;
@@ -21,7 +21,6 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -77,10 +76,10 @@ public class MatchController {
 					description = "알 수 없는 서버 에러가 발생했습니다.",
 					content = @Content(schema = @Schema(implementation = FailResponse.class)))
 	})
-	@PatchMapping
-	public ResponseEntity<?> recordTurn(
+	@PostMapping("/processes")
+	public ResponseEntity<?> recordMatchProcess(
 			@Parameter(hidden = true) @UserId Long userId,
-			@RequestBody RecordTurnRequest request
+			@RequestBody RecordMatchProcessRequest request
 	) {
 
 		return HttpResponse.success(SuccessType.UPDATE_RESOURCE_SUCCESS);

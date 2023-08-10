@@ -1,8 +1,8 @@
 package com.qdang.global.resolver;
 
-import com.qdang.application.global.exception.BusinessException;
-import com.qdang.application.global.exception.ErrorType;
-import com.qdang.application.global.jwt.JwtResolver;
+import com.qdang.global.exception.BusinessException;
+import com.qdang.global.exception.ErrorType;
+import com.qdang.global.jwt.JwtResolver;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;

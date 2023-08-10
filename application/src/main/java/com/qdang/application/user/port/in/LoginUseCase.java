@@ -5,5 +5,5 @@ import com.qdang.application.user.domain.TokenCollection;
 
 public interface LoginUseCase {
 
-	TokenCollection login(LoginCommand request);
+	TokenCollection login(LoginCommand command);
 }

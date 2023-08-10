@@ -1,6 +1,6 @@
 package com.qdang.application.user.service;
 
-import com.qdang.application.global.usecase.UseCase;
+import com.qdang.global.usecase.UseCase;
 import com.qdang.application.user.port.in.UpdateUserProfileUseCase;
 import com.qdang.application.user.port.in.command.UpdateUserProfileCommand;
 import com.qdang.application.user.port.out.LoadUserPort;

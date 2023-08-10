@@ -1,7 +1,8 @@
 package com.qdang.adapter.user;
 
+import com.qdang.adapter.user.response.GetUserMatchHistoryResponse;
 import com.qdang.application.match.domain.MatchHistory;
-import com.qdang.application.match.service.GetUserMatchHistoryService;
+import com.qdang.application.match.port.in.GetUserMatchHistoryUseCase;
 import com.qdang.global.adapter.WebAdapter;
 import com.qdang.global.pathmatch.V1;
 import com.qdang.global.resolver.UserId;
@@ -20,7 +21,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.util.List;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -40,7 +40,7 @@ public class UserController {
 
 	private final CheckValidationUsernameUseCase checkValidationUserNameUseCase;
 	private final UpdateUserProfileUseCase updateUserProfileUseCase;
-	private final GetUserMatchHistoryService getUserMatchHistoryService;
+	private final GetUserMatchHistoryUseCase getUserMatchHistoryUseCase;
 
 	@Operation(summary = "닉네임 중복 확인")
 	@ApiResponses(value = {
@@ -61,10 +61,12 @@ public class UserController {
 	public ResponseEntity<?> checkValidationUsername(
 			@RequestParam("username") String username
 	) {
-		Boolean isValid = checkValidationUserNameUseCase.checkValidationUsername(username);
+		CheckValidationUsernameResponse response =
+				CheckValidationUsernameResponse.from(
+						checkValidationUserNameUseCase.checkValidationUsername(username));
 		return HttpResponse.success(
 				SuccessType.READ_RESOURCE_SUCCESS,
-				CheckValidationUsernameResponse.from(isValid));
+				response);
 	}
 
 	@Operation(summary = "프로필 수정")
@@ -94,7 +96,8 @@ public class UserController {
 	@ApiResponses(value = {
 			@ApiResponse(
 					responseCode = "200",
-					description = "경기 전적 조회 성공"),
+					description = "경기 전적 조회 성공",
+					content = @Content(schema = @Schema(implementation = GetUserMatchHistoryResponse.class))),
 			@ApiResponse(
 					responseCode = "400",
 					description = "잘못된 요청입니다.",
@@ -108,9 +111,12 @@ public class UserController {
 	public ResponseEntity<?> getUserMatchHistory(
 			@Parameter(hidden = true) @UserId Long userId
 	) {
-		List<MatchHistory> matchHistories =
-				getUserMatchHistoryService.getMatchHistoryByUserId(userId);
-		return HttpResponse.success(SuccessType.READ_RESOURCE_SUCCESS, matchHistories);
+		GetUserMatchHistoryResponse response =
+				GetUserMatchHistoryResponse.from(
+						getUserMatchHistoryUseCase.getMatchHistoryByUserId(userId));
+		return HttpResponse.success(
+				SuccessType.READ_RESOURCE_SUCCESS,
+				response);
 	}
 
 }

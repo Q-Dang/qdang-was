@@ -30,7 +30,7 @@ public class MatchProcessJpaEntity {
     private MatchJpaEntity match;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "play_user_id")
+    @JoinColumn(name = "player_id")
     private UserJpaEntity user;
 
     private LocalTime duration;

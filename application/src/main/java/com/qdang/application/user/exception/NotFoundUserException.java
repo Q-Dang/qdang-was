@@ -1,7 +1,7 @@
 package com.qdang.application.user.exception;
 
-import com.qdang.application.global.exception.BusinessException;
-import com.qdang.application.global.exception.ErrorType;
+import com.qdang.global.exception.BusinessException;
+import com.qdang.global.exception.ErrorType;
 
 public class NotFoundUserException extends BusinessException {
 

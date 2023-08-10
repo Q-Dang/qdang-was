@@ -1,4 +1,4 @@
-package com.qdang.application.global.exception;
+package com.qdang.global.exception;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

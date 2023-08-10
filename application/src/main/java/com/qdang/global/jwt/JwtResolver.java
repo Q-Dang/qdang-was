@@ -1,7 +1,7 @@
-package com.qdang.application.global.jwt;
+package com.qdang.global.jwt;
 
-import com.qdang.application.global.exception.ErrorType;
-import com.qdang.application.global.exception.UnauthorizedException;
+import com.qdang.global.exception.ErrorType;
+import com.qdang.global.exception.UnauthorizedException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;

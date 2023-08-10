@@ -26,12 +26,12 @@ public class StartMatchRequest {
 
 	@Schema(description = "유저 수 크기만큼")
 	@Range(min = 1, max = 4, message = "{match.matchTargetScoreList.size.range}")
-	private List<MatchTargetScore> matchTargetScoreList;
+	private List<MatchTargetScoreRequest> matchTargetScoreList;
 
 
 	public StartMatchCommand toStartMatchCommand() {
 		List<com.qdang.application.match.domain.MatchTargetScore> matchTargetScores = this.matchTargetScoreList.stream()
-			.map(MatchTargetScore::toMatchTargetScore)
+			.map(MatchTargetScoreRequest::toMatchTargetScore)
 			.collect(Collectors.toList());
 		return StartMatchCommand.of(matchType, userCount, matchTargetScores);
 	}

@@ -1,8 +1,8 @@
 package com.qdang.application.user.service;
 
-import com.qdang.application.global.jwt.JwtProvider;
-import com.qdang.application.global.jwt.TokenInfo;
-import com.qdang.application.global.usecase.UseCase;
+import com.qdang.global.jwt.JwtProvider;
+import com.qdang.global.jwt.TokenInfo;
+import com.qdang.global.usecase.UseCase;
 import com.qdang.application.user.domain.TokenCollection;
 import com.qdang.application.user.domain.UserRole;
 import com.qdang.application.user.exception.ConflictUserNameException;
@@ -26,13 +26,13 @@ public class SignUpService implements SignUpUseCase {
 
 	@Override
 	@Transactional
-	public TokenCollection signUp(SignUpCommand request) {
+	public TokenCollection signUp(SignUpCommand command) {
 		System.out.println("SignUpService.signUp");
-		if (checkUserPort.hasUserByLoginId(request.getLoginId())) {
+		if (checkUserPort.hasUserByLoginId(command.getLoginId())) {
 			throw new ConflictUserNameException();
 		}
 		System.out.println("SignUpService.signUp");
-		User user = User.of(request.getLoginId(), request.getPassword(), UserRole.MEMBER);
+		User user = User.of(command.getLoginId(), command.getPassword(), UserRole.MEMBER);
 		user.encodePassword(passwordEncoder);
 		System.out.println("SignUpService.signUp");
 		saveUserPort.save(user);
