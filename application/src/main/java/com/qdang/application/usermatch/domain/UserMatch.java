@@ -32,17 +32,17 @@ public class UserMatch {
 	private Integer failedInningCount;
 
 	public static UserMatch of(
-		Long userId,
-		Long matchId,
-		Integer targetScore,
-		Integer finishCushionTargetScore,
-		Integer finishBankShotTargetScore) {
+			Long userId,
+			Long matchId,
+			Integer targetScore,
+			Integer finishCushionTargetScore,
+			Integer finishBankShotTargetScore) {
 		return UserMatch.builder()
-			.userId(userId)
-			.matchId(matchId)
-			.targetScore(targetScore)
-			.finishCushionTargetScore(finishCushionTargetScore)
-			.finishBankShotTargetScore(finishBankShotTargetScore)
-			.build();
+				.userId(userId)
+				.matchId(matchId)
+				.targetScore(targetScore)
+				.finishCushionTargetScore(finishCushionTargetScore)
+				.finishBankShotTargetScore(finishBankShotTargetScore)
+				.build();
 	}
 }

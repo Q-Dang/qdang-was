@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
+@Schema(description = "회원가입 요청")
 public class SignUpRequest {
 
     @Schema(description = "로그인 아이디")

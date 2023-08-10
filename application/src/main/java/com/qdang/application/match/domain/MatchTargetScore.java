@@ -15,12 +15,16 @@ public class MatchTargetScore {
 	private Integer cushionTargetScore;
 	private Integer bankShotTargetScore;
 
-	public static MatchTargetScore of(Long userId, Integer targetScore, Integer cushionTargetScore, Integer bankShotTargetScore) {
+	public static MatchTargetScore of(
+			Long userId,
+			Integer targetScore,
+			Integer cushionTargetScore,
+			Integer bankShotTargetScore) {
 		return MatchTargetScore.builder()
-			.userId(userId)
-			.targetScore(targetScore)
-			.cushionTargetScore(cushionTargetScore)
-			.bankShotTargetScore(bankShotTargetScore)
-			.build();
+				.userId(userId)
+				.targetScore(targetScore)
+				.cushionTargetScore(cushionTargetScore)
+				.bankShotTargetScore(bankShotTargetScore)
+				.build();
 	}
 }

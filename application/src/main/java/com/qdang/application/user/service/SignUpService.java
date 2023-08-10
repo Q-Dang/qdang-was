@@ -1,6 +1,6 @@
 package com.qdang.application.user.service;
 
-import com.qdang.application.global.jwt.JwtService;
+import com.qdang.application.global.jwt.JwtProvider;
 import com.qdang.application.global.jwt.TokenInfo;
 import com.qdang.application.global.usecase.UseCase;
 import com.qdang.application.user.domain.TokenCollection;
@@ -20,7 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class SignUpService implements SignUpUseCase {
 
 	private final PasswordEncoder passwordEncoder;
-	private final JwtService jwtService;
+	private final JwtProvider jwtProvider;
 	private final SaveUserPort saveUserPort;
 	private final CheckUserPort checkUserPort;
 
@@ -40,8 +40,8 @@ public class SignUpService implements SignUpUseCase {
 	}
 
 	public TokenCollection generateTokenCollection(TokenInfo tokenInfo) {
-		String accessToken = jwtService.createAccessToken(tokenInfo);
-		String refreshToken = jwtService.createRefreshToken();
+		String accessToken = jwtProvider.createAccessToken(tokenInfo);
+		String refreshToken = jwtProvider.createRefreshToken();
 		return TokenCollection.of(accessToken, refreshToken);
 	}
 }

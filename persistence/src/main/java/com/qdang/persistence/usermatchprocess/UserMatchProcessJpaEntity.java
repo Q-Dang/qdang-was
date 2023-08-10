@@ -3,6 +3,8 @@ package com.qdang.persistence.usermatchprocess;
 import com.qdang.persistence.matchprocess.MatchProcessJpaEntity;
 import com.qdang.persistence.user.UserJpaEntity;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -32,7 +34,8 @@ public class UserMatchProcessJpaEntity {
 
     private Integer ranking;
 
-    private String status;
+    @Enumerated(value = EnumType.STRING)
+    private UserMatchStatusJpa status;
 
     private Integer maxHighRun;
 

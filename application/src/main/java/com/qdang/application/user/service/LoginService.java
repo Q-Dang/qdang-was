@@ -1,6 +1,6 @@
 package com.qdang.application.user.service;
 
-import com.qdang.application.global.jwt.JwtService;
+import com.qdang.application.global.jwt.JwtProvider;
 import com.qdang.application.global.jwt.TokenInfo;
 import com.qdang.application.global.usecase.UseCase;
 import com.qdang.application.user.port.in.LoginUseCase;
@@ -18,7 +18,7 @@ public class LoginService implements LoginUseCase {
 
 	private final LoadUserPort loadUserPort;
 	private final PasswordEncoder passwordEncoder;
-	private final JwtService jwtService;
+	private final JwtProvider jwtProvider;
 
 	@Override
 	@Transactional(readOnly = true)
@@ -30,8 +30,8 @@ public class LoginService implements LoginUseCase {
 	}
 
 	public TokenCollection generateTokenCollection(TokenInfo tokenInfo) {
-		String accessToken = jwtService.createAccessToken(tokenInfo);
-		String refreshToken = jwtService.createRefreshToken();
+		String accessToken = jwtProvider.createAccessToken(tokenInfo);
+		String refreshToken = jwtProvider.createRefreshToken();
 		return TokenCollection.of(accessToken, refreshToken);
 	}
 }

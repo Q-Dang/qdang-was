@@ -42,21 +42,21 @@ public class User {
 	private Integer accessCount;
 
 	public static User of(
-		String loginId,
-		String password,
-		UserRole userRole) {
+			String loginId,
+			String password,
+			UserRole userRole) {
 		return User.builder()
-			.loginId(loginId)
-			.password(password)
-			.userRole(userRole)
-			.build();
+				.loginId(loginId)
+				.password(password)
+				.userRole(userRole)
+				.build();
 	}
 
 	public void update(
-		String username,
-		LocalDate birthday,
-		Gender gender,
-		Integer proficiency) {
+			String username,
+			LocalDate birthday,
+			Gender gender,
+			Integer proficiency) {
 		this.username = username;
 		this.birthday = birthday;
 		this.gender = gender;
@@ -68,8 +68,8 @@ public class User {
 	}
 
 	public void checkPasswordByEncoder(
-		String rawPassword,
-		PasswordEncoder passwordEncoder) {
+			String rawPassword,
+			PasswordEncoder passwordEncoder) {
 		if (!passwordEncoder.matches(rawPassword, this.password)) {
 			// Todo: 예외 처리 말고 return 값으로!
 //

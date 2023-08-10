@@ -24,20 +24,22 @@ public class MatchHistory {
 	private Boolean isValid;
 	private Integer ranking;
 
-	public static MatchHistory of(Match match, UserMatch userMatch) {
+	public static MatchHistory of(
+			Match match,
+			UserMatch userMatch) {
 		return MatchHistory.builder()
-			.matchId(match.getId())
-			.userCount(match.getUserCount())
-			.matchType(match.getMatchType())
-			.createdAt(match.getCreatedAt())
-			.score(userMatch.getScore())
-			.finishCushionScore(userMatch.getFinishCushionScore())
-			.finishBankShotScore(userMatch.getFinishBankShotScore())
-			.maxHighRun(userMatch.getMaxHighRun())
-			.isDeleted(match.getIsDeleted())
-			.isValid(match.getIsValid())
-			.ranking(userMatch.getRanking())
-			.build();
+				.matchId(match.getId())
+				.userCount(match.getUserCount())
+				.matchType(match.getMatchType())
+				.createdAt(match.getCreatedAt())
+				.score(userMatch.getScore())
+				.finishCushionScore(userMatch.getFinishCushionScore())
+				.finishBankShotScore(userMatch.getFinishBankShotScore())
+				.maxHighRun(userMatch.getMaxHighRun())
+				.isDeleted(match.getIsDeleted())
+				.isValid(match.getIsValid())
+				.ranking(userMatch.getRanking())
+				.build();
 	}
 
 }

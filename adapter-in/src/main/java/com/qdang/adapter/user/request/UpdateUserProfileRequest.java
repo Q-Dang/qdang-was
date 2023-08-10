@@ -12,6 +12,7 @@ import org.hibernate.validator.constraints.Range;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
+@Schema(description = "회원 프로필 수정 요청")
 public class UpdateUserProfileRequest {
 
 	@Schema(description = "닉네임")

@@ -23,10 +23,12 @@ public class Match {
 	private LocalTime duration;
 	private Integer userCount;
 
-	public static Match of(MatchType matchType, Integer userCount) {
+	public static Match of(
+			MatchType matchType,
+			Integer userCount) {
 		return Match.builder()
-			.matchType(matchType)
-			.userCount(userCount)
-			.build();
+				.matchType(matchType)
+				.userCount(userCount)
+				.build();
 	}
 }
