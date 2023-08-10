@@ -4,6 +4,7 @@ import com.qdang.application.user.domain.Gender;
 import com.qdang.application.user.port.in.command.UpdateUserProfileCommand;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.time.LocalDate;
+import javax.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,7 +20,7 @@ public class UpdateUserProfileRequest {
 	@Schema(description = "생년월일", example = "2000-01-01")
 	private LocalDate birthday;
 
-	@Schema(description = "성별")
+	@Schema(description = "성별", example = "MALE, FEMALE, OTHER")
 	private Gender gender;
 
 	@Schema(description = "1~5숙련도")

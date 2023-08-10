@@ -1,14 +1,14 @@
 package com.qdang.adapter.match;
 
+import com.qdang.adapter.global.persistenceadapter.PersistenceAdapter;
 import com.qdang.adapter.match.persistence.MatchRepositoryImpl;
 import com.qdang.application.match.domain.Match;
 import com.qdang.application.match.port.out.LoadMatchPort;
 import com.qdang.application.match.port.out.SaveMatchPort;
 import com.qdang.persistence.match.MatchJpaEntity;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
 
-@Component
+@PersistenceAdapter
 @RequiredArgsConstructor
 public class MatchPersistenceAdapter implements
 	LoadMatchPort,

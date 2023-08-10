@@ -1,16 +1,15 @@
 package com.qdang.application.user.service;
 
+import com.qdang.application.global.usecase.UseCase;
 import com.qdang.application.user.port.in.UpdateUserProfileUseCase;
 import com.qdang.application.user.port.in.command.UpdateUserProfileCommand;
 import com.qdang.application.user.port.out.LoadUserPort;
 import com.qdang.application.user.port.out.SaveUserPort;
 import com.qdang.application.user.domain.User;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Service
+@UseCase
 @RequiredArgsConstructor
 public class UpdateUserProfileService implements UpdateUserProfileUseCase {
 

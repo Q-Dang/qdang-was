@@ -1,12 +1,12 @@
 package com.qdang.application.user.service;
 
+import com.qdang.application.global.usecase.UseCase;
 import com.qdang.application.user.port.in.CheckValidationUsernameUseCase;
 import com.qdang.application.user.port.out.CheckUserPort;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Service
+@UseCase
 @RequiredArgsConstructor
 public class CheckValidationUsernameService implements CheckValidationUsernameUseCase {
 

@@ -2,6 +2,7 @@ package com.qdang.application.user.service;
 
 import com.qdang.application.global.jwt.JwtService;
 import com.qdang.application.global.jwt.TokenInfo;
+import com.qdang.application.global.usecase.UseCase;
 import com.qdang.application.user.domain.TokenCollection;
 import com.qdang.application.user.domain.UserRole;
 import com.qdang.application.user.exception.ConflictUserNameException;
@@ -12,10 +13,9 @@ import com.qdang.application.user.port.out.SaveUserPort;
 import com.qdang.application.user.domain.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Service
+@UseCase
 @RequiredArgsConstructor
 public class SignUpService implements SignUpUseCase {
 

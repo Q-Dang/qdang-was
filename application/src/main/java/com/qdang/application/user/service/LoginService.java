@@ -2,6 +2,7 @@ package com.qdang.application.user.service;
 
 import com.qdang.application.global.jwt.JwtService;
 import com.qdang.application.global.jwt.TokenInfo;
+import com.qdang.application.global.usecase.UseCase;
 import com.qdang.application.user.port.in.LoginUseCase;
 import com.qdang.application.user.port.in.command.LoginCommand;
 import com.qdang.application.user.port.out.LoadUserPort;
@@ -9,10 +10,9 @@ import com.qdang.application.user.domain.TokenCollection;
 import com.qdang.application.user.domain.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Service
+@UseCase
 @RequiredArgsConstructor
 public class LoginService implements LoginUseCase {
 

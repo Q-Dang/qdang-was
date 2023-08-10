@@ -1,5 +1,6 @@
 package com.qdang.adapter.usermatch;
 
+import com.qdang.adapter.global.persistenceadapter.PersistenceAdapter;
 import com.qdang.adapter.usermatch.persistence.UserMatchRepositoryImpl;
 import com.qdang.application.usermatch.domain.UserMatch;
 import com.qdang.application.usermatch.port.out.LoadUserMatchPort;
@@ -8,9 +9,8 @@ import com.qdang.persistence.usermatch.UserMatchJpaEntity;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
 
-@Component
+@PersistenceAdapter
 @RequiredArgsConstructor
 public class UserMatchPersistenceAdapter implements
 	LoadUserMatchPort,

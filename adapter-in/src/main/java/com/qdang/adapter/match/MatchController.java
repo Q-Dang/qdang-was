@@ -3,6 +3,7 @@ package com.qdang.adapter.match;
 import com.qdang.adapter.match.response.StartMatchResponse;
 import com.qdang.application.match.domain.Match;
 import com.qdang.application.match.port.in.StartMatchUseCase;
+import com.qdang.global.adapter.WebAdapter;
 import com.qdang.global.pathmatch.V1;
 import com.qdang.global.response.FailResponse;
 import com.qdang.global.response.HttpResponse;
@@ -20,10 +21,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 @V1
-@RestController
+@WebAdapter
 @RequiredArgsConstructor
 @RequestMapping("/matches")
 @SecurityRequirement(name = "JWT Auth")

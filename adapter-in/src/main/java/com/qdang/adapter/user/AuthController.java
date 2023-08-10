@@ -1,5 +1,6 @@
 package com.qdang.adapter.user;
 
+import com.qdang.global.adapter.WebAdapter;
 import com.qdang.global.pathmatch.V1;
 import com.qdang.global.response.FailResponse;
 import com.qdang.global.response.HttpResponse;
@@ -23,10 +24,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 @V1
-@RestController
+@WebAdapter
 @RequestMapping("/auth")
 @RequiredArgsConstructor
 @Tag(name = "Auth", description = "Auth API Document")
@@ -74,7 +74,7 @@ public class AuthController {
 			content = @Content(schema = @Schema(implementation = FailResponse.class)))
 	})
 	@PostMapping("/login")
-	public ResponseEntity<?> login(@RequestBody LoginRequest request) {
+	public ResponseEntity<?> login(@Valid @RequestBody LoginRequest request) {
 		TokenCollection jwtToken = loginUseCase.login(request.toLoginInfo());
 		return HttpResponse.success(
 			SuccessType.LOGIN_SUCCESS,

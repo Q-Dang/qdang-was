@@ -1,5 +1,6 @@
 package com.qdang.adapter.user;
 
+import com.qdang.adapter.global.persistenceadapter.PersistenceAdapter;
 import com.qdang.adapter.user.persistence.UserRepositoryImpl;
 import com.qdang.application.user.domain.User;
 import com.qdang.application.user.exception.NotFoundUserException;
@@ -8,9 +9,8 @@ import com.qdang.application.user.port.out.LoadUserPort;
 import com.qdang.application.user.port.out.SaveUserPort;
 import com.qdang.persistence.user.UserJpaEntity;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
 
-@Component
+@PersistenceAdapter
 @RequiredArgsConstructor
 public class UserPersistenceAdapter implements
 	LoadUserPort,

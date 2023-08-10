@@ -1,5 +1,6 @@
 package com.qdang.application.match.service;
 
+import com.qdang.application.global.usecase.UseCase;
 import com.qdang.application.match.domain.Match;
 import com.qdang.application.match.domain.MatchHistory;
 import com.qdang.application.match.port.in.GetUserMatchHistoryUseCase;
@@ -9,9 +10,8 @@ import com.qdang.application.usermatch.port.out.LoadUserMatchPort;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
-@Service
+@UseCase
 @RequiredArgsConstructor
 public class GetUserMatchHistoryService implements GetUserMatchHistoryUseCase {
 
