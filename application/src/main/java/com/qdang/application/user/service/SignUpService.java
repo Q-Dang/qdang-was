@@ -27,16 +27,13 @@ public class SignUpService implements SignUpUseCase {
 	@Override
 	@Transactional
 	public TokenCollection signUp(SignUpCommand command) {
-		System.out.println("SignUpService.signUp");
 		if (checkUserPort.hasUserByLoginId(command.getLoginId())) {
 			throw new ConflictUserNameException();
 		}
-		System.out.println("SignUpService.signUp");
 		User user = User.of(command.getLoginId(), command.getPassword(), UserRole.MEMBER);
 		user.encodePassword(passwordEncoder);
-		System.out.println("SignUpService.signUp");
-		saveUserPort.save(user);
-		return generateTokenCollection(TokenInfo.from(user));
+		User saveUser = saveUserPort.save(user);
+		return generateTokenCollection(TokenInfo.from(saveUser));
 	}
 
 	public TokenCollection generateTokenCollection(TokenInfo tokenInfo) {
