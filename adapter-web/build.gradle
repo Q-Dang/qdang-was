@@ -5,7 +5,7 @@ bootJar {enabled = true}
 jar {enabled = false}
 
 dependencies {
-    implementation project(':adapter-out')
+    implementation project(':adapter-persistence')
     implementation project(':application')
     implementation project(':persistence')
     implementation project(':library')

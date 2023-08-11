@@ -1,11 +1,9 @@
 rootProject.name = 'WAS'
 include(
-        'adapter-in',
-        'adapter-out',
+        'adapter-web',
+        'adapter-persistence',
         'application',
         'library',
         'persistence'
 )
-include 'adapter-in'
-include 'adapter-out'
 
