@@ -23,8 +23,8 @@ jobs:
 
     - name: make application.properties
       run: |
-        mkdir ./api/src/main/resources
-        cd ./api/src/main/resources
+        mkdir ./adapter-persistence/src/main/resources
+        cd ./adapter-persistence/src/main/resources
         touch ./application.yaml
         echo "${{ secrets.QDANG_PROD_APPLICATION }}" >> ./application.yaml
       shell: bash
