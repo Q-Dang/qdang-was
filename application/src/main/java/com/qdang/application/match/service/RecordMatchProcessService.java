@@ -2,6 +2,7 @@ package com.qdang.application.match.service;
 
 import com.qdang.application.match.port.in.RecordMatchProcessUseCase;
 import com.qdang.application.match.port.in.command.RecordMatchProcessCommand;
+import com.qdang.application.matchprocess.domain.MatchProcess;
 import com.qdang.application.matchprocess.port.out.SaveMatchProcessPort;
 import com.qdang.application.usermatchprocess.port.out.SaveUserMatchProcessPort;
 import com.qdang.global.usecase.UseCase;
@@ -18,7 +19,11 @@ public class RecordMatchProcessService implements RecordMatchProcessUseCase {
 	@Override
 	@Transactional
 	public void recordMatchProcess(RecordMatchProcessCommand command) {
-		saveMatchProcessPort.save(command.getMatchProcess());
+		MatchProcess matchProcess = saveMatchProcessPort.save(command.getMatchProcess());
+		command.getUserMatchProcessList()
+				.forEach(userMatchProcess -> {
+					userMatchProcess.setMatchProcessId(matchProcess.getId());
+				});
 		saveUserMatchProcessPort.saveAll(command.getUserMatchProcessList());
 	}
 }

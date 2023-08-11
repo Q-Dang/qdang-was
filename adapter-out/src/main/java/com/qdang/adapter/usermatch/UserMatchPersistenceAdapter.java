@@ -23,7 +23,6 @@ public class UserMatchPersistenceAdapter implements
 		UserMatchJpaEntity userMatchJpaEntity =
 			userMatchMapper.mapToJpaEntity(userMatch);
 		userMatchRepository.save(userMatchJpaEntity);
-		System.out.println("UserMatchPersistenceAdapter.save");
 		return userMatchMapper.mapToDomainEntity(userMatchJpaEntity);
 	}
 

@@ -26,41 +26,38 @@ public class UserIdResolver implements HandlerMethodArgumentResolver {
 	@Override
 	public boolean supportsParameter(MethodParameter parameter) {
 		return parameter.hasParameterAnnotation(UserId.class)
-			&& Long.class.equals(parameter.getParameterType());
+				&& Long.class.equals(parameter.getParameterType());
 	}
 
 	@Override
 	public Object resolveArgument(
-		@NotNull MethodParameter parameter,
-		ModelAndViewContainer modelAndViewContainer,
-		@NotNull NativeWebRequest webRequest,
-		WebDataBinderFactory binderFactory) {
+			@NotNull MethodParameter parameter,
+			ModelAndViewContainer modelAndViewContainer,
+			@NotNull NativeWebRequest webRequest,
+			WebDataBinderFactory binderFactory) {
 
 		final HttpServletRequest request = (HttpServletRequest) webRequest.getNativeRequest();
 		final String bearerHeader = request.getHeader("Authorization");
-		log.info("bearerHeader ={}", bearerHeader);
+		log.info("bearerHeader = {}", bearerHeader);
 
 		if (!StringUtils.hasText(bearerHeader) || !bearerHeader.startsWith(HEADER_PREFIX)) {
-			throw new BusinessException(
-				ErrorType.INVALID_JWT_TOKEN_EXCEPTION,
-				(String.format("USER_ID를 가져오지 못했습니다. (%s - %s)", parameter.getClass(), parameter.getMethod())));
+			throw new BusinessException(ErrorType.INVALID_JWT_TOKEN_EXCEPTION);
 		}
 		String token = bearerHeader.substring(HEADER_PREFIX.length());
 		if (!jwtResolver.verifyToken(token)) {
-			throw new RuntimeException(
-				String.format("USER_ID를 가져오지 못했습니다. (%s - %s)", parameter.getClass(),
-					parameter.getMethod()));
+			throw new BusinessException(
+					ErrorType.INVALID_JWT_TOKEN_EXCEPTION,
+					String.format("USER_ID를 가져오지 못했습니다. (%s - %s)", parameter.getClass(),
+							parameter.getMethod()));
 		}
-		log.info("token ={}", token);
-		// 유저 아이디 반환
 		final String tokenContents = jwtResolver.getJwtContents(token);
-		log.info("tokenContents ={}", tokenContents);
+		log.info("tokenContents = {}", tokenContents);
 		try {
 			return Long.parseLong(tokenContents);
 		} catch (NumberFormatException e) {
 			throw new RuntimeException(
-				String.format("USER_ID를 가져오지 못했습니다. (%s - %s)", parameter.getClass(),
-					parameter.getMethod()));
+					String.format("USER_ID를 가져오지 못했습니다. (%s - %s)", parameter.getClass(),
+							parameter.getMethod()));
 		}
 	}
 }

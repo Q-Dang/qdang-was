@@ -12,6 +12,7 @@ import javax.validation.constraints.Size;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
@@ -26,8 +27,9 @@ public class RecordMatchProcessRequest {
 	@NotNull(message = "{matchProcess.playerId.notnull}")
 	private Long playerId;
 
-	@Schema(description = "턴에 소요한 시간", example = "00:00:00")
+	@Schema(description = "턴에 소요한 시간, 00:00:00 ~ 23:59:59", example = "00:00:00")
 	@NotNull(message = "{matchProcess.duration.notnull}")
+	@DateTimeFormat(pattern = "HH:mm:ss")
 	private LocalTime duration;
 
 	@Schema(description = "친 페이스 횟수")

@@ -12,12 +12,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
 @Entity
 @Table(name = "q_match_process")
+@Builder
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class MatchProcessJpaEntity {
 
@@ -31,16 +35,16 @@ public class MatchProcessJpaEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "player_id")
-    private UserJpaEntity user;
+    private UserJpaEntity player;
 
     private LocalTime duration;
 
-    private int processCount;
+    private Integer processCount;
 
-    private int turnCount;
+    private Integer turnCount;
 
-    private int phaseCount;
+    private Integer phaseCount;
 
-    private boolean isValid;
+    private Boolean isValid;
 }
 

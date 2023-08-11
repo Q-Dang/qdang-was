@@ -2,7 +2,8 @@ package com.qdang.persistence.usermatchprocess;
 
 public enum UserMatchStatusJpa {
 
-	PROGRESS,
-	FINISH_PROGRESS,
+	NORMAL,
+	CUSHION,
+	BANK_SHOT,
 	END;
 }

@@ -70,6 +70,6 @@ public class UserJpaEntity {
 	@OneToMany(mappedBy = "user")
 	private List<UserMatchJpaEntity> userMatchList;
 
-	@OneToMany(mappedBy = "user")
+	@OneToMany(mappedBy = "player")
 	private List<MatchProcessJpaEntity> matchProcessList;
 }

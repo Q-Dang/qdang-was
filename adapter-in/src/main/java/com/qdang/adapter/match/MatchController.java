@@ -3,6 +3,7 @@ package com.qdang.adapter.match;
 import com.qdang.adapter.match.request.RecordMatchProcessRequest;
 import com.qdang.adapter.match.response.StartMatchResponse;
 import com.qdang.application.match.domain.Match;
+import com.qdang.application.match.port.in.RecordMatchProcessUseCase;
 import com.qdang.application.match.port.in.StartMatchUseCase;
 import com.qdang.global.adapter.WebAdapter;
 import com.qdang.global.pathmatch.V1;
@@ -34,39 +35,39 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MatchController {
 
 	private final StartMatchUseCase startMatchUseCase;
+	private final RecordMatchProcessUseCase recordMatchProcessUseCase;
 
 	@Operation(summary = "게임 생성 및 매칭 시작")
 	@ApiResponses(value = {
-		@ApiResponse(
-			responseCode = "201",
-			description = "게임 및 전적 생성 성공",
-			content = @Content(schema = @Schema(implementation = StartMatchResponse.class))),
-		@ApiResponse(
-			responseCode = "400",
-			description = "잘못된 요청입니다.",
-			content = @Content(schema = @Schema(implementation = FailResponse.class))),
-		@ApiResponse(
-			responseCode = "500",
-			description = "알 수 없는 서버 에러가 발생했습니다.",
-			content = @Content(schema = @Schema(implementation = FailResponse.class)))
+			@ApiResponse(
+					responseCode = "201",
+					description = "게임 및 전적 생성 성공",
+					content = @Content(schema = @Schema(implementation = StartMatchResponse.class))),
+			@ApiResponse(
+					responseCode = "400",
+					description = "잘못된 요청입니다.",
+					content = @Content(schema = @Schema(implementation = FailResponse.class))),
+			@ApiResponse(
+					responseCode = "500",
+					description = "알 수 없는 서버 에러가 발생했습니다.",
+					content = @Content(schema = @Schema(implementation = FailResponse.class)))
 	})
 	@PostMapping
 	public ResponseEntity<?> startMatch(
 			@Parameter(hidden = true) @UserId Long userId,
-		@RequestBody StartMatchRequest request
+			@RequestBody StartMatchRequest request
 	) {
 		Match match = startMatchUseCase.startMatch(request.toStartMatchCommand());
 		return HttpResponse.success(
-			SuccessType.CREATE_RESOURCE_SUCCESS,
-			StartMatchResponse.from(match));
+				SuccessType.CREATE_RESOURCE_SUCCESS,
+				StartMatchResponse.from(match));
 	}
 
 	@Operation(summary = "턴 기록")
 	@ApiResponses(value = {
 			@ApiResponse(
-					responseCode = "201",
-					description = "턴 기록 성공",
-					content = @Content(schema = @Schema(implementation = Integer.class))),
+					responseCode = "200",
+					description = "턴 기록 성공"),
 			@ApiResponse(
 					responseCode = "400",
 					description = "잘못된 요청입니다.",
@@ -81,7 +82,7 @@ public class MatchController {
 			@Parameter(hidden = true) @UserId Long userId,
 			@RequestBody RecordMatchProcessRequest request
 	) {
-
+		recordMatchProcessUseCase.recordMatchProcess(request.toRecordMatchProcessCommand());
 		return HttpResponse.success(SuccessType.UPDATE_RESOURCE_SUCCESS);
 	}
 

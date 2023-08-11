@@ -58,12 +58,9 @@ public class UserPersistenceAdapter implements
 
 	@Override
 	public User save(User user) {
-		System.out.println("UserPersistenceAdapter.save");
 		UserJpaEntity userJpaEntity =
 			userMapper.mapToJpaEntity(user);
-		System.out.println("UserPersistenceAdapter.save");
 		userRepository.save(userJpaEntity);
-		System.out.println("UserPersistenceAdapter.save");
 		return userMapper.mapToDomainEntity(userJpaEntity);
 	}
 }

@@ -3,78 +3,78 @@ package com.qdang.adapter.user;
 import com.qdang.application.user.domain.Gender;
 import com.qdang.application.user.domain.User;
 import com.qdang.application.user.domain.UserRole;
+import com.qdang.global.mapper.Mapper;
 import com.qdang.library.mapper.GenericJpaMapper;
 import com.qdang.persistence.user.GenderJpa;
 import com.qdang.persistence.user.UserJpaEntity;
 import com.qdang.persistence.user.UserRoleJpa;
-import org.springframework.stereotype.Component;
 
-@Component
+@Mapper
 public class UserMapper implements GenericJpaMapper<User, UserJpaEntity> {
 
 	@Override
-	public User mapToDomainEntity(UserJpaEntity userJpaEntity) {
-		if (userJpaEntity == null) {
+	public User mapToDomainEntity(UserJpaEntity jpaEntity) {
+		if (jpaEntity == null) {
 			return null;
 		}
 
 		return User.builder()
-			.id(userJpaEntity.getId())
-			.loginId(userJpaEntity.getLoginId())
-			.password(userJpaEntity.getPassword())
-			.username(userJpaEntity.getUsername())
-			.birthday(userJpaEntity.getBirthday())
-			.gender(genderToDomain(userJpaEntity.getGender()))
-			.proficiency(userJpaEntity.getProficiency())
-			.phone(userJpaEntity.getPhone())
-			.fcmToken(userJpaEntity.getFcmToken())
-			.profileImage(userJpaEntity.getProfileImage())
-			.address(userJpaEntity.getAddress())
-			.detailAddress(userJpaEntity.getDetailAddress())
-			.isResting(userJpaEntity.getIsResting())
-			.isLeaving(userJpaEntity.getIsLeaving())
-			.phoneAuthCode(userJpaEntity.getPhoneAuthCode())
-			.phoneAuthAt(userJpaEntity.getPhoneAuthAt())
-			.isPhoneAuth(userJpaEntity.getIsPhoneAuth())
-			.joinAt(userJpaEntity.getJoinAt())
-			.joinAgree(userJpaEntity.getJoinAgree())
-			.agreeUpdateAt(userJpaEntity.getAgreeUpdateAt())
-			.accessAt(userJpaEntity.getAccessAt())
-			.accessCount(userJpaEntity.getAccessCount())
-			.userRole(userRoleToDomain(userJpaEntity.getUserRole()))
+			.id(jpaEntity.getId())
+			.loginId(jpaEntity.getLoginId())
+			.password(jpaEntity.getPassword())
+			.username(jpaEntity.getUsername())
+			.birthday(jpaEntity.getBirthday())
+			.gender(genderToDomain(jpaEntity.getGender()))
+			.proficiency(jpaEntity.getProficiency())
+			.phone(jpaEntity.getPhone())
+			.fcmToken(jpaEntity.getFcmToken())
+			.profileImage(jpaEntity.getProfileImage())
+			.address(jpaEntity.getAddress())
+			.detailAddress(jpaEntity.getDetailAddress())
+			.isResting(jpaEntity.getIsResting())
+			.isLeaving(jpaEntity.getIsLeaving())
+			.phoneAuthCode(jpaEntity.getPhoneAuthCode())
+			.phoneAuthAt(jpaEntity.getPhoneAuthAt())
+			.isPhoneAuth(jpaEntity.getIsPhoneAuth())
+			.joinAt(jpaEntity.getJoinAt())
+			.joinAgree(jpaEntity.getJoinAgree())
+			.agreeUpdateAt(jpaEntity.getAgreeUpdateAt())
+			.accessAt(jpaEntity.getAccessAt())
+			.accessCount(jpaEntity.getAccessCount())
+			.userRole(userRoleToDomain(jpaEntity.getUserRole()))
 			.build();
 	}
 
 	@Override
-	public UserJpaEntity mapToJpaEntity(User user) {
-		if (user == null) {
+	public UserJpaEntity mapToJpaEntity(User domain) {
+		if (domain == null) {
 			return null;
 		}
 
 		return UserJpaEntity.builder()
-			.id(user.getId())
-			.loginId(user.getLoginId())
-			.password(user.getPassword())
-			.username(user.getUsername())
-			.birthday(user.getBirthday())
-			.gender(genderToJpa(user.getGender()))
-			.proficiency(user.getProficiency())
-			.phone(user.getPhone())
-			.fcmToken(user.getFcmToken())
-			.profileImage(user.getProfileImage())
-			.address(user.getAddress())
-			.detailAddress(user.getDetailAddress())
-			.isResting(user.getIsResting())
-			.isLeaving(user.getIsLeaving())
-			.phoneAuthCode(user.getPhoneAuthCode())
-			.phoneAuthAt(user.getPhoneAuthAt())
-			.isPhoneAuth(user.getIsPhoneAuth())
-			.joinAt(user.getJoinAt())
-			.joinAgree(user.getJoinAgree())
-			.agreeUpdateAt(user.getAgreeUpdateAt())
-			.accessAt(user.getAccessAt())
-			.accessCount(user.getAccessCount())
-			.userRole(userRoleToJpa(user.getUserRole()))
+			.id(domain.getId())
+			.loginId(domain.getLoginId())
+			.password(domain.getPassword())
+			.username(domain.getUsername())
+			.birthday(domain.getBirthday())
+			.gender(genderToJpa(domain.getGender()))
+			.proficiency(domain.getProficiency())
+			.phone(domain.getPhone())
+			.fcmToken(domain.getFcmToken())
+			.profileImage(domain.getProfileImage())
+			.address(domain.getAddress())
+			.detailAddress(domain.getDetailAddress())
+			.isResting(domain.getIsResting())
+			.isLeaving(domain.getIsLeaving())
+			.phoneAuthCode(domain.getPhoneAuthCode())
+			.phoneAuthAt(domain.getPhoneAuthAt())
+			.isPhoneAuth(domain.getIsPhoneAuth())
+			.joinAt(domain.getJoinAt())
+			.joinAgree(domain.getJoinAgree())
+			.agreeUpdateAt(domain.getAgreeUpdateAt())
+			.accessAt(domain.getAccessAt())
+			.accessCount(domain.getAccessCount())
+			.userRole(userRoleToJpa(domain.getUserRole()))
 			.build();
 	}
 

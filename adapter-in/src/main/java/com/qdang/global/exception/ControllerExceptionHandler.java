@@ -27,7 +27,8 @@ public class ControllerExceptionHandler {
 	protected ResponseEntity<?> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
 		FieldError fieldError = Objects.requireNonNull(e.getFieldError());
 		return HttpResponse.error(ErrorType.VALIDATION_INPUT_EXCEPTION,
-			String.format("%s. (%s)", fieldError.getDefaultMessage(), fieldError.getField()));
+			String.format("%s. (%s)", fieldError.getDefaultMessage(),
+					fieldError.getField()));
 	}
 
 	/**
