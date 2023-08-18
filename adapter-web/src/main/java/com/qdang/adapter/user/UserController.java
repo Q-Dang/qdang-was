@@ -49,7 +49,7 @@ public class UserController {
 			@ApiResponse(
 					responseCode = "200",
 					description = "유저 본인 프로필 조회 성공",
-					content = @Content(schema = @Schema(implementation = Integer.class))),
+					content = @Content(schema = @Schema(implementation = GetUserProfileResponse.class))),
 			@ApiResponse(
 					responseCode = "400",
 					description = "잘못된 요청입니다.",

@@ -8,7 +8,9 @@ import com.qdang.application.user.port.out.LoadUserPort;
 import com.qdang.application.user.port.out.SaveUserPort;
 import com.qdang.persistence.user.UserJpaEntity;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @PersistenceAdapter
 @RequiredArgsConstructor
 public class UserPersistenceAdapter implements

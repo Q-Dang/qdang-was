@@ -12,9 +12,11 @@ import com.qdang.application.user.port.out.CheckUserPort;
 import com.qdang.application.user.port.out.SaveUserPort;
 import com.qdang.application.user.domain.User;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 
+@Slf4j
 @UseCase
 @RequiredArgsConstructor
 public class SignUpService implements SignUpUseCase {
