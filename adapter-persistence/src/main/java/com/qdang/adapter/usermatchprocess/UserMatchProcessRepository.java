@@ -7,5 +7,5 @@ public interface UserMatchProcessRepository {
 
 	UserMatchProcessJpaEntity save(UserMatchProcessJpaEntity userMatchProcessJpaEntity);
 
-	List<UserMatchProcessJpaEntity> saveAll(List<UserMatchProcessJpaEntity> userMatchProcessJpaEntity);
+	List<UserMatchProcessJpaEntity> saveAll(Iterable<UserMatchProcessJpaEntity> userMatchProcessJpaEntities);
 }
