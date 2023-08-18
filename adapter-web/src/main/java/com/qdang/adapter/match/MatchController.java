@@ -66,7 +66,7 @@ public class MatchController {
 	@Operation(summary = "턴 기록")
 	@ApiResponses(value = {
 			@ApiResponse(
-					responseCode = "200",
+					responseCode = "204",
 					description = "턴 기록 성공"),
 			@ApiResponse(
 					responseCode = "400",

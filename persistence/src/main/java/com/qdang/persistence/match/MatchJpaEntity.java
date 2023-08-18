@@ -26,6 +26,7 @@ import org.hibernate.annotations.DynamicInsert;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class MatchJpaEntity {
 
+    // Todo : null 값을 비롯한 컬럼 제약조건 명시해주기
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

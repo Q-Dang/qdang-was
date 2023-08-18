@@ -46,7 +46,7 @@ public class RecordMatchProcessRequest {
 
 	@Schema(description = "턴에 대한 유저 정보")
 	@Size(min = 1, max = 4, message = "{matchProcess.turnUserProcessList.size.range}")
-	List<TurnUserProcessRequest> turnUserProcessList;
+	List<TurnUserProcessVo> turnUserProcessList;
 
 	public RecordMatchProcessCommand toRecordMatchProcessCommand() {
 

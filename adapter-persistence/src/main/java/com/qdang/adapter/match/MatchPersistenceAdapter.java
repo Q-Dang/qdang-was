@@ -20,7 +20,8 @@ public class MatchPersistenceAdapter implements
 	public Match save(Match match) {
 		MatchJpaEntity matchJpaEntity = matchMapper.mapToJpaEntity(match);
 		matchRepository.save(matchJpaEntity);
-		return matchMapper.mapToDomainEntity(matchJpaEntity);
+		match = matchMapper.mapToDomainEntity(matchJpaEntity);
+		return match;
 	}
 
 	@Override

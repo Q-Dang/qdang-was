@@ -1,11 +1,9 @@
 package com.qdang.adapter.match.request;
 
-import com.fasterxml.jackson.annotation.JsonEnumDefaultValue;
 import com.qdang.application.usermatchprocess.domain.TurnType;
 import com.qdang.application.usermatchprocess.domain.UserMatchStatus;
 import io.swagger.v3.oas.annotations.media.Schema;
 import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.XmlEnum;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Schema(description = "턴에 대한 유저 정보")
-public class TurnUserProcessRequest {
+public class TurnUserProcessVo {
 
 	@Schema(description = "유저 아이디")
 	@NotNull(message = "{user.userId.notnull}")

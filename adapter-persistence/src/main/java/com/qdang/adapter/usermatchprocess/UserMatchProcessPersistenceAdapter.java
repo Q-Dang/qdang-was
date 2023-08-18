@@ -20,13 +20,11 @@ public class UserMatchProcessPersistenceAdapter implements
 
 	@Override
 	public UserMatchProcess save(UserMatchProcess userMatchProcess) {
-		log.info("UserMatchProcessPersistenceAdapter.save");
 		UserMatchProcessJpaEntity userMatchProcessJpaEntity =
 				userMatchProcessMapper.mapToJpaEntity(userMatchProcess);
-		log.info("UserMatchProcessPersistenceAdapter.save");
 		userMatchProcessRepository.save(userMatchProcessJpaEntity);
-		log.info("UserMatchProcessPersistenceAdapter.save");
-		return userMatchProcessMapper.mapToDomainEntity(userMatchProcessJpaEntity);
+		userMatchProcess = userMatchProcessMapper.mapToDomainEntity(userMatchProcessJpaEntity);
+		return userMatchProcess;
 	}
 
 	@Override

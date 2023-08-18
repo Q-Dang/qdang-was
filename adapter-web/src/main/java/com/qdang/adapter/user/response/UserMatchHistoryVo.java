@@ -13,7 +13,7 @@ import lombok.Getter;
 @Builder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Schema(description = "유저의 경기 기록")
-public class UserMatchHistoryResponse {
+public class UserMatchHistoryVo {
 
 	@Schema(description = "경기 ID")
 	private Long matchId;
@@ -48,8 +48,8 @@ public class UserMatchHistoryResponse {
 	@Schema(description = "유저의 경기 순위")
 	private Integer ranking;
 
-	public static UserMatchHistoryResponse from(MatchHistory matchHistory) {
-		return UserMatchHistoryResponse.builder()
+	public static UserMatchHistoryVo from(MatchHistory matchHistory) {
+		return UserMatchHistoryVo.builder()
 				.matchId(matchHistory.getMatch().getId())
 				.userCount(matchHistory.getMatch().getUserCount())
 				.matchType(matchHistory.getMatch().getMatchType())

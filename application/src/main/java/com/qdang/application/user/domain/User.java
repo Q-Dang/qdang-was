@@ -2,7 +2,6 @@ package com.qdang.application.user.domain;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import javax.print.attribute.standard.MediaSize.Other;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,7 +27,6 @@ public class User {
 	private String profileImage;
 	private String address;
 	private String detailAddress;
-	private Integer matchCount;
 	//	private Integer joinStaffId;
 	private Boolean isResting;
 	private Boolean isLeaving;
@@ -40,6 +38,18 @@ public class User {
 	private LocalDateTime agreeUpdateAt;
 	private LocalDateTime accessAt;
 	private Integer accessCount;
+
+	private String statusMessage;
+	private Integer average;
+	private Integer matchCount;
+	private Integer highRun;
+	private Integer totalInningCount;
+	private Integer succeedInningCount;
+	private Integer failedInningCount;
+	private Integer sluggingCount;
+	private Integer battingAverage;
+	private Integer sluggingPercentage;
+
 
 	public static User of(
 			String loginId,
@@ -67,12 +77,13 @@ public class User {
 		this.password = passwordEncoder.encode(this.password);
 	}
 
-	public void checkPasswordByEncoder(
+	public boolean checkPasswordByEncoder(
 			String rawPassword,
 			PasswordEncoder passwordEncoder) {
-		if (!passwordEncoder.matches(rawPassword, this.password)) {
-			// Todo: 예외 처리 말고 return 값으로!
-//
+		if (passwordEncoder.matches(rawPassword, this.password)) {
+			return true;
 		}
+		return false;
+		// Todo: 예외 처리 말고 return 값으로!
 	}
 }

@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,13 +26,13 @@ public class StartMatchRequest {
 	private Integer userCount;
 
 	@Schema(description = "유저 수 크기만큼")
-	@Range(min = 1, max = 4, message = "{match.matchTargetScoreList.size.range}")
-	private List<MatchTargetScoreRequest> matchTargetScoreList;
+	@Size(min = 1, max = 4, message = "{match.matchTargetScoreList.size.range}")
+	private List<MatchTargetScoreVo> matchTargetScoreList;
 
 
 	public StartMatchCommand toStartMatchCommand() {
 		List<com.qdang.application.match.domain.MatchTargetScore> matchTargetScores = this.matchTargetScoreList.stream()
-			.map(MatchTargetScoreRequest::toMatchTargetScore)
+			.map(MatchTargetScoreVo::toMatchTargetScore)
 			.collect(Collectors.toList());
 		return StartMatchCommand.of(matchType, userCount, matchTargetScores);
 	}

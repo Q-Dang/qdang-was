@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Schema(description = "경기 목표 점수")
-public class MatchTargetScoreRequest {
+public class MatchTargetScoreVo {
 
 	@Schema(description = "게임에 참여하는 유저 아이디")
 	@NotNull(message = "{user.userId.notNull}")

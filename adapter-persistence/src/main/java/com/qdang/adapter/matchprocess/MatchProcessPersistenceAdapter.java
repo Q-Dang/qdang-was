@@ -18,8 +18,8 @@ public class MatchProcessPersistenceAdapter implements
 	public MatchProcess save(MatchProcess matchProcess) {
 		MatchProcessJpaEntity matchProcessJpaEntity =
 				matchProcessMapper.mapToJpaEntity(matchProcess);
-		MatchProcessJpaEntity savedMatchProcessJpaEntity =
-				matchProcessRepository.save(matchProcessJpaEntity);
-		return matchProcessMapper.mapToDomainEntity(savedMatchProcessJpaEntity);
+		matchProcessRepository.save(matchProcessJpaEntity);
+		matchProcess = matchProcessMapper.mapToDomainEntity(matchProcessJpaEntity);
+		return matchProcess;
 	}
 }

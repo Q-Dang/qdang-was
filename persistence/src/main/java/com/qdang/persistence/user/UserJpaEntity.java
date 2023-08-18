@@ -1,10 +1,7 @@
 package com.qdang.persistence.user;
 
-import com.qdang.persistence.matchprocess.MatchProcessJpaEntity;
-import com.qdang.persistence.usermatch.UserMatchJpaEntity;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -14,7 +11,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -67,9 +63,24 @@ public class UserJpaEntity {
 	private LocalDateTime accessAt;
 	private Integer accessCount;
 
-	@OneToMany(mappedBy = "user")
-	private List<UserMatchJpaEntity> userMatchList;
+	private String statusMessage;
+	private Integer average;
+	private Integer matchCount;
+	private Integer highRun;
+	private Integer totalInningCount;
+	private Integer succeedInningCount;
+	private Integer failedInningCount;
+	private Integer sluggingCount;
+	private Integer battingAverage;
+	private Integer sluggingPercentage;
 
-	@OneToMany(mappedBy = "player")
-	private List<MatchProcessJpaEntity> matchProcessList;
+
+	/**
+	 * mappedBy 지양! -> 할 거면 set, change 함수 만들어서 사용하기
+	 */
+//	@OneToMany(mappedBy = "user")
+//	private List<UserMatchJpaEntity> userMatchList = new ArrayList<>();
+//
+//	@OneToMany(mappedBy = "player")
+//	private List<MatchProcessJpaEntity> matchProcessList = new ArrayList<>();
 }

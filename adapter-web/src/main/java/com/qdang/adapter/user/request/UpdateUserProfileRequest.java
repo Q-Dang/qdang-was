@@ -4,7 +4,6 @@ import com.qdang.application.user.domain.Gender;
 import com.qdang.application.user.port.in.command.UpdateUserProfileCommand;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.time.LocalDate;
-import javax.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,7 +24,7 @@ public class UpdateUserProfileRequest {
 	private Gender gender;
 
 	@Schema(description = "1~5숙련도")
-	@Range(min = 1, max = 5)
+	@Range(min = 1, max = 5, message = "{user.proficiency.range}")
 	private Integer proficiency;
 
 	public UpdateUserProfileCommand toUpdateUserProfileCommand(Long userId ) {

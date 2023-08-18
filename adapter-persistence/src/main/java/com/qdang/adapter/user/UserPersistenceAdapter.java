@@ -27,7 +27,6 @@ public class UserPersistenceAdapter implements
 
 	@Override
 	public boolean hasUserByLoginId(String loginId) {
-		System.out.println("UserPersistenceAdapter.hasUserByLoginId");
 		return userRepository.findByLoginId(loginId)
 			.isPresent();
 	}
@@ -61,6 +60,7 @@ public class UserPersistenceAdapter implements
 		UserJpaEntity userJpaEntity =
 			userMapper.mapToJpaEntity(user);
 		userRepository.save(userJpaEntity);
-		return userMapper.mapToDomainEntity(userJpaEntity);
+		user = userMapper.mapToDomainEntity(userJpaEntity);
+		return user;
 	}
 }

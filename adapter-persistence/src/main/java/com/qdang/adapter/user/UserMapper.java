@@ -3,6 +3,8 @@ package com.qdang.adapter.user;
 import com.qdang.application.user.domain.Gender;
 import com.qdang.application.user.domain.User;
 import com.qdang.application.user.domain.UserRole;
+import com.qdang.global.exception.BusinessException;
+import com.qdang.global.exception.ErrorType;
 import com.qdang.global.mapper.Mapper;
 import com.qdang.library.mapper.GenericJpaMapper;
 import com.qdang.persistence.user.GenderJpa;
@@ -18,31 +20,41 @@ public class UserMapper implements GenericJpaMapper<User, UserJpaEntity> {
 			return null;
 		}
 
-		return User.builder()
-			.id(jpaEntity.getId())
-			.loginId(jpaEntity.getLoginId())
-			.password(jpaEntity.getPassword())
-			.username(jpaEntity.getUsername())
-			.birthday(jpaEntity.getBirthday())
-			.gender(genderToDomain(jpaEntity.getGender()))
-			.proficiency(jpaEntity.getProficiency())
-			.phone(jpaEntity.getPhone())
-			.fcmToken(jpaEntity.getFcmToken())
-			.profileImage(jpaEntity.getProfileImage())
-			.address(jpaEntity.getAddress())
-			.detailAddress(jpaEntity.getDetailAddress())
-			.isResting(jpaEntity.getIsResting())
-			.isLeaving(jpaEntity.getIsLeaving())
-			.phoneAuthCode(jpaEntity.getPhoneAuthCode())
-			.phoneAuthAt(jpaEntity.getPhoneAuthAt())
-			.isPhoneAuth(jpaEntity.getIsPhoneAuth())
-			.joinAt(jpaEntity.getJoinAt())
-			.joinAgree(jpaEntity.getJoinAgree())
-			.agreeUpdateAt(jpaEntity.getAgreeUpdateAt())
-			.accessAt(jpaEntity.getAccessAt())
-			.accessCount(jpaEntity.getAccessCount())
-			.userRole(userRoleToDomain(jpaEntity.getUserRole()))
-			.build();
+		User.UserBuilder user = User.builder();
+		user.id(jpaEntity.getId());
+		user.userRole(userRoleToDomain(jpaEntity.getUserRole()));
+		user.loginId(jpaEntity.getLoginId());
+		user.password(jpaEntity.getPassword());
+		user.username(jpaEntity.getUsername());
+		user.birthday(jpaEntity.getBirthday());
+		user.gender(genderToDomain(jpaEntity.getGender()));
+		user.proficiency(jpaEntity.getProficiency());
+		user.phone(jpaEntity.getPhone());
+		user.fcmToken(jpaEntity.getFcmToken());
+		user.profileImage(jpaEntity.getProfileImage());
+		user.address(jpaEntity.getAddress());
+		user.detailAddress(jpaEntity.getDetailAddress());
+		user.isResting(jpaEntity.getIsResting());
+		user.isLeaving(jpaEntity.getIsLeaving());
+		user.phoneAuthCode(jpaEntity.getPhoneAuthCode());
+		user.phoneAuthAt(jpaEntity.getPhoneAuthAt());
+		user.isPhoneAuth(jpaEntity.getIsPhoneAuth());
+		user.joinAt(jpaEntity.getJoinAt());
+		user.joinAgree(jpaEntity.getJoinAgree());
+		user.agreeUpdateAt(jpaEntity.getAgreeUpdateAt());
+		user.accessAt(jpaEntity.getAccessAt());
+		user.accessCount(jpaEntity.getAccessCount());
+		user.statusMessage(jpaEntity.getStatusMessage());
+		user.average(jpaEntity.getAverage());
+		user.matchCount(jpaEntity.getMatchCount());
+		user.highRun(jpaEntity.getHighRun());
+		user.totalInningCount(jpaEntity.getTotalInningCount());
+		user.succeedInningCount(jpaEntity.getSucceedInningCount());
+		user.failedInningCount(jpaEntity.getFailedInningCount());
+		user.sluggingCount(jpaEntity.getSluggingCount());
+		user.battingAverage(jpaEntity.getBattingAverage());
+		user.sluggingPercentage(jpaEntity.getSluggingPercentage());
+		return user.build();
 	}
 
 	@Override
@@ -51,58 +63,103 @@ public class UserMapper implements GenericJpaMapper<User, UserJpaEntity> {
 			return null;
 		}
 
-		return UserJpaEntity.builder()
-			.id(domain.getId())
-			.loginId(domain.getLoginId())
-			.password(domain.getPassword())
-			.username(domain.getUsername())
-			.birthday(domain.getBirthday())
-			.gender(genderToJpa(domain.getGender()))
-			.proficiency(domain.getProficiency())
-			.phone(domain.getPhone())
-			.fcmToken(domain.getFcmToken())
-			.profileImage(domain.getProfileImage())
-			.address(domain.getAddress())
-			.detailAddress(domain.getDetailAddress())
-			.isResting(domain.getIsResting())
-			.isLeaving(domain.getIsLeaving())
-			.phoneAuthCode(domain.getPhoneAuthCode())
-			.phoneAuthAt(domain.getPhoneAuthAt())
-			.isPhoneAuth(domain.getIsPhoneAuth())
-			.joinAt(domain.getJoinAt())
-			.joinAgree(domain.getJoinAgree())
-			.agreeUpdateAt(domain.getAgreeUpdateAt())
-			.accessAt(domain.getAccessAt())
-			.accessCount(domain.getAccessCount())
-			.userRole(userRoleToJpa(domain.getUserRole()))
-			.build();
+		UserJpaEntity.UserJpaEntityBuilder userJpa = UserJpaEntity.builder();
+		userJpa.id(domain.getId());
+		userJpa.userRole(userRoleToJpa(domain.getUserRole()));
+		userJpa.loginId(domain.getLoginId());
+		userJpa.password(domain.getPassword());
+		userJpa.username(domain.getUsername());
+		userJpa.birthday(domain.getBirthday());
+		userJpa.gender(genderToJpa(domain.getGender()));
+		userJpa.proficiency(domain.getProficiency());
+		userJpa.phone(domain.getPhone());
+		userJpa.fcmToken(domain.getFcmToken());
+		userJpa.profileImage(domain.getProfileImage());
+		userJpa.address(domain.getAddress());
+		userJpa.detailAddress(domain.getDetailAddress());
+		userJpa.isResting(domain.getIsResting());
+		userJpa.isLeaving(domain.getIsLeaving());
+		userJpa.phoneAuthCode(domain.getPhoneAuthCode());
+		userJpa.phoneAuthAt(domain.getPhoneAuthAt());
+		userJpa.isPhoneAuth(domain.getIsPhoneAuth());
+		userJpa.joinAt(domain.getJoinAt());
+		userJpa.joinAgree(domain.getJoinAgree());
+		userJpa.agreeUpdateAt(domain.getAgreeUpdateAt());
+		userJpa.accessAt(domain.getAccessAt());
+		userJpa.accessCount(domain.getAccessCount());
+		userJpa.statusMessage(domain.getStatusMessage());
+		userJpa.average(domain.getAverage());
+		userJpa.matchCount(domain.getMatchCount());
+		userJpa.highRun(domain.getHighRun());
+		userJpa.totalInningCount(domain.getTotalInningCount());
+		userJpa.succeedInningCount(domain.getSucceedInningCount());
+		userJpa.failedInningCount(domain.getFailedInningCount());
+		userJpa.sluggingCount(domain.getSluggingCount());
+		userJpa.battingAverage(domain.getBattingAverage());
+		userJpa.sluggingPercentage(domain.getSluggingPercentage());
+		return userJpa.build();
 	}
 
+	/**
+	 * Enum Mapping
+	 */
 	private Gender genderToDomain(GenderJpa genderJpa) {
-		if ( genderJpa == null ) {
+		if (genderJpa == null) {
 			return null;
 		}
-		return Gender.valueOf(genderJpa.name());
+		switch (genderJpa) {
+			case MALE:
+				return Gender.MALE;
+			case FEMALE:
+				return Gender.FEMALE;
+			case OTHER:
+				return Gender.OTHER;
+			default:
+				throw new BusinessException(ErrorType.NOT_FOUND_RESOURCE, "알 수 없는 유저 성별입니다.");
+		}
 	}
 
 	private GenderJpa genderToJpa(Gender gender) {
-		if ( gender == null ) {
+		if (gender == null) {
 			return null;
 		}
-		return GenderJpa.valueOf(gender.name());
+		switch (gender) {
+			case MALE:
+				return GenderJpa.MALE;
+			case FEMALE:
+				return GenderJpa.FEMALE;
+			case OTHER:
+				return GenderJpa.OTHER;
+			default:
+				throw new BusinessException(ErrorType.NOT_FOUND_RESOURCE, "알 수 없는 유저 성별입니다.");
+		}
 	}
 
 	private UserRole userRoleToDomain(UserRoleJpa userRoleJpa) {
-		if ( userRoleJpa == null ) {
+		if (userRoleJpa == null) {
 			return null;
 		}
-		return UserRole.valueOf(userRoleJpa.name());
+		switch (userRoleJpa) {
+			case ADMIN:
+				return UserRole.ADMIN;
+			case MEMBER:
+				return UserRole.MEMBER;
+			default:
+				throw new BusinessException(ErrorType.NOT_FOUND_RESOURCE, "알 수 없는 유저 권한입니다.");
+		}
 	}
 
 	private UserRoleJpa userRoleToJpa(UserRole userRole) {
-		if ( userRole == null ) {
+		if (userRole == null) {
 			return null;
 		}
-		return UserRoleJpa.valueOf(userRole.name());
+		switch (userRole) {
+			case ADMIN:
+				return UserRoleJpa.ADMIN;
+			case MEMBER:
+				return UserRoleJpa.MEMBER;
+			default:
+				throw new BusinessException(ErrorType.NOT_FOUND_RESOURCE, "알 수 없는 유저 권한입니다.");
+		}
 	}
 }

@@ -13,13 +13,13 @@ import lombok.Getter;
 public class GetUserMatchHistoryResponse {
 
 	@Schema(description = "유저 경기 기록 리스트")
-	List<UserMatchHistoryResponse> userMatchHistoryList;
+	List<UserMatchHistoryVo> userMatchHistoryList;
 
 	public static GetUserMatchHistoryResponse from(List<MatchHistory> matchHistoryList) {
 		return new GetUserMatchHistoryResponse(
 				matchHistoryList
 						.stream()
-						.map(UserMatchHistoryResponse::from)
+						.map(UserMatchHistoryVo::from)
 						.collect(Collectors.toList()));
 	}
 }
