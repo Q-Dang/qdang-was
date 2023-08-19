@@ -61,7 +61,7 @@ public class UserController {
 	})
 	@GetMapping("/profiles")
 	public ResponseEntity<?> getMyProfile(
-			@Parameter(hidden = true) @UserId Long userId
+			@UserId Long userId
 	) {
 		/**
 		 * 이름
@@ -150,7 +150,7 @@ public class UserController {
 	})
 	@PatchMapping("/profile")
 	public ResponseEntity<?> updateUserProfile(
-			@Parameter(hidden = true) @UserId Long userId,
+			@UserId Long userId,
 			@Valid @RequestBody UpdateUserProfileRequest request
 	) {
 		updateUserProfileUseCase.updateUserProfile(request.toUpdateUserProfileCommand(userId));
@@ -174,7 +174,7 @@ public class UserController {
 	})
 	@GetMapping("/matches")
 	public ResponseEntity<?> getUserMatchHistory(
-			@Parameter(hidden = true) @UserId Long userId
+			@UserId Long userId
 	) {
 		GetUserMatchHistoryResponse response =
 				GetUserMatchHistoryResponse.from(

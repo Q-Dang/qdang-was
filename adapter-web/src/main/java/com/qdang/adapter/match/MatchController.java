@@ -54,7 +54,7 @@ public class MatchController {
 	})
 	@PostMapping
 	public ResponseEntity<?> startMatch(
-			@Parameter(hidden = true) @UserId Long userId,
+			@UserId Long userId,
 			@RequestBody StartMatchRequest request
 	) {
 		Match match = startMatchUseCase.startMatch(request.toStartMatchCommand());
@@ -79,7 +79,7 @@ public class MatchController {
 	})
 	@PostMapping("/processes")
 	public ResponseEntity<?> recordMatchProcess(
-			@Parameter(hidden = true) @UserId Long userId,
+			@UserId Long userId,
 			@RequestBody RecordMatchProcessRequest request
 	) {
 		recordMatchProcessUseCase.recordMatchProcess(request.toRecordMatchProcessCommand());
