@@ -23,7 +23,6 @@ public class WebConfig implements WebMvcConfigurer {
 
 	private final UserIdResolver userIdResolver;
 
-
 	@Override
 	public void configurePathMatch(PathMatchConfigurer configurer) {
 		configurer

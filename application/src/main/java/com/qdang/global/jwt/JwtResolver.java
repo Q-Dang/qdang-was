@@ -30,7 +30,7 @@ public class JwtResolver {
 			return true;
 		} catch (RuntimeException e) {
 			if (e instanceof ExpiredJwtException) {
-				throw new UnauthorizedException(ErrorType.TOKEN_TIME_EXPIRED_EXCEPTION);
+				throw new UnauthorizedException(ErrorType.EXPIRED_TOKEN_EXCEPTION);
 			}
 			return false;
 		}

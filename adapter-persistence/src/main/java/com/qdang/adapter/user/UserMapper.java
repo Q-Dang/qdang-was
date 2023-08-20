@@ -115,7 +115,7 @@ public class UserMapper implements GenericJpaMapper<User, UserJpaEntity> {
 			case OTHER:
 				return Gender.OTHER;
 			default:
-				throw new BusinessException(ErrorType.NOT_FOUND_RESOURCE, "알 수 없는 유저 성별입니다.");
+				throw new BusinessException(ErrorType.NOT_FOUND_RESOURCE_EXCEPTION, "알 수 없는 유저 성별입니다.");
 		}
 	}
 
@@ -131,7 +131,7 @@ public class UserMapper implements GenericJpaMapper<User, UserJpaEntity> {
 			case OTHER:
 				return GenderJpa.OTHER;
 			default:
-				throw new BusinessException(ErrorType.NOT_FOUND_RESOURCE, "알 수 없는 유저 성별입니다.");
+				throw new BusinessException(ErrorType.NOT_FOUND_RESOURCE_EXCEPTION, "알 수 없는 유저 성별입니다.");
 		}
 	}
 
@@ -145,7 +145,7 @@ public class UserMapper implements GenericJpaMapper<User, UserJpaEntity> {
 			case MEMBER:
 				return UserRole.MEMBER;
 			default:
-				throw new BusinessException(ErrorType.NOT_FOUND_RESOURCE, "알 수 없는 유저 권한입니다.");
+				throw new BusinessException(ErrorType.NOT_FOUND_RESOURCE_EXCEPTION, "알 수 없는 유저 권한입니다.");
 		}
 	}
 
@@ -159,7 +159,7 @@ public class UserMapper implements GenericJpaMapper<User, UserJpaEntity> {
 			case MEMBER:
 				return UserRoleJpa.MEMBER;
 			default:
-				throw new BusinessException(ErrorType.NOT_FOUND_RESOURCE, "알 수 없는 유저 권한입니다.");
+				throw new BusinessException(ErrorType.NOT_FOUND_RESOURCE_EXCEPTION, "알 수 없는 유저 권한입니다.");
 		}
 	}
 }

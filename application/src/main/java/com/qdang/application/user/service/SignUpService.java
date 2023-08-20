@@ -5,7 +5,7 @@ import com.qdang.global.jwt.TokenInfo;
 import com.qdang.global.usecase.UseCase;
 import com.qdang.application.user.domain.TokenCollection;
 import com.qdang.application.user.domain.UserRole;
-import com.qdang.application.user.exception.ConflictUserNameException;
+import com.qdang.application.user.exception.ConflictUserException;
 import com.qdang.application.user.port.in.SignUpUseCase;
 import com.qdang.application.user.port.in.command.SignUpCommand;
 import com.qdang.application.user.port.out.CheckUserPort;
@@ -31,7 +31,7 @@ public class SignUpService implements SignUpUseCase {
 	@Transactional
 	public TokenCollection signUp(SignUpCommand command) {
 		if (checkUserPort.hasUserByLoginId(command.getLoginId())) {
-			throw new ConflictUserNameException();
+			throw new ConflictUserException();
 		}
 		User user = User.of(command.getLoginId(), command.getPassword(), UserRole.MEMBER);
 		user.encodePassword(passwordEncoder);
