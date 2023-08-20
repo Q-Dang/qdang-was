@@ -11,6 +11,6 @@ public class FailResponse {
 	@Schema(description = "HTTP 상태코드")
 	private int code;
 
-	@Schema(description = "에러 메시지")
+	@Schema(description = "에러 메시지", example = "에러 메시지")
 	private String message;
 }

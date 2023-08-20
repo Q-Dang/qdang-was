@@ -1,6 +1,7 @@
 package com.qdang.global.exception;
 
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
+import com.qdang.global.response.FailResponse;
 import com.qdang.global.response.HttpResponse;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.Objects;
@@ -29,7 +30,7 @@ public class ControllerExceptionHandler {
 	 */
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ExceptionHandler(MethodArgumentNotValidException.class)
-	protected ResponseEntity<?> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
+	protected ResponseEntity<FailResponse> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
 		log.error(e.getMessage(), e);
 		FieldError fieldError = Objects.requireNonNull(e.getFieldError());
 		return HttpResponse.error(
@@ -40,7 +41,7 @@ public class ControllerExceptionHandler {
 
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ExceptionHandler(BindException.class)
-	public ResponseEntity<?> handleBadRequest(BindException e) {
+	public ResponseEntity<FailResponse> handleBadRequest(BindException e) {
 		log.error(e.getMessage(), e);
 		FieldError fieldError = Objects.requireNonNull(e.getFieldError());
 		return HttpResponse.error(
@@ -51,7 +52,7 @@ public class ControllerExceptionHandler {
 
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ExceptionHandler(MethodArgumentTypeMismatchException.class)
-	public ResponseEntity<?> handleMethodArgumentTypeMismatchException(
+	public ResponseEntity<FailResponse> handleMethodArgumentTypeMismatchException(
 			MethodArgumentTypeMismatchException exception) {
 		log.error(exception.getMessage(), exception);
 		return HttpResponse.error(ErrorType.INVALID_INPUT_EXCEPTION,
@@ -64,7 +65,7 @@ public class ControllerExceptionHandler {
 			InvalidFormatException.class,
 			ServletRequestBindingException.class
 	})
-	public ResponseEntity<?> handleInvalidFormatException(Exception e) {
+	public ResponseEntity<FailResponse> handleInvalidFormatException(Exception e) {
 		log.error(e.getMessage(), e);
 		return HttpResponse.error(ErrorType.INVALID_INPUT_EXCEPTION);
 	}
@@ -74,7 +75,7 @@ public class ControllerExceptionHandler {
 	 */
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ExceptionHandler(SQLIntegrityConstraintViolationException.class)
-	public ResponseEntity<?> handleConstraintViolationException(
+	public ResponseEntity<FailResponse> handleConstraintViolationException(
 			SQLIntegrityConstraintViolationException e) {
 		log.error(e.getMessage(), e);
 		return HttpResponse.error(ErrorType.INVALID_INPUT_EXCEPTION);
@@ -85,7 +86,7 @@ public class ControllerExceptionHandler {
 	 */
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ExceptionHandler(IllegalArgumentException.class)
-	public ResponseEntity<?> illegalArgumentExceptionAdvice(IllegalArgumentException e) {
+	public ResponseEntity<FailResponse> illegalArgumentExceptionAdvice(IllegalArgumentException e) {
 		log.error(e.getMessage(), e);
 		return HttpResponse.error(ErrorType.INVALID_ARGUMENT_EXCEPTION);
 	}
@@ -95,7 +96,7 @@ public class ControllerExceptionHandler {
 	 */
 	@ResponseStatus(HttpStatus.UNAUTHORIZED)
 	@ExceptionHandler(UnauthorizedException.class)
-	public ResponseEntity<?> handleUnAuthorizedException(UnauthorizedException e) {
+	public ResponseEntity<FailResponse> handleUnAuthorizedException(UnauthorizedException e) {
 		log.error(e.getMessage(), e);
 		return HttpResponse.error(e.getErrorType());
 	}
@@ -105,7 +106,7 @@ public class ControllerExceptionHandler {
 	 */
 	@ResponseStatus(HttpStatus.FORBIDDEN)
 	@ExceptionHandler(ForbiddenException.class)
-	public ResponseEntity<?> handleForbiddenException(ForbiddenException e) {
+	public ResponseEntity<FailResponse> handleForbiddenException(ForbiddenException e) {
 		log.error(e.getMessage(), e);
 		return HttpResponse.error(e.getErrorType());
 	}
@@ -115,7 +116,7 @@ public class ControllerExceptionHandler {
 	 */
 	@ResponseStatus(HttpStatus.NOT_FOUND)
 	@ExceptionHandler(NotFoundException.class)
-	public ResponseEntity<?> handleNotFoundException(NotFoundException e) {
+	public ResponseEntity<FailResponse> handleNotFoundException(NotFoundException e) {
 		log.error(e.getMessage(), e);
 		return HttpResponse.error(e.getErrorType());
 	}
@@ -125,7 +126,7 @@ public class ControllerExceptionHandler {
 	 */
 	@ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
 	@ExceptionHandler(HttpRequestMethodNotSupportedException.class)
-	public ResponseEntity<?> handleHttpRequestMethodNotSupportedException(
+	public ResponseEntity<FailResponse> handleHttpRequestMethodNotSupportedException(
 			HttpRequestMethodNotSupportedException e) {
 		log.error(e.getMessage(), e);
 		return HttpResponse.error(ErrorType.METHOD_NOT_ALLOWED_EXCEPTION);
@@ -136,7 +137,7 @@ public class ControllerExceptionHandler {
 	 */
 	@ResponseStatus(HttpStatus.CONFLICT)
 	@ExceptionHandler(ConflictException.class)
-	public ResponseEntity<?> handleConflictException(ConflictException e) {
+	public ResponseEntity<FailResponse> handleConflictException(ConflictException e) {
 		log.error(e.getMessage(), e);
 		return HttpResponse.error(e.getErrorType());
 	}
@@ -146,7 +147,7 @@ public class ControllerExceptionHandler {
 	 */
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	@ExceptionHandler(Exception.class)
-	protected ResponseEntity<?> handleInternalServerException(Exception e) {
+	protected ResponseEntity<FailResponse> handleInternalServerException(Exception e) {
 		log.error(e.getMessage(), e);
 		return HttpResponse.error(ErrorType.INTERNAL_SERVER_ERROR);
 	}
@@ -155,7 +156,7 @@ public class ControllerExceptionHandler {
 	 * Custom Error
 	 */
 	@ExceptionHandler(BusinessException.class)
-	protected ResponseEntity<?> handleBusinessException(BusinessException e) {
+	protected ResponseEntity<FailResponse> handleBusinessException(BusinessException e) {
 		log.error(e.getMessage(), e);
 		return HttpResponse.error(e.getErrorType());
 	}

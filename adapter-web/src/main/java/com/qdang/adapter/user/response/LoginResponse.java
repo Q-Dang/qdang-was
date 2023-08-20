@@ -10,10 +10,10 @@ import lombok.Getter;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class LoginResponse {
 
-	@Schema(description = "JWT access token")
+	@Schema(description = "JWT access token", example = "access_token")
 	private String accessToken;
 
-	@Schema(description = "JWT refresh token")
+	@Schema(description = "JWT refresh token", example = "refresh_token")
 	private String refreshToken;
 
 	public static LoginResponse from(TokenCollection jwtToken) {

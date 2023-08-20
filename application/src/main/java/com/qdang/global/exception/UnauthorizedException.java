@@ -7,7 +7,7 @@ public class UnauthorizedException extends BusinessException {
     }
 
     public UnauthorizedException(ErrorType errorType) {
-        super(errorType);
+        super(ErrorType.UNAUTHORIZED_EXCEPTION, errorType.getMessage());
     }
 
     public UnauthorizedException(String message) {

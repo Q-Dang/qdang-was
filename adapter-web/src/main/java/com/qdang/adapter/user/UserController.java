@@ -7,7 +7,6 @@ import com.qdang.application.user.port.in.GetUserProfileUseCase;
 import com.qdang.global.adapter.WebAdapter;
 import com.qdang.global.pathmatch.V1;
 import com.qdang.global.resolver.UserId;
-import com.qdang.global.response.FailResponse;
 import com.qdang.global.response.HttpResponse;
 import com.qdang.global.response.SuccessType;
 import com.qdang.adapter.user.request.UpdateUserProfileRequest;
@@ -15,11 +14,7 @@ import com.qdang.adapter.user.response.CheckValidationUsernameResponse;
 import com.qdang.application.user.port.in.CheckValidationUsernameUseCase;
 import com.qdang.application.user.port.in.UpdateUserProfileUseCase;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import javax.validation.Valid;
@@ -45,22 +40,11 @@ public class UserController {
 	private final GetUserProfileUseCase getUserProfileUseCase;
 
 	@Operation(summary = "유저 본인 프로필 조회")
-	@ApiResponses(value = {
-			@ApiResponse(
-					responseCode = "200",
-					description = "유저 본인 프로필 조회 성공",
-					content = @Content(schema = @Schema(implementation = GetUserProfileResponse.class))),
-			@ApiResponse(
-					responseCode = "400",
-					description = "잘못된 요청입니다.",
-					content = @Content(schema = @Schema(implementation = FailResponse.class))),
-			@ApiResponse(
-					responseCode = "500",
-					description = "알 수 없는 서버 에러가 발생했습니다.",
-					content = @Content(schema = @Schema(implementation = FailResponse.class)))
-	})
+	@ApiResponse(
+			responseCode = "200",
+			description = "유저 본인 프로필 조회 성공")
 	@GetMapping("/profiles")
-	public ResponseEntity<?> getMyProfile(
+	public ResponseEntity<GetUserProfileResponse> getMyProfile(
 			@UserId Long userId
 	) {
 		/**
@@ -108,22 +92,11 @@ public class UserController {
 
 
 	@Operation(summary = "닉네임 유효성 확인")
-	@ApiResponses(value = {
-			@ApiResponse(
-					responseCode = "200",
-					description = "닉네임 중복 확인 성공",
-					content = @Content(schema = @Schema(implementation = CheckValidationUsernameResponse.class))),
-			@ApiResponse(
-					responseCode = "400",
-					description = "잘못된 요청입니다.",
-					content = @Content(schema = @Schema(implementation = FailResponse.class))),
-			@ApiResponse(
-					responseCode = "500",
-					description = "알 수 없는 서버 에러가 발생했습니다.",
-					content = @Content(schema = @Schema(implementation = FailResponse.class)))
-	})
+	@ApiResponse(
+			responseCode = "200",
+			description = "닉네임 중복 확인 성공")
 	@GetMapping("/validation/username")
-	public ResponseEntity<?> checkValidationUsername(
+	public ResponseEntity<CheckValidationUsernameResponse> checkValidationUsername(
 			@RequestParam("username") String username
 	) {
 		CheckValidationUsernameResponse response =
@@ -135,21 +108,11 @@ public class UserController {
 	}
 
 	@Operation(summary = "프로필 수정")
-	@ApiResponses(value = {
-			@ApiResponse(
-					responseCode = "204",
-					description = "프로필 수정 성공"),
-			@ApiResponse(
-					responseCode = "400",
-					description = "잘못된 요청입니다.",
-					content = @Content(schema = @Schema(implementation = FailResponse.class))),
-			@ApiResponse(
-					responseCode = "500",
-					description = "알 수 없는 서버 에러가 발생했습니다.",
-					content = @Content(schema = @Schema(implementation = FailResponse.class)))
-	})
+	@ApiResponse(
+			responseCode = "204",
+			description = "프로필 수정 성공")
 	@PatchMapping("/profile")
-	public ResponseEntity<?> updateUserProfile(
+	public ResponseEntity<Void> updateUserProfile(
 			@UserId Long userId,
 			@Valid @RequestBody UpdateUserProfileRequest request
 	) {
@@ -158,22 +121,11 @@ public class UserController {
 	}
 
 	@Operation(summary = "경기 전적 조회")
-	@ApiResponses(value = {
-			@ApiResponse(
-					responseCode = "200",
-					description = "경기 전적 조회 성공",
-					content = @Content(schema = @Schema(implementation = GetUserMatchHistoryResponse.class))),
-			@ApiResponse(
-					responseCode = "400",
-					description = "잘못된 요청입니다.",
-					content = @Content(schema = @Schema(implementation = FailResponse.class))),
-			@ApiResponse(
-					responseCode = "500",
-					description = "알 수 없는 서버 에러가 발생했습니다.",
-					content = @Content(schema = @Schema(implementation = FailResponse.class)))
-	})
+	@ApiResponse(
+			responseCode = "200",
+			description = "경기 전적 조회 성공")
 	@GetMapping("/matches")
-	public ResponseEntity<?> getUserMatchHistory(
+	public ResponseEntity<GetUserMatchHistoryResponse> getUserMatchHistory(
 			@UserId Long userId
 	) {
 		GetUserMatchHistoryResponse response =

@@ -18,8 +18,8 @@ public enum SuccessType {
     /**
      * 201 CREATED
      */
-    SIGNUP_SUCCESS(HttpStatus.CREATED, "회원가입이 완료됐습니다."),
     CREATE_RESOURCE_SUCCESS(HttpStatus.CREATED, "생성에 성공했습니다."),
+    SIGNUP_SUCCESS(HttpStatus.CREATED, "회원가입이 완료됐습니다."),
 
     /**
      * 204 NO CONTENT
