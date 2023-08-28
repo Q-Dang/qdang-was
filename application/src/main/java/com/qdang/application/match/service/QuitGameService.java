@@ -13,6 +13,8 @@ import com.qdang.application.user.port.out.SaveUserPort;
 import com.qdang.application.usermatch.domain.UserMatch;
 import com.qdang.application.usermatch.port.out.LoadUserMatchPort;
 import com.qdang.application.usermatch.port.out.SaveUserMatchPort;
+import com.qdang.global.exception.BusinessException;
+import com.qdang.global.exception.ErrorType;
 import com.qdang.global.exception.ForbiddenException;
 import com.qdang.global.usecase.UseCase;
 import java.util.List;
@@ -42,10 +44,11 @@ public class QuitGameService implements QuitGameUseCase {
 				loadUserMatchPort.loadAllByMatchId(command.getMatchId());
 		List<User> users =
 				loadUserPort.loadAllByMatchId(match.getId());
-
 		checkValidationPlayerId(command.getPlayerId(), userMatches);
 		checkValidationPlayerIds(getUserIdsInCommand(command), userMatches);
-
+		if (match.isQuitMatch()) {
+			throw new BusinessException(ErrorType.INVALID_INPUT_EXCEPTION, "이미 종료된 게임입니다.");
+		}
 		match.quit(command.getPlayTime());
 		command.getUserMatchResultCommand().forEach(userMatchResultCommand -> {
 			UserMatch userMatch =

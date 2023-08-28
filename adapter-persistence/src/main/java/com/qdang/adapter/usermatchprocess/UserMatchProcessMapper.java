@@ -15,11 +15,9 @@ import com.qdang.persistence.usermatchprocess.TurnTypeJpa;
 import com.qdang.persistence.usermatchprocess.UserMatchProcessJpaEntity;
 import com.qdang.persistence.usermatchprocess.UserMatchStatusJpa;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 @Mapper
 @RequiredArgsConstructor
-@Slf4j
 public class UserMatchProcessMapper implements
 		GenericJpaMapper<UserMatchProcess, UserMatchProcessJpaEntity> {
 
@@ -69,24 +67,19 @@ public class UserMatchProcessMapper implements
 		UserJpaEntity userJpaEntity =
 				userRepository.findById(domain.getUserId())
 						.orElseThrow(NotFoundUserException::new);
-		log.info("UserMatchProcessMapper.mapToDomainEntity");
 		MatchProcessJpaEntity matchProcessJpaEntity =
 				matchProcessRepository.findById(domain.getMatchProcessId())
 				.orElseThrow(NotFoundMatchProcessException::new);
-		log.info("UserMatchProcessMapper.mapToDomainEntity");
 		UserMatchProcessJpaEntity.UserMatchProcessJpaEntityBuilder userMatchProcessJpaEntity = UserMatchProcessJpaEntity.builder();
 		if(domain.getId() != null) {
 			userMatchProcessJpaEntity.id(domain.getId());
 		}
-		log.info("UserMatchProcessMapper.mapToDomainEntity");
 		userMatchProcessJpaEntity.user(userJpaEntity);
-		log.info("UserMatchProcessMapper.mapToDomainEntity");
 		userMatchProcessJpaEntity.matchProcess(matchProcessJpaEntity);
 		userMatchProcessJpaEntity.score(domain.getScore());
 		userMatchProcessJpaEntity.finishCushionScore(domain.getFinishCushionScore());
 		userMatchProcessJpaEntity.finishBankShotScore(domain.getFinishBankShotScore());
 		userMatchProcessJpaEntity.ranking(domain.getRanking());
-		log.info("UserMatchProcessMapper.mapToJpaEntity");
 		if (domain.getStatus() != null) {
 			userMatchProcessJpaEntity.status(
 					userMatchStatusToUserMatchStatusJpa(domain.getStatus())

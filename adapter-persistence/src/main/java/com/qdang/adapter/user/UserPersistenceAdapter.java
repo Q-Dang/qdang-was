@@ -84,6 +84,9 @@ public class UserPersistenceAdapter implements
 				.stream()
 				.map(userMapper::mapToJpaEntity)
 				.collect(Collectors.toList());
+		userJpaEntities.forEach(userJpaEntity -> {
+		});
+
 		userRepository.saveAll(userJpaEntities);
 		return userJpaEntities
 				.stream()

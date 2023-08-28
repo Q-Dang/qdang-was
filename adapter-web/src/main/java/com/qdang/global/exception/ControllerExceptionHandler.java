@@ -158,6 +158,6 @@ public class ControllerExceptionHandler {
 	@ExceptionHandler(BusinessException.class)
 	protected ResponseEntity<FailResponse> handleBusinessException(BusinessException e) {
 		log.error(e.getMessage(), e);
-		return HttpResponse.error(e.getErrorType());
+		return HttpResponse.error(e.getErrorType(), e.getMessage());
 	}
 }

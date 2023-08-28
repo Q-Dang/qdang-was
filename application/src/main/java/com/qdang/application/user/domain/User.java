@@ -9,7 +9,6 @@ import lombok.Builder;
 import lombok.Getter;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-// TODO: Domain 모델로 고치기
 @Getter
 @Builder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
@@ -83,8 +82,8 @@ public class User {
 		this.failedInningCount += userMatch.getFailedInningCount();
 		this.sluggingCount += userMatch.getSluggingCount();
 		if (totalInningCount != 0) {
-			this.battingAverage = this.succeedInningCount/ this.totalInningCount * 100;
-			this.sluggingPercentage = this.sluggingCount / this.totalInningCount * 100;
+			this.battingAverage = 100 * this.succeedInningCount/ this.totalInningCount;
+			this.sluggingPercentage = 100 * this.sluggingCount / this.totalInningCount;
 		}
 	}
 

@@ -36,4 +36,8 @@ public class Match {
 		this.endAt = LocalDateTime.now();
 		this.duration = duration;
 	}
+
+	public boolean isQuitMatch() {
+		return this.isValid;
+	}
 }

@@ -19,6 +19,7 @@ public class UserRepositoryImpl implements UserRepositoryCustom {
 	public List<UserJpaEntity> findAllByMatchId(Long matchId) {
 		return queryFactory
 				.select(userJpaEntity)
+				.distinct()
 				.from(userJpaEntity)
 				.leftJoin(userJpaEntity.userMatchList)
 				.where(userJpaEntity.userMatchList.any().match.id.eq(matchId))
