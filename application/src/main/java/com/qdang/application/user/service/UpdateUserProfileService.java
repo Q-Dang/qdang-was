@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @UseCase
 @RequiredArgsConstructor
-public class UpdateUserProfileService implements UpdateUserProfileUseCase {
+class UpdateUserProfileService implements UpdateUserProfileUseCase {
 
 	private final LoadUserPort loadUserPort;
 	private final SaveUserPort saveUserPort;

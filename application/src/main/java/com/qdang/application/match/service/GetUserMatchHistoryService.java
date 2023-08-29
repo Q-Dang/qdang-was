@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @UseCase
 @RequiredArgsConstructor
-public class GetUserMatchHistoryService implements GetUserMatchHistoryUseCase {
+class GetUserMatchHistoryService implements GetUserMatchHistoryUseCase {
 
 	private final LoadUserMatchPort loadUserMatchPort;
 	private final LoadMatchPort loadMatchPort;

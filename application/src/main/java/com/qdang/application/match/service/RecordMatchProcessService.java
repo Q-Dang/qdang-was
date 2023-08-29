@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @UseCase
 @RequiredArgsConstructor
-public class RecordMatchProcessService implements RecordMatchProcessUseCase {
+class RecordMatchProcessService implements RecordMatchProcessUseCase {
 
 	private final SaveMatchProcessPort saveMatchProcessPort;
 	private final SaveUserMatchProcessPort saveUserMatchProcessPort;

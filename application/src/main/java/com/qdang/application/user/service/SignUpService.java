@@ -19,7 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Slf4j
 @UseCase
 @RequiredArgsConstructor
-public class SignUpService implements SignUpUseCase {
+class SignUpService implements SignUpUseCase {
 
 	private final PasswordEncoder passwordEncoder;
 	private final JwtProvider jwtProvider;

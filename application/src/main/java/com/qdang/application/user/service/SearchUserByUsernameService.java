@@ -11,7 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @UseCase
 @RequiredArgsConstructor
-public class SearchUserByUsernameService implements SearchUserByUsernameUseCase {
+class SearchUserByUsernameService implements SearchUserByUsernameUseCase {
 
 	private final LoadUserPort loadUserPort;
 

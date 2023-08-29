@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @UseCase
 @RequiredArgsConstructor
-public class LoginService implements LoginUseCase {
+class LoginService implements LoginUseCase {
 
 	private final LoadUserPort loadUserPort;
 	private final PasswordEncoder passwordEncoder;

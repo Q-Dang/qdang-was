@@ -26,7 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Slf4j
 @UseCase
 @RequiredArgsConstructor
-public class QuitGameService implements QuitGameUseCase {
+class QuitGameService implements QuitGameUseCase {
 
 	private final LoadMatchPort loadMatchPort;
 	private final LoadUserMatchPort loadUserMatchPort;

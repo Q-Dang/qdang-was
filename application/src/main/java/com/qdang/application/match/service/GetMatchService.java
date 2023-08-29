@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 @UseCase
 @RequiredArgsConstructor
 @Slf4j
-public class GetMatchService implements GetMatchUseCase {
+class GetMatchService implements GetMatchUseCase {
 
 	private final LoadMatchPort loadMatchPort;
 

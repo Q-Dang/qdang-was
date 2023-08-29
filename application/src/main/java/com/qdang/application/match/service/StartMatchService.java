@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @UseCase
 @RequiredArgsConstructor
-public class StartMatchService implements StartMatchUseCase {
+class StartMatchService implements StartMatchUseCase {
 
 	private final SaveMatchPort saveMatchPort;
 	private final SaveUserMatchPort saveUserMatchPort;

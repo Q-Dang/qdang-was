@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 
 @UseCase
 @RequiredArgsConstructor
-public class GetUserProfileService implements GetUserProfileUseCase {
+class GetUserProfileService implements GetUserProfileUseCase {
 
 	private final LoadUserPort loadUserPort;
 
