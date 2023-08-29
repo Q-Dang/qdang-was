@@ -10,6 +10,7 @@ import com.qdang.application.usermatch.port.out.LoadUserMatchPort;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 
 @UseCase
 @RequiredArgsConstructor
@@ -19,6 +20,7 @@ public class GetUserMatchHistoryService implements GetUserMatchHistoryUseCase {
 	private final LoadMatchPort loadMatchPort;
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<MatchHistory> getMatchHistoryByUserId(Long userId) {
 		List<UserMatch> userMatches = loadUserMatchPort.loadAllByUserId(userId);
 		List<MatchHistory> matchHistories = userMatches.stream()
