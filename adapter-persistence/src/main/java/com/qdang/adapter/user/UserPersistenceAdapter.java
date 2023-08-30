@@ -15,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @PersistenceAdapter
 @RequiredArgsConstructor
-public class UserPersistenceAdapter implements
+class UserPersistenceAdapter implements
 		LoadUserPort,
 		CheckUserPort,
 		SaveUserPort {

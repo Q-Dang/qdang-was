@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 
 @PersistenceAdapter
 @RequiredArgsConstructor
-public class MatchProcessPersistenceAdapter implements
+class MatchProcessPersistenceAdapter implements
 		SaveMatchProcessPort {
 
 	private final MatchProcessRepository matchProcessRepository;

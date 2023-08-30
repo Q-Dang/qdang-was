@@ -13,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @PersistenceAdapter
 @RequiredArgsConstructor
-public class UserMatchPersistenceAdapter implements
+class UserMatchPersistenceAdapter implements
 		LoadUserMatchPort,
 		SaveUserMatchPort {
 
