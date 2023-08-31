@@ -1,63 +1,66 @@
 buildscript {
-	ext {
-		springBootVersion = '2.7.14'
-	}
-	repositories {
-		mavenCentral()
-	}
+    ext {
+        springBootVersion = '2.7.14'
+        jjwtVersion = "0.11.5"
+        queryDslVersion = "5.0.0"
+        mapstructVersion = "1.5.4.Final"
+        springDocVersion = "1.7.0"
+    }
+    repositories {
+        mavenCentral()
+    }
 
-	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-	}
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
 }
 subprojects {
-	group = 'com.qdang'
-	version = '1.0'
-	apply plugin: "java"
-	apply plugin: "org.springframework.boot"
-	apply plugin: "io.spring.dependency-management"
-	apply plugin: 'war'
-	sourceCompatibility = '11'
+    group = 'com.qdang'
+    version = '1.0'
+    apply plugin: "java"
+    apply plugin: "org.springframework.boot"
+    apply plugin: "io.spring.dependency-management"
+    apply plugin: 'war'
+    sourceCompatibility = '11'
 
-	repositories {
-		mavenCentral()
-	}
+    repositories {
+        mavenCentral()
+    }
 
-	configurations {
-		compileOnly {
-			extendsFrom annotationProcessor
-		}
-	}
+    configurations {
+        compileOnly {
+            extendsFrom annotationProcessor
+        }
+    }
 
-	dependencies {
-		// Health Check
-		implementation 'org.springframework.boot:spring-boot-starter-web'
-		testImplementation 'org.springframework.boot:spring-boot-starter-test'
-		implementation 'org.springframework.boot:spring-boot-starter-actuator'
-		providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+    dependencies {
+        // Health Check
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        implementation 'org.springframework.boot:spring-boot-starter-actuator'
+        providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 
-		compileOnly 'org.projectlombok:lombok'
-		annotationProcessor 'org.projectlombok:lombok'
+        // Spring Security
+        implementation 'org.springframework.boot:spring-boot-starter-security'
+        testImplementation 'org.springframework.security:spring-security-test'
 
+        // JWT
+        runtimeOnly "io.jsonwebtoken:jjwt-impl:${jjwtVersion}"
+        runtimeOnly "io.jsonwebtoken:jjwt-jackson:${jjwtVersion}"
+        implementation "io.jsonwebtoken:jjwt-api:${jjwtVersion}"
 
-		// JWT
-		runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
-		runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
-		implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+        compileOnly 'org.projectlombok:lombok'
+        annotationProcessor 'org.projectlombok:lombok'
+    }
 
-		// Spring Security
-		implementation 'org.springframework.boot:spring-boot-starter-security'
-		testImplementation 'org.springframework.security:spring-security-test'
-	}
-
-	tasks.named('test') {
-		useJUnitPlatform()
-	}
+    tasks.named('test') {
+        useJUnitPlatform()
+    }
 
 //	war {
 //		archiveName("ROOT.war")
 //	}
-	bootWar {
-		archiveName("ROOT.war")
-	}
+    bootWar {
+        archiveName("ROOT.war")
+    }
 }

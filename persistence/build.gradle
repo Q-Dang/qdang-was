@@ -4,7 +4,27 @@ war {enabled = true}
 bootJar {enabled = false}
 jar {enabled = true}
 
+
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     runtimeOnly 'com.mysql:mysql-connector-j'
+
+    implementation "com.querydsl:querydsl-apt:${queryDslVersion}"
+    annotationProcessor(
+            "com.querydsl:querydsl-apt:${dependencyManagement.importedProperties["querydsl.version"]}:jpa",
+            "javax.persistence:javax.persistence-api",
+            "javax.annotation:javax.annotation-api")
+}
+
+def queryDslDir = "$buildDir/generated/querydsl"
+
+sourceSets {
+    main.java.srcDirs += [queryDslDir]
+}
+tasks.withType(JavaCompile) {
+    options.generatedSourceOutputDirectory = file(queryDslDir)
+}
+
+clean.doLast {
+    file(queryDslDir).deleteDir()
 }
