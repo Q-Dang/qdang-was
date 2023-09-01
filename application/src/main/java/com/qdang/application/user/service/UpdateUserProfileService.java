@@ -20,7 +20,7 @@ public class UpdateUserProfileService implements UpdateUserProfileUseCase {
 	@Transactional
 	public void updateUserProfile(UpdateUserProfileCommand command) {
 		User user = loadUserPort.loadById(command.getUserId());
-		user.update(
+		user.updateProfile(
 			command.getUsername(),
 			command.getBirthday(),
 			command.getGender(),
