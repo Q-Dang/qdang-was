@@ -26,11 +26,10 @@ public class SignUpService implements SignUpUseCase {
 	private final SaveUserPort saveUserPort;
 	private final CheckUserPort checkUserPort;
 
-	// Todo : save
 	@Override
 	@Transactional
 	public TokenCollection signUp(SignUpCommand command) {
-		if (checkUserPort.hasUserByLoginId(command.getLoginId())) {
+		if (checkUserPort.isPresentLoginId(command.getLoginId())) {
 			throw new ConflictUserException();
 		}
 		User user = User.of(command.getLoginId(), command.getPassword(), UserRole.MEMBER);

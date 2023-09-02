@@ -8,13 +8,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 @UseCase
 @RequiredArgsConstructor
-public class CheckValidationUsernameService implements CheckValidationUsernameUseCase {
+class CheckValidationUsernameService implements CheckValidationUsernameUseCase {
 
 	private final CheckUserPort checkUserPort;
 
 	@Override
 	@Transactional(readOnly = true)
 	public Boolean checkValidationUsername(String username) {
-		return checkUserPort.hasUserByUsername(username) ? false : true;
+		return checkUserPort.isPresentUsername(username) ? false : true;
 	}
 }
