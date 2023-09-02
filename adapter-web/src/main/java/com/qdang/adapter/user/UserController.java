@@ -2,15 +2,17 @@ package com.qdang.adapter.user;
 
 import com.qdang.adapter.user.response.GetUserMatchHistoryResponse;
 import com.qdang.adapter.user.response.GetUserProfileResponse;
+import com.qdang.adapter.user.response.SearchUserResponse;
 import com.qdang.application.match.port.in.GetUserMatchHistoryUseCase;
 import com.qdang.application.user.port.in.GetUserProfileUseCase;
+import com.qdang.application.user.port.in.SearchUserByUsernameUseCase;
 import com.qdang.global.adapter.WebAdapter;
 import com.qdang.global.pathmatch.V1;
 import com.qdang.global.resolver.UserId;
 import com.qdang.global.response.HttpResponse;
 import com.qdang.global.response.SuccessType;
 import com.qdang.adapter.user.request.UpdateUserProfileRequest;
-import com.qdang.adapter.user.response.CheckValidationUsernameResponse;
+import com.qdang.adapter.user.response.UserValidationResponse;
 import com.qdang.application.user.port.in.CheckValidationUsernameUseCase;
 import com.qdang.application.user.port.in.UpdateUserProfileUseCase;
 import io.swagger.v3.oas.annotations.Operation;
@@ -22,6 +24,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,6 +41,7 @@ public class UserController {
 	private final UpdateUserProfileUseCase updateUserProfileUseCase;
 	private final GetUserMatchHistoryUseCase getUserMatchHistoryUseCase;
 	private final GetUserProfileUseCase getUserProfileUseCase;
+	private final SearchUserByUsernameUseCase searchUserByUsernameUseCase;
 
 	@Operation(summary = "유저 본인 프로필 조회")
 	@ApiResponse(
@@ -47,17 +51,28 @@ public class UserController {
 	public ResponseEntity<GetUserProfileResponse> getMyProfile(
 			@UserId Long userId
 	) {
-		/**
-		 * 이름
-		 * 상태메세지
-		 * - 상태메세지 컬럼 추가하기
-		 * 사진
-		 * - 디폴트 이미지 추가하기
-		 */
 		GetUserProfileResponse response =
 				GetUserProfileResponse.from(
 						getUserProfileUseCase.getUserProfile(userId));
-		return HttpResponse.success(SuccessType.READ_RESOURCE_SUCCESS, response);
+		return HttpResponse.success(
+				SuccessType.READ_RESOURCE_SUCCESS,
+				response);
+	}
+
+	@Operation(summary = "유저 이름으로 프로필 조회")
+	@ApiResponse(
+			responseCode = "200",
+			description = "유저 이름으로 프로필 조회 성공")
+	@GetMapping("/search")
+	public ResponseEntity<SearchUserResponse> searchUserByUsername(
+			@RequestParam(value = "username", required = false) String username
+	) {
+		SearchUserResponse response =
+				SearchUserResponse.from(
+						searchUserByUsernameUseCase.searchUserByUsername(username));
+		return HttpResponse.success(
+				SuccessType.READ_RESOURCE_SUCCESS,
+				response);
 	}
 
 
@@ -66,11 +81,11 @@ public class UserController {
 			responseCode = "200",
 			description = "닉네임 중복 확인 성공")
 	@GetMapping("/validation/username")
-	public ResponseEntity<CheckValidationUsernameResponse> checkValidationUsername(
+	public ResponseEntity<UserValidationResponse> checkValidationUsername(
 			@RequestParam("username") String username
 	) {
-		CheckValidationUsernameResponse response =
-				CheckValidationUsernameResponse.from(
+		UserValidationResponse response =
+				UserValidationResponse.from(
 						checkValidationUserNameUseCase.checkValidationUsername(username));
 		return HttpResponse.success(
 				SuccessType.READ_RESOURCE_SUCCESS,
@@ -102,7 +117,7 @@ public class UserController {
 				GetUserMatchHistoryResponse.from(
 						getUserMatchHistoryUseCase.getMatchHistoryByUserId(userId));
 		return HttpResponse.success(
-				SuccessType.READ_RESOURCE_SUCCESS,
+				SuccessType.READ_RESOURCE_LIST_SUCCESS,
 				response);
 	}
 }

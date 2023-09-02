@@ -7,12 +7,12 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class CheckValidationUsernameResponse {
+public class UserValidationResponse {
 
-	@Schema(description = "닉네임 유효 여부")
+	@Schema(description = "유효 여부")
 	private Boolean isValid;
 
-	public static CheckValidationUsernameResponse from(Boolean isValid) {
-		return new CheckValidationUsernameResponse(isValid);
+	public static UserValidationResponse from(Boolean isValid) {
+		return new UserValidationResponse(isValid);
 	}
 }

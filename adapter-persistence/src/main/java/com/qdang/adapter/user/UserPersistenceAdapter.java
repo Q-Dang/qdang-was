@@ -1,6 +1,5 @@
 package com.qdang.adapter.user;
 
-import com.qdang.application.match.domain.Match;
 import com.qdang.global.persistenceadapter.PersistenceAdapter;
 import com.qdang.application.user.domain.User;
 import com.qdang.application.user.exception.NotFoundUserException;
@@ -25,13 +24,13 @@ public class UserPersistenceAdapter implements
 	private final UserMapper userMapper;
 
 	@Override
-	public boolean hasUserByUsername(String username) {
+	public boolean isPresentUsername(String username) {
 		return userRepository.findByUsername(username)
 				.isPresent();
 	}
 
 	@Override
-	public boolean hasUserByLoginId(String loginId) {
+	public boolean isPresentLoginId(String loginId) {
 		return userRepository.findByLoginId(loginId)
 				.isPresent();
 	}
@@ -64,6 +63,15 @@ public class UserPersistenceAdapter implements
 	public List<User> loadAllByMatchId(Long matchId) {
 		return userRepository
 				.findAllByMatchId(matchId)
+				.stream()
+				.map(userMapper::mapToDomainEntity)
+				.collect(Collectors.toList());
+	}
+
+	@Override
+	public List<User> loadAllContainUsername(String username) {
+		return userRepository
+				.findAllByContainingUsername(username)
 				.stream()
 				.map(userMapper::mapToDomainEntity)
 				.collect(Collectors.toList());
