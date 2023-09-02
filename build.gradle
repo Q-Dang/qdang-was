@@ -57,9 +57,9 @@ subprojects {
         useJUnitPlatform()
     }
 
-//	war {
-//		archiveName("ROOT.war")
-//	}
+	war {
+		archiveName("ROOT.war")
+	}
     bootWar {
         archiveName("ROOT.war")
     }
