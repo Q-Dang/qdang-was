@@ -11,6 +11,9 @@ import lombok.Getter;
 @Schema(description = "유저 프로필 조회 응답")
 public class GetUserProfileResponse {
 
+	@Schema(description = "유저 아이디", example = "1")
+	private Long id;
+
 	@Schema(description = "유저 닉네임")
 	private String username;
 
@@ -37,6 +40,7 @@ public class GetUserProfileResponse {
 
 	static public GetUserProfileResponse from(User user) {
 		return new GetUserProfileResponse(
+				user.getId(),
 				user.getUsername(),
 				user.getStatusMessage(),
 				user.getProfileImage(),
