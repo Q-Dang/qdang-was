@@ -37,8 +37,9 @@ public class AuthController {
 			description = "회원가입 성공")
 	@PostMapping("/signup")
 	public ResponseEntity<SignUpResponse> singUp(@Valid @RequestBody SignUpRequest request) {
-		TokenCollection jwtToken = signUpUseCase.signUp(request.toSignUpCommand());
-		SignUpResponse response = SignUpResponse.from(jwtToken);
+		SignUpResponse response =
+				SignUpResponse.from(
+						signUpUseCase.signUp(request.toSignUpCommand()));
 		return HttpResponse.success(
 				SuccessType.SIGNUP_SUCCESS,
 				response);
@@ -50,10 +51,12 @@ public class AuthController {
 			description = "로그인 성공")
 	@PostMapping("/login")
 	public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRequest request) {
-		TokenCollection jwtToken = loginUseCase.login(request.toLoginInfo());
+		LoginResponse response =
+				LoginResponse.from(
+						loginUseCase.login(request.toLoginInfo()));
 		return HttpResponse.success(
 				SuccessType.LOGIN_SUCCESS,
-				LoginResponse.from(jwtToken));
+				response);
 	}
 
 }
