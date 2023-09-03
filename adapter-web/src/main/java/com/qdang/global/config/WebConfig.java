@@ -13,6 +13,7 @@ import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.method.HandlerTypePredicate;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.util.UrlPathHelper;
@@ -24,6 +25,20 @@ public class WebConfig implements WebMvcConfigurer {
 	private final UserIdResolver userIdResolver;
 
 	@Override
+	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
+		resolvers.add(userIdResolver);
+	}
+
+	@Override
+	public void addCorsMappings(CorsRegistry registry) {
+		registry.addMapping("/**")
+				.allowedOrigins("https://api.q-dang.com", "http://api.q-dang.com")
+				.allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE")
+				.allowedHeaders("*")
+				.allowCredentials(true);
+	}
+
+	@Override
 	public void configurePathMatch(PathMatchConfigurer configurer) {
 		configurer
 				.setUseTrailingSlashMatch(true)
@@ -31,11 +46,6 @@ public class WebConfig implements WebMvcConfigurer {
 				.setPathMatcher(new AntPathMatcher())
 				.setUrlPathHelper(new UrlPathHelper())
 		;
-	}
-
-	@Override
-	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
-		resolvers.add(userIdResolver);
 	}
 
 	@Bean
