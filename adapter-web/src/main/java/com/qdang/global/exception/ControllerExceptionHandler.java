@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
-@Slf4j
 @ControllerAdvice
 @RequiredArgsConstructor
 public class ControllerExceptionHandler {
@@ -31,7 +30,6 @@ public class ControllerExceptionHandler {
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	protected ResponseEntity<FailResponse> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
-		log.error(e.getMessage(), e);
 		FieldError fieldError = Objects.requireNonNull(e.getFieldError());
 		return HttpResponse.error(
 				ErrorType.INVALID_INPUT_EXCEPTION,
@@ -42,7 +40,6 @@ public class ControllerExceptionHandler {
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ExceptionHandler(BindException.class)
 	public ResponseEntity<FailResponse> handleBadRequest(BindException e) {
-		log.error(e.getMessage(), e);
 		FieldError fieldError = Objects.requireNonNull(e.getFieldError());
 		return HttpResponse.error(
 				ErrorType.INVALID_INPUT_EXCEPTION,
@@ -54,7 +51,6 @@ public class ControllerExceptionHandler {
 	@ExceptionHandler(MethodArgumentTypeMismatchException.class)
 	public ResponseEntity<FailResponse> handleMethodArgumentTypeMismatchException(
 			MethodArgumentTypeMismatchException exception) {
-		log.error(exception.getMessage(), exception);
 		return HttpResponse.error(ErrorType.INVALID_INPUT_EXCEPTION,
 				Objects.requireNonNull(exception.getMessage()));
 	}
@@ -66,7 +62,6 @@ public class ControllerExceptionHandler {
 			ServletRequestBindingException.class
 	})
 	public ResponseEntity<FailResponse> handleInvalidFormatException(Exception e) {
-		log.error(e.getMessage(), e);
 		return HttpResponse.error(ErrorType.INVALID_INPUT_EXCEPTION);
 	}
 
@@ -77,7 +72,6 @@ public class ControllerExceptionHandler {
 	@ExceptionHandler(SQLIntegrityConstraintViolationException.class)
 	public ResponseEntity<FailResponse> handleConstraintViolationException(
 			SQLIntegrityConstraintViolationException e) {
-		log.error(e.getMessage(), e);
 		return HttpResponse.error(ErrorType.INVALID_INPUT_EXCEPTION);
 	}
 
@@ -87,7 +81,6 @@ public class ControllerExceptionHandler {
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ExceptionHandler(IllegalArgumentException.class)
 	public ResponseEntity<FailResponse> illegalArgumentExceptionAdvice(IllegalArgumentException e) {
-		log.error(e.getMessage(), e);
 		return HttpResponse.error(ErrorType.INVALID_ARGUMENT_EXCEPTION);
 	}
 
@@ -97,7 +90,6 @@ public class ControllerExceptionHandler {
 	@ResponseStatus(HttpStatus.UNAUTHORIZED)
 	@ExceptionHandler(UnauthorizedException.class)
 	public ResponseEntity<FailResponse> handleUnAuthorizedException(UnauthorizedException e) {
-		log.error(e.getMessage(), e);
 		return HttpResponse.error(e.getErrorType());
 	}
 
@@ -107,7 +99,6 @@ public class ControllerExceptionHandler {
 	@ResponseStatus(HttpStatus.FORBIDDEN)
 	@ExceptionHandler(ForbiddenException.class)
 	public ResponseEntity<FailResponse> handleForbiddenException(ForbiddenException e) {
-		log.error(e.getMessage(), e);
 		return HttpResponse.error(e.getErrorType());
 	}
 
@@ -117,7 +108,6 @@ public class ControllerExceptionHandler {
 	@ResponseStatus(HttpStatus.NOT_FOUND)
 	@ExceptionHandler(NotFoundException.class)
 	public ResponseEntity<FailResponse> handleNotFoundException(NotFoundException e) {
-		log.error(e.getMessage(), e);
 		return HttpResponse.error(e.getErrorType());
 	}
 
@@ -128,7 +118,6 @@ public class ControllerExceptionHandler {
 	@ExceptionHandler(HttpRequestMethodNotSupportedException.class)
 	public ResponseEntity<FailResponse> handleHttpRequestMethodNotSupportedException(
 			HttpRequestMethodNotSupportedException e) {
-		log.error(e.getMessage(), e);
 		return HttpResponse.error(ErrorType.METHOD_NOT_ALLOWED_EXCEPTION);
 	}
 
@@ -138,7 +127,6 @@ public class ControllerExceptionHandler {
 	@ResponseStatus(HttpStatus.CONFLICT)
 	@ExceptionHandler(ConflictException.class)
 	public ResponseEntity<FailResponse> handleConflictException(ConflictException e) {
-		log.error(e.getMessage(), e);
 		return HttpResponse.error(e.getErrorType());
 	}
 
@@ -148,7 +136,6 @@ public class ControllerExceptionHandler {
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	@ExceptionHandler(Exception.class)
 	protected ResponseEntity<FailResponse> handleInternalServerException(Exception e) {
-		log.error(e.getMessage(), e);
 		return HttpResponse.error(ErrorType.INTERNAL_SERVER_ERROR);
 	}
 
@@ -157,7 +144,6 @@ public class ControllerExceptionHandler {
 	 */
 	@ExceptionHandler(BusinessException.class)
 	protected ResponseEntity<FailResponse> handleBusinessException(BusinessException e) {
-		log.error(e.getMessage(), e);
 		return HttpResponse.error(e.getErrorType(), e.getMessage());
 	}
 }
