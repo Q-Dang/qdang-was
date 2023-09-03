@@ -3,6 +3,7 @@
     <timestamp key="BY_DATE" datePattern="yyyy-MM-dd"/>
     <property name="LOG_PATTERN"
         value="%d{yyyy-MM-dd HH:mm:ss}:%-4relative %green([%thread]) %highlight(%-5level) %boldWhite([%C.%M:%yellow(%L)]) - %msg%n"/>
+
     <springProfile name="!prod">
         <include resource="./logback/console-appender.xml"/>
         <root level="INFO">
@@ -11,10 +12,12 @@
     </springProfile>
 
     <springProfile name="prod">
+        <include resource="./logback/console-appender.xml"/>
         <include resource="./logback/file-info-appender.xml"/>
         <include resource="./logback/file-warn-appender.xml"/>
         <include resource="./logback/file-error-appender.xml"/>
         <root level="INFO">
+            <appender-ref ref="CONSOLE"/>
             <appender-ref ref="FILE-INFO"/>
             <appender-ref ref="FILE-WARN"/>
             <appender-ref ref="FILE-ERROR"/>
