@@ -32,7 +32,9 @@ class SignUpService implements SignUpUseCase {
 		if (checkUserPort.isPresentLoginId(command.getLoginId())) {
 			throw new ConflictUserException();
 		}
-		User user = User.of(command.getLoginId(), command.getPassword(), UserRole.MEMBER);
+		// Todo : Random user name create refactoring
+		String randomUsername = "user" + (int) (Math.random() * 100000);
+		User user = User.of(command.getLoginId(), command.getPassword(),  randomUsername, UserRole.MEMBER);
 		user.encodePassword(passwordEncoder);
 		User saveUser = saveUserPort.save(user);
 		return generateTokenCollection(TokenInfo.from(saveUser));

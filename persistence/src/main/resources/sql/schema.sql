@@ -1,17 +1,17 @@
-# DROP TABLE IF EXISTS `q_user`;
-# DROP TABLE IF EXISTS `q_match`;
-# DROP TABLE IF EXISTS `q_user_match`;
-# DROP TABLE IF EXISTS `q_match_process`;
-# DROP TABLE IF EXISTS `q_user_match_process`;
-# DROP TABLE IF EXISTS `phone_auth`;
-# DROP TABLE IF EXISTS `access_log`;
+DROP TABLE IF EXISTS `q_user`;
+DROP TABLE IF EXISTS `q_match`;
+DROP TABLE IF EXISTS `q_user_match`;
+DROP TABLE IF EXISTS `q_match_process`;
+DROP TABLE IF EXISTS `q_user_match_process`;
+DROP TABLE IF EXISTS `phone_auth`;
+DROP TABLE IF EXISTS `access_log`;
 
 CREATE TABLE `q_user` (
                           `id`	bigint	NOT NULL	PRIMARY KEY AUTO_INCREMENT,
                           `user_role`	varchar(10)	NOT NULL	DEFAULT 'MEMBER',
                           `login_id`	varchar(50)	NOT NULL,
-                          `password`	varchar(100)	NOT NULL,
-                          `username`	VARCHAR(20)	NULL,
+                          `password`	varchar(100)    NOT NULL,
+                          `username`	VARCHAR(20)	    NOT NULL ,
                           `birthday`	date	NULL,
                           `gender`	varchar(10)	NULL,
                           `proficiency`	int	NOT NULL	DEFAULT 0,
@@ -41,7 +41,9 @@ CREATE TABLE `q_user` (
                           `slugging_count`	int	NOT NULL	DEFAULT 0,
                           `batting_average`	int	NOT NULL	DEFAULT 0,
                           `slugging_percentage`	int	NOT NULL	DEFAULT 0,
-                          FOREIGN KEY (join_staff) REFERENCES q_user (id)
+                          FOREIGN KEY (join_staff) REFERENCES q_user (id),
+                          CONSTRAINT user_login_id_uq UNIQUE(login_id),
+                          CONSTRAINT user_username_uq UNIQUE(username)
 );
 
 CREATE TABLE `q_match` (

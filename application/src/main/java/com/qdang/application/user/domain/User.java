@@ -54,10 +54,12 @@ public class User {
 	public static User of(
 			String loginId,
 			String password,
+			String username,
 			UserRole userRole) {
 		return User.builder()
 				.loginId(loginId)
 				.password(password)
+				.username(username)
 				.userRole(userRole)
 				.build();
 	}

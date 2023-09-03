@@ -29,8 +29,8 @@ import org.hibernate.annotations.DynamicUpdate;
 @Getter
 @Entity
 @Table(name = "q_user", uniqueConstraints = {
-		@UniqueConstraint(name = "uk_user_login_id", columnNames = {"loginId"}),
-		@UniqueConstraint(name = "uk_user_username", columnNames = {"username"})
+		@UniqueConstraint(name = "user_login_id_uq", columnNames = {"loginId"}),
+		@UniqueConstraint(name = "user_username_uq", columnNames = {"username"})
 })
 @DynamicInsert
 @DynamicUpdate
@@ -52,7 +52,10 @@ public class UserJpaEntity {
 
 	@Column(nullable = false)
 	private String password;
+
+	@Column(nullable = false)
 	private String username;
+
 	private LocalDate birthday;
 	@Enumerated(value = EnumType.STRING)
 	private GenderJpa gender;
