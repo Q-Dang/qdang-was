@@ -8,7 +8,6 @@ import com.qdang.adapter.user.request.LoginRequest;
 import com.qdang.adapter.user.request.SignUpRequest;
 import com.qdang.adapter.user.response.LoginResponse;
 import com.qdang.adapter.user.response.SignUpResponse;
-import com.qdang.application.user.domain.TokenCollection;
 import com.qdang.application.user.port.in.LoginUseCase;
 import com.qdang.application.user.port.in.SignUpUseCase;
 import io.swagger.v3.oas.annotations.Operation;

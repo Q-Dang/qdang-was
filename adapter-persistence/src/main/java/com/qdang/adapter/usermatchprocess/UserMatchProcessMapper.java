@@ -1,7 +1,7 @@
 package com.qdang.adapter.usermatchprocess;
 
-import com.qdang.adapter.matchprocess.MatchProcessRepository;
 import com.qdang.adapter.user.UserRepository;
+import com.qdang.adapter.matchprocess.MatchProcessRepository;
 import com.qdang.application.user.exception.NotFoundUserException;
 import com.qdang.application.usermatchprocess.domain.TurnType;
 import com.qdang.application.usermatchprocess.domain.UserMatchProcess;

@@ -6,7 +6,6 @@ import com.qdang.global.mapper.Mapper;
 import com.qdang.library.mapper.GenericJpaMapper;
 import com.qdang.persistence.match.MatchJpaEntity;
 import com.qdang.persistence.match.MatchTypeJpa;
-import org.springframework.stereotype.Component;
 
 @Mapper
 public class MatchMapper implements GenericJpaMapper<Match, MatchJpaEntity> {
