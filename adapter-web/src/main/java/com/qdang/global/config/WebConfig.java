@@ -27,7 +27,7 @@ public class WebConfig implements WebMvcConfigurer {
 	public void configurePathMatch(PathMatchConfigurer configurer) {
 		configurer
 				.setUseTrailingSlashMatch(true)
-				.addPathPrefix("/api/v1", HandlerTypePredicate.forAnnotation(V1.class))
+				.addPathPrefix("/v1", HandlerTypePredicate.forAnnotation(V1.class))
 				.setPathMatcher(new AntPathMatcher())
 				.setUrlPathHelper(new UrlPathHelper())
 		;
