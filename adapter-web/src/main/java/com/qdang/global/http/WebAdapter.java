@@ -1,4 +1,4 @@
-package com.qdang.global.adapter;
+package com.qdang.global.http;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

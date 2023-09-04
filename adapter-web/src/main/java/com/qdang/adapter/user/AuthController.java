@@ -1,6 +1,6 @@
 package com.qdang.adapter.user;
 
-import com.qdang.global.adapter.WebAdapter;
+import com.qdang.global.http.WebAdapter;
 import com.qdang.global.pathmatch.V1;
 import com.qdang.global.response.HttpResponse;
 import com.qdang.global.response.SuccessType;

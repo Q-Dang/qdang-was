@@ -6,7 +6,7 @@ import com.qdang.adapter.user.response.SearchUserResponse;
 import com.qdang.application.match.port.in.GetUserMatchHistoryUseCase;
 import com.qdang.application.user.port.in.GetUserProfileUseCase;
 import com.qdang.application.user.port.in.SearchUserByUsernameUseCase;
-import com.qdang.global.adapter.WebAdapter;
+import com.qdang.global.http.WebAdapter;
 import com.qdang.global.pathmatch.V1;
 import com.qdang.global.resolver.UserId;
 import com.qdang.global.response.HttpResponse;

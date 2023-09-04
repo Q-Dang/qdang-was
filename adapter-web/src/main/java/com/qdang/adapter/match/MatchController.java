@@ -8,7 +8,7 @@ import com.qdang.application.match.port.in.GetMatchUseCase;
 import com.qdang.application.match.port.in.QuitGameUseCase;
 import com.qdang.application.match.port.in.RecordMatchProcessUseCase;
 import com.qdang.application.match.port.in.StartMatchUseCase;
-import com.qdang.global.adapter.WebAdapter;
+import com.qdang.global.http.WebAdapter;
 import com.qdang.global.pathmatch.V1;
 import com.qdang.global.resolver.UserId;
 import com.qdang.global.response.HttpResponse;

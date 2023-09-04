@@ -18,7 +18,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 @Aspect
 public class LogAspect {
 
-	@Pointcut("@within(com.qdang.global.adapter.WebAdapter)")
+	@Pointcut("@within(com.qdang.global.http.WebAdapter)")
 	public void onRequest() {
 	}
 
