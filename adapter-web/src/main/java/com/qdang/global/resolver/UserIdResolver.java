@@ -1,5 +1,6 @@
 package com.qdang.global.resolver;
 
+import com.qdang.global.http.HeaderTokenExtractor;
 import com.qdang.global.exception.BusinessException;
 import com.qdang.global.exception.ErrorType;
 import com.qdang.global.jwt.JwtResolver;
@@ -9,7 +10,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
@@ -21,8 +21,7 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 public class UserIdResolver implements HandlerMethodArgumentResolver {
 
 	private final JwtResolver jwtResolver;
-	private static final String HEADER_PREFIX = "Bearer ";
-	private static final String AUTHORIZATION_HEADER = "Authorization";
+	private final HeaderTokenExtractor headerTokenExtractor;
 
 	@Override
 	public boolean supportsParameter(MethodParameter parameter) {
@@ -38,14 +37,9 @@ public class UserIdResolver implements HandlerMethodArgumentResolver {
 			WebDataBinderFactory binderFactory) {
 
 		final HttpServletRequest request = (HttpServletRequest) webRequest.getNativeRequest();
-		final String bearerHeader = request.getHeader(AUTHORIZATION_HEADER);
-		log.info("bearerHeader = {}", bearerHeader);
+		String token = headerTokenExtractor.extractAccessToken(request);
 
-		if (!StringUtils.hasText(bearerHeader) || !bearerHeader.startsWith(HEADER_PREFIX)) {
-			throw new BusinessException(ErrorType.INVALID_JWT_TOKEN_EXCEPTION);
-		}
-		String token = bearerHeader.substring(HEADER_PREFIX.length());
-		if (!jwtResolver.verifyToken(token)) {
+		if (!jwtResolver.validateAccessToken(token)) {
 			throw new BusinessException(
 					ErrorType.INVALID_JWT_TOKEN_EXCEPTION,
 					String.format(
@@ -53,10 +47,10 @@ public class UserIdResolver implements HandlerMethodArgumentResolver {
 							parameter.getClass(),
 							parameter.getMethod()));
 		}
-		final String tokenContents = jwtResolver.getJwtContents(token);
-		log.info("tokenContents = {}", tokenContents);
+		Long userId = jwtResolver.getUserIdFromJwtToken(token);
+		log.info("userId = {}", userId);
 		try {
-			return Long.parseLong(tokenContents);
+			return userId;
 		} catch (NumberFormatException e) {
 			throw new RuntimeException(
 					String.format(

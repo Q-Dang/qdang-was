@@ -16,7 +16,7 @@ public class TokenInfo {
 	public static TokenInfo from(User user) {
 		Map<String, Object> accessTokenPayload = new HashMap<>();
 		accessTokenPayload.put("userId", user.getId());
-//		accessTokenPayload.put("role", user.getUserRole());
+//		accessTokenPayload.put("role", user.getUserRole().name());
 		return new TokenInfo(accessTokenPayload);
 	}
 }
