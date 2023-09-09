@@ -20,7 +20,7 @@ public class HeaderTokenExtractor {
 		if (StringUtils.hasText(bearerHeader) && bearerHeader.startsWith(HEADER_PREFIX)) {
 			return bearerHeader.substring(HEADER_PREFIX.length());
 		}
-		log.warn("bearerHeader = {}", bearerHeader);
+		log.error("Authorization Header does not begin with \"Bearer\" String : [{}]", bearerHeader);
 		throw new UnauthorizedException(ErrorType.INVALID_JWT_TOKEN_EXCEPTION);
 	}
 
@@ -29,7 +29,7 @@ public class HeaderTokenExtractor {
 		if (StringUtils.hasText(bearerHeader) && bearerHeader.startsWith(HEADER_PREFIX)) {
 			return bearerHeader.substring(HEADER_PREFIX.length());
 		}
-		log.warn("bearerHeader = {}", bearerHeader);
+		log.error("Refresh-Token Header does not begin with \"Bearer\" String : [{}]", bearerHeader);
 		throw new UnauthorizedException(ErrorType.INVALID_REFRESH_TOKEN_EXCEPTION);
 	}
 }
