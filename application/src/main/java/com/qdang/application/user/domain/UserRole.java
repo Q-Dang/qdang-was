@@ -8,5 +8,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public enum UserRole {
 	MEMBER,
+	MANAGER,
 	ADMIN;
 }
