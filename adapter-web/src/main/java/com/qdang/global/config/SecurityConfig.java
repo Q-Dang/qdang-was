@@ -5,6 +5,7 @@ import com.qdang.global.filter.JwtExceptionFilter;
 import com.qdang.global.handler.JwtAccessDeniedHandler;
 import com.qdang.global.http.HeaderTokenExtractor;
 import com.qdang.global.jwt.JwtResolver;
+import java.util.Arrays;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
@@ -18,6 +19,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @EnableWebSecurity
 @RequiredArgsConstructor
@@ -52,14 +56,14 @@ public class SecurityConfig {
 				.addFilterBefore(jwtExceptionFilter,
 						JwtAuthenticationFilter.class)
 				.exceptionHandling()
-				.accessDeniedHandler(customAccessDeniedHandler);
-
-		http.httpBasic().disable();
-		http.csrf().disable();
-		http.cors().disable();
-
-		http.sessionManagement()
-				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+				.accessDeniedHandler(customAccessDeniedHandler)
+				.and()
+				.sessionManagement()
+				.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+				.and()
+				.httpBasic().disable()
+				.csrf().disable()
+				.cors().configurationSource(corsConfigurationSource());
 
 		http.authorizeHttpRequests()
 				.requestMatchers(new AntPathRequestMatcher("/manager/**"))
@@ -77,15 +81,48 @@ public class SecurityConfig {
 			web.ignoring()
 					.antMatchers(SwaggerPatterns)
 					.antMatchers("/actuator/**")
+					.requestMatchers(PathRequest.toStaticResources().atCommonLocations())
 					.requestMatchers(
-			PathRequest.toStaticResources().atCommonLocations())
-					.requestMatchers(
-							new AntPathRequestMatcher("/v1/auth/login", HttpMethod.POST.name()),
-							new AntPathRequestMatcher("/v1/auth/signup", HttpMethod.POST.name()),
-							new AntPathRequestMatcher("/v1/matches/{matchId}", HttpMethod.GET.name()),
-							new AntPathRequestMatcher("/v1/users/search", HttpMethod.GET.name()),
-							new AntPathRequestMatcher("/v1/users/validation/username", HttpMethod.GET.name())
+							new AntPathRequestMatcher(
+									"/v1/auth/login",
+									HttpMethod.POST.name()),
+							new AntPathRequestMatcher(
+									"/v1/auth/signup",
+									HttpMethod.POST.name()),
+							new AntPathRequestMatcher(
+									"/v1/matches/{matchId}",
+									HttpMethod.GET.name()),
+							new AntPathRequestMatcher(
+									"/v1/users/search",
+									HttpMethod.GET.name()),
+							new AntPathRequestMatcher(
+									"/v1/users/validation/username",
+									HttpMethod.GET.name())
 					);
 		};
+	}
+
+	@Bean
+	protected CorsConfigurationSource corsConfigurationSource() {
+		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		source.registerCorsConfiguration("/**", getDefaultCorsConfiguration());
+		return source;
+	}
+
+	private CorsConfiguration getDefaultCorsConfiguration() {
+		CorsConfiguration configuration = new CorsConfiguration();
+		configuration.setAllowedOrigins(Arrays.asList("https://api.q-dang.com"));
+		configuration.setAllowedMethods(
+				Arrays.asList(
+						HttpMethod.GET.name(),
+						HttpMethod.POST.name(),
+						HttpMethod.PUT.name(),
+						HttpMethod.PATCH.name(),
+						HttpMethod.DELETE.name()));
+		configuration.setAllowedHeaders(Arrays.asList("*"));
+		configuration.setExposedHeaders(Arrays.asList("Refresh-Token"));
+		configuration.setAllowCredentials(true);
+		configuration.setMaxAge(3600L);
+		return configuration;
 	}
 }

@@ -6,6 +6,7 @@ import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.security.SecurityRequirement;
 import io.swagger.v3.oas.models.security.SecurityScheme;
+import io.swagger.v3.oas.models.servers.Server;
 import java.util.Arrays;
 import org.springdoc.core.SpringDocUtils;
 import org.springframework.context.annotation.Bean;
@@ -30,6 +31,9 @@ public class SwaggerConfig {
 		SecurityRequirement securityRequirement = new SecurityRequirement().addList("Bearer Token");
 
 		return new OpenAPI()
+				.addServersItem(new Server().url("/").description("Current Server url"))
+				.addServersItem(new Server().url("https://api.q-dang.com").description("Production Server url"))
+				.addServersItem(new Server().url("http://localhost:8080").description("Local Server url"))
 				.components(new Components().addSecuritySchemes("Bearer Token", securityScheme))
 				.security(Arrays.asList(securityRequirement))
 				.info(info);

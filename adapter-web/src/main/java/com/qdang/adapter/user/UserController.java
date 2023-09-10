@@ -79,7 +79,7 @@ public class UserController {
 	@Operation(summary = "닉네임 유효성 확인")
 	@ApiResponse(
 			responseCode = "200",
-			description = "닉네임 중복 확인 성공")
+			description = "닉네임 유효성 확인 성공")
 	@GetMapping("/validation/username")
 	public ResponseEntity<UserValidationResponse> checkValidationUsername(
 			@RequestParam("username") String username
