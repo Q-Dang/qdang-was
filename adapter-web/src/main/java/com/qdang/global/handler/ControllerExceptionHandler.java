@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+import org.springframework.web.servlet.NoHandlerFoundException;
 
 @ControllerAdvice
 @RequiredArgsConstructor
@@ -114,6 +115,14 @@ public class ControllerExceptionHandler {
 	@ExceptionHandler(NotFoundException.class)
 	public ResponseEntity<FailResponse> handleNotFoundException(NotFoundException e) {
 		return HttpResponse.error(e.getErrorType());
+	}
+
+	@ResponseStatus(HttpStatus.NOT_FOUND)
+	@ExceptionHandler(NoHandlerFoundException.class)
+	public ResponseEntity<FailResponse> handleNotFoundMethodException(NoHandlerFoundException e) {
+		return HttpResponse.error(
+				ErrorType.NOT_FOUND_RESOURCE_EXCEPTION,
+				String.format("지원하지 않는 api 요청입니다. - [%s] %s", e.getHttpMethod(), e.getRequestURL()));
 	}
 
 	/**
