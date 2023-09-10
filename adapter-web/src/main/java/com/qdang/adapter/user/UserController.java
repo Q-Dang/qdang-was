@@ -4,11 +4,12 @@ import com.qdang.adapter.user.response.GetUserMatchHistoryResponse;
 import com.qdang.adapter.user.response.GetUserProfileResponse;
 import com.qdang.adapter.user.response.SearchUserResponse;
 import com.qdang.application.match.port.in.GetUserMatchHistoryUseCase;
+import com.qdang.application.user.domain.User;
 import com.qdang.application.user.port.in.GetUserProfileUseCase;
 import com.qdang.application.user.port.in.SearchUserByUsernameUseCase;
 import com.qdang.global.http.WebAdapter;
 import com.qdang.global.pathmatch.V1;
-import com.qdang.global.resolver.UserId;
+import com.qdang.global.argument.LoginUser;
 import com.qdang.global.response.HttpResponse;
 import com.qdang.global.response.SuccessType;
 import com.qdang.adapter.user.request.UpdateUserProfileRequest;
@@ -48,11 +49,11 @@ public class UserController {
 			description = "내 프로필 조회 성공")
 	@GetMapping("/profiles")
 	public ResponseEntity<GetUserProfileResponse> getMyProfile(
-			@UserId Long userId
+			@LoginUser User user
 	) {
 		GetUserProfileResponse response =
 				GetUserProfileResponse.from(
-						getUserProfileUseCase.getUserProfile(userId));
+						getUserProfileUseCase.getUserProfile(user.getId()));
 		return HttpResponse.success(
 				SuccessType.READ_RESOURCE_SUCCESS,
 				response);
@@ -97,10 +98,10 @@ public class UserController {
 			description = "프로필 수정 성공")
 	@PatchMapping("/profile")
 	public ResponseEntity<Void> updateUserProfile(
-			@UserId Long userId,
+			@LoginUser User user,
 			@Valid @RequestBody UpdateUserProfileRequest request
 	) {
-		updateUserProfileUseCase.updateUserProfile(request.toUpdateUserProfileCommand(userId));
+		updateUserProfileUseCase.updateUserProfile(request.toUpdateUserProfileCommand(user.getId()));
 		return HttpResponse.success(SuccessType.UPDATE_RESOURCE_SUCCESS);
 	}
 
@@ -110,11 +111,11 @@ public class UserController {
 			description = "내 경기 전적 조회 성공")
 	@GetMapping("/matches")
 	public ResponseEntity<GetUserMatchHistoryResponse> getUserMatchHistory(
-			@UserId Long userId
+			@LoginUser User user
 	) {
 		GetUserMatchHistoryResponse response =
 				GetUserMatchHistoryResponse.from(
-						getUserMatchHistoryUseCase.getMatchHistoryByUserId(userId));
+						getUserMatchHistoryUseCase.getMatchHistoryByUserId(user.getId()));
 		return HttpResponse.success(
 				SuccessType.READ_RESOURCE_LIST_SUCCESS,
 				response);

@@ -8,9 +8,10 @@ import com.qdang.application.match.port.in.GetMatchUseCase;
 import com.qdang.application.match.port.in.QuitGameUseCase;
 import com.qdang.application.match.port.in.RecordMatchProcessUseCase;
 import com.qdang.application.match.port.in.StartMatchUseCase;
+import com.qdang.application.user.domain.User;
 import com.qdang.global.http.WebAdapter;
 import com.qdang.global.pathmatch.V1;
-import com.qdang.global.resolver.UserId;
+import com.qdang.global.argument.LoginUser;
 import com.qdang.global.response.HttpResponse;
 import com.qdang.global.response.SuccessType;
 import com.qdang.adapter.match.request.StartMatchRequest;
@@ -64,7 +65,6 @@ public class MatchController {
 			description = "게임 및 전적 생성 성공")
 	@PostMapping
 	public ResponseEntity<StartMatchResponse> startMatch(
-			@UserId Long userId,
 			@Valid @RequestBody StartMatchRequest request
 	) {
 		StartMatchResponse response =
@@ -81,7 +81,6 @@ public class MatchController {
 			description = "턴 기록 성공")
 	@PostMapping("/processes")
 	public ResponseEntity<Void> recordMatchProcess(
-			@UserId Long userId,
 			@Valid @RequestBody RecordMatchProcessRequest request
 	) {
 		recordMatchProcessUseCase.recordMatchProcess(request.toRecordMatchProcessCommand());
@@ -94,10 +93,10 @@ public class MatchController {
 			description = "경기 종료 성공")
 	@PostMapping("/quit")
 	public ResponseEntity<Void> quitMatch(
-			@UserId Long userId,
+			@LoginUser User user,
 			@Valid @RequestBody QuitMatchRequest request
 	) {
-		quitGameUseCase.quitGame(request.toQuitMatchCommand(userId));
+		quitGameUseCase.quitGame(request.toQuitMatchCommand(user.getId()));
 		return HttpResponse.success(SuccessType.UPDATE_RESOURCE_SUCCESS);
 	}
 }
