@@ -29,7 +29,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 			HttpServletRequest request,
 			HttpServletResponse response,
 			FilterChain filterChain) throws ServletException, IOException {
-		log.warn("JwtAuthenticationFilter.doFilterInternal");
 		String jwtToken = headerTokenExtractor.extractAccessToken(request);
 		if (StringUtils.hasText(jwtToken)) {
 			if (jwtResolver.validateAccessToken(jwtToken)) {
@@ -41,6 +40,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 				}
 			}
 		} else {
+			log.warn("JWT Token is null : [{}]", jwtToken);
 			throw new UnauthorizedException(ErrorType.INVALID_JWT_TOKEN_EXCEPTION);
 		}
 		filterChain.doFilter(request, response);
