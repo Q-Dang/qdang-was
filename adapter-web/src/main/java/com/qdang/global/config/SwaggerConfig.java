@@ -1,6 +1,6 @@
 package com.qdang.global.config;
 
-import com.qdang.global.resolver.UserId;
+import com.qdang.global.argument.LoginUser;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
@@ -36,6 +36,6 @@ public class SwaggerConfig {
 	}
 
 	static {
-		SpringDocUtils.getConfig().addAnnotationsToIgnore(UserId.class);
+		SpringDocUtils.getConfig().addAnnotationsToIgnore(LoginUser.class);
 	}
 }
