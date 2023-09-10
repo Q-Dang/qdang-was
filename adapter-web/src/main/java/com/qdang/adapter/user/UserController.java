@@ -42,10 +42,10 @@ public class UserController {
 	private final GetUserProfileUseCase getUserProfileUseCase;
 	private final SearchUserByUsernameUseCase searchUserByUsernameUseCase;
 
-	@Operation(summary = "유저 본인 프로필 조회")
+	@Operation(summary = "내 프로필 조회")
 	@ApiResponse(
 			responseCode = "200",
-			description = "유저 본인 프로필 조회 성공")
+			description = "내 프로필 조회 성공")
 	@GetMapping("/profiles")
 	public ResponseEntity<GetUserProfileResponse> getMyProfile(
 			@UserId Long userId
@@ -104,10 +104,10 @@ public class UserController {
 		return HttpResponse.success(SuccessType.UPDATE_RESOURCE_SUCCESS);
 	}
 
-	@Operation(summary = "경기 전적 조회")
+	@Operation(summary = "내 경기 전적 조회")
 	@ApiResponse(
 			responseCode = "200",
-			description = "경기 전적 조회 성공")
+			description = "내 경기 전적 조회 성공")
 	@GetMapping("/matches")
 	public ResponseEntity<GetUserMatchHistoryResponse> getUserMatchHistory(
 			@UserId Long userId
