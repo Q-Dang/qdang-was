@@ -13,37 +13,31 @@ import io.jsonwebtoken.security.SignatureException;
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Date;
+import javax.annotation.PostConstruct;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 @Slf4j
-@Component
+@Service
+@RequiredArgsConstructor
 public class JwtResolver {
 
 	private final PrincipalDetailsService principalDetailsService;
-	private final Key accessKey;
-	private final Key refreshKey;
+	private final JwtProperty jwtProperty;
+	private Key accessKey;
+	private Key refreshKey;
 
-	@Autowired
-	public JwtResolver(PrincipalDetailsService principalDetailsService, JwtProperty jwtProperty) {
-		this.principalDetailsService = principalDetailsService;
+	@PostConstruct
+	public void init() {
 		byte[] accessKeyBytes = jwtProperty.getAccessKey().getBytes(StandardCharsets.UTF_8);
 		byte[] refreshKeyBytes = jwtProperty.getRefreshKey().getBytes(StandardCharsets.UTF_8);
 		accessKey = Keys.hmacShaKeyFor(accessKeyBytes);
 		refreshKey = Keys.hmacShaKeyFor(refreshKeyBytes);
 	}
-
-//	@PostConstruct
-//	public void init(JwtProperty jwtProperty) {
-//		byte[] accessKeyBytes = jwtProperty.getAccessKey().getBytes(StandardCharsets.UTF_8);
-//		byte[] refreshKeyBytes = jwtProperty.getRefreshKey().getBytes(StandardCharsets.UTF_8);
-//		accessKey = Keys.hmacShaKeyFor(accessKeyBytes);
-//		refreshKey = Keys.hmacShaKeyFor(refreshKeyBytes);
-//	}
 
 	private Claims getAccessTokenBody(final String token) {
 		return Jwts.parserBuilder()
