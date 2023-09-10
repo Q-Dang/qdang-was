@@ -1,8 +1,6 @@
 package com.qdang.global.config;
 
 import com.qdang.global.pathmatch.V1;
-import com.qdang.global.resolver.UserIdResolver;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -13,7 +11,6 @@ import org.springframework.util.AntPathMatcher;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.method.HandlerTypePredicate;
-import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -23,13 +20,6 @@ import org.springframework.web.util.UrlPathHelper;
 @EnableAspectJAutoProxy
 @RequiredArgsConstructor
 public class WebConfig implements WebMvcConfigurer {
-
-	private final UserIdResolver userIdResolver;
-
-	@Override
-	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
-		resolvers.add(userIdResolver);
-	}
 
 	@Override
 	public void addCorsMappings(CorsRegistry registry) {
