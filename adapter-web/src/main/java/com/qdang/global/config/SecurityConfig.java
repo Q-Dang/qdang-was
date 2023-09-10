@@ -30,6 +30,7 @@ public class SecurityConfig {
 
 	private static final String[] SwaggerPatterns = {
 			"/swagger-resources/**",
+			"/swagger-ui.html",
 			"/swagger-ui/**",
 			"/v3/api-docs/**",
 			"/api-docs/**",
