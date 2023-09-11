@@ -2,7 +2,6 @@ package com.qdang.global.response;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
@@ -12,6 +11,7 @@ public enum SuccessType {
      * 200 OK
      */
     LOGIN_SUCCESS(HttpStatus.OK, "로그인에 성공했습니다."),
+    REFRESH_TOKEN_SUCCESS(HttpStatus.OK, "토큰 갱신에 성공했습니다."),
     READ_RESOURCE_SUCCESS(HttpStatus.OK, "조회에 성공했습니다."),
     READ_RESOURCE_LIST_SUCCESS(HttpStatus.OK, "리스트 조회에 성공했습니다."),
 
@@ -26,8 +26,8 @@ public enum SuccessType {
      */
     UPDATE_RESOURCE_SUCCESS(HttpStatus.NO_CONTENT, "갱신에 성공했습니다."),
     DELETE_RESOURCE_SUCCESS(HttpStatus.NO_CONTENT, "삭제에 성공했습니다."),
+    LOGOUT_SUCCESS(HttpStatus.NO_CONTENT, "로그아웃에 성공했습니다."),
     ;
-
 
     private final HttpStatus httpStatus;
     private final String message;
