@@ -33,16 +33,22 @@ class SignUpService implements SignUpUseCase {
 			throw new ConflictUserException();
 		}
 		// Todo : Random user name create refactoring
-		String randomUsername = "user" + (int) (Math.random() * 100000);
-		User user = User.of(command.getLoginId(), command.getPassword(),  randomUsername, UserRole.MEMBER);
-		user.encodePassword(passwordEncoder);
-		User saveUser = saveUserPort.save(user);
-		return generateTokenCollection(TokenInfo.from(saveUser));
+		User user =
+				saveUserPort.save(
+						User.of(
+								command.getLoginId(),
+								passwordEncoder.encode(
+										command.getPassword()),
+								generateRandomUsername(),
+								UserRole.MEMBER));
+		TokenCollection tokenCollection =
+				jwtProvider.createTokenCollection(TokenInfo.from(user));
+		user.updateRefreshToken(tokenCollection.getRefreshToken());
+		saveUserPort.save(user);
+		return tokenCollection;
 	}
 
-	public TokenCollection generateTokenCollection(TokenInfo tokenInfo) {
-		String accessToken = jwtProvider.createAccessToken(tokenInfo);
-		String refreshToken = jwtProvider.createRefreshToken();
-		return TokenCollection.of(accessToken, refreshToken);
+	private String generateRandomUsername() {
+		return "user" + (int) (Math.random() * 100000);
 	}
 }

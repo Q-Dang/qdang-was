@@ -39,61 +39,72 @@ public class JwtResolver {
 		refreshKey = Keys.hmacShaKeyFor(refreshKeyBytes);
 	}
 
-	private Claims getAccessTokenBody(final String token) {
+	private Claims getAccessTokenBody(String accessToken) {
 		return Jwts.parserBuilder()
 				.setSigningKey(accessKey)
 				.build()
-				.parseClaimsJws(token)
+				.parseClaimsJws(accessToken)
 				.getBody();
 	}
 
-	public Authentication getAuthentication(String token) {
+	private Claims getRefreshTokenBody(String refreshToken) {
+		return Jwts.parserBuilder()
+				.setSigningKey(refreshKey)
+				.build()
+				.parseClaimsJws(refreshToken)
+				.getBody();
+	}
+
+	public Authentication getAuthenticationFromAccessToken(String accessToken) {
 		UserDetails userDetails =
 				principalDetailsService.loadUserByUsername(
-						getUserIdFromJwtToken(token).toString());
+						getUserIdFromAccessToken(accessToken).toString());
 		return new UsernamePasswordAuthenticationToken(
 				userDetails,
 				"",
 				userDetails.getAuthorities());
 	}
 
-	public Long getUserIdFromJwtToken(String token) {
+	public Long getUserIdFromAccessToken(String accessToken) {
 		try {
-			Claims claims = getAccessTokenBody(token);
+			Claims claims = getAccessTokenBody(accessToken);
 			return Long.parseLong(claims.get("userId").toString());
 		} catch (ExpiredJwtException e) {
-			throw new UnauthorizedException(ErrorType.EXPIRED_TOKEN_EXCEPTION);
+			throw new UnauthorizedException(ErrorType.EXPIRED_ACCESS_TOKEN_EXCEPTION);
 		} catch (Exception e) {
 			throw new UnauthorizedException();
 		}
 	}
 
-	public boolean validateAccessToken(String token) {
+	public boolean validateAccessToken(String accessToken) {
 		try {
-			return !getAccessTokenBody(token)
+			return !getAccessTokenBody(accessToken)
 					.getExpiration()
 					.before(new Date());
 		} catch (SecurityException | MalformedJwtException | SignatureException e) {
-			throw new UnauthorizedException(ErrorType.INVALID_JWT_TOKEN_EXCEPTION);
+			throw new UnauthorizedException(ErrorType.INVALID_ACCESS_TOKEN_EXCEPTION);
 		} catch (UnsupportedJwtException e) {
 			throw new UnauthorizedException(ErrorType.UNSUPPORTED_JWT_TOKEN_EXCEPTION);
 		} catch (IllegalArgumentException e) {
-			throw new UnauthorizedException(ErrorType.INVALID_JWT_TOKEN_EXCEPTION);
+			throw new UnauthorizedException(ErrorType.INVALID_ACCESS_TOKEN_EXCEPTION);
 		} catch (ExpiredJwtException e) {
-			throw new UnauthorizedException(ErrorType.EXPIRED_TOKEN_EXCEPTION);
+			throw new UnauthorizedException(ErrorType.EXPIRED_ACCESS_TOKEN_EXCEPTION);
 		}
 	}
 
 	public boolean validateRefreshToken(String refreshToken) {
 		try {
-			Jwts
-					.parserBuilder()
-					.setSigningKey(refreshKey)
-					.build()
-					.parse(refreshToken);
-			return true;
-		} catch (Exception e) {
-			return false;
+			return !getRefreshTokenBody(refreshToken)
+					.getExpiration()
+					.before(new Date());
+		} catch (SecurityException | MalformedJwtException | SignatureException e) {
+			throw new UnauthorizedException(ErrorType.INVALID_REFRESH_TOKEN_EXCEPTION);
+		} catch (UnsupportedJwtException e) {
+			throw new UnauthorizedException(ErrorType.UNSUPPORTED_JWT_TOKEN_EXCEPTION);
+		} catch (IllegalArgumentException e) {
+			throw new UnauthorizedException(ErrorType.INVALID_REFRESH_TOKEN_EXCEPTION);
+		} catch (ExpiredJwtException e) {
+			throw new UnauthorizedException(ErrorType.EXPIRED_REFRESH_TOKEN_EXCEPTION);
 		}
 	}
 }

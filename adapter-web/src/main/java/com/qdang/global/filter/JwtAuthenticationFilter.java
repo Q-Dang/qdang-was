@@ -33,15 +33,15 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 		if (StringUtils.hasText(jwtToken)) {
 			if (jwtResolver.validateAccessToken(jwtToken)) {
 				try {
-					Authentication authentication = jwtResolver.getAuthentication(jwtToken);
+					Authentication authentication = jwtResolver.getAuthenticationFromAccessToken(jwtToken);
 					SecurityContextHolder.getContext().setAuthentication(authentication);
 				} catch (NotFoundException e) {
-					throw new UnauthorizedException(ErrorType.INVALID_JWT_TOKEN_EXCEPTION);
+					throw new UnauthorizedException(ErrorType.INVALID_ACCESS_TOKEN_EXCEPTION);
 				}
 			}
 		} else {
 			log.warn("JWT Token is null : [{}]", jwtToken);
-			throw new UnauthorizedException(ErrorType.INVALID_JWT_TOKEN_EXCEPTION);
+			throw new UnauthorizedException(ErrorType.INVALID_ACCESS_TOKEN_EXCEPTION);
 		}
 		filterChain.doFilter(request, response);
 	}

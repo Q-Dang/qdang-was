@@ -1,5 +1,6 @@
 package com.qdang.application.user.service;
 
+import com.qdang.application.user.port.out.SaveUserPort;
 import com.qdang.global.jwt.JwtProvider;
 import com.qdang.global.jwt.TokenInfo;
 import com.qdang.global.usecase.UseCase;
@@ -17,21 +18,19 @@ import org.springframework.transaction.annotation.Transactional;
 class LoginService implements LoginUseCase {
 
 	private final LoadUserPort loadUserPort;
+	private final SaveUserPort saveUserPort;
 	private final PasswordEncoder passwordEncoder;
 	private final JwtProvider jwtProvider;
 
 	@Override
-	@Transactional(readOnly = true)
+	@Transactional
 	public TokenCollection login(LoginCommand command) {
 		User user = loadUserPort.loadByLoginId(command.getLoginId());
 		user.checkPasswordByEncoder(command.getPassword(), passwordEncoder);
-		// TODO: Jwt Token 부분 리펙토링하기
-		return generateTokenCollection(TokenInfo.from(user));
-	}
-
-	public TokenCollection generateTokenCollection(TokenInfo tokenInfo) {
-		String accessToken = jwtProvider.createAccessToken(tokenInfo);
-		String refreshToken = jwtProvider.createRefreshToken();
-		return TokenCollection.of(accessToken, refreshToken);
+		TokenCollection tokenCollection =
+				jwtProvider.createTokenCollection(TokenInfo.from(user));
+		user.updateRefreshToken(tokenCollection.getRefreshToken());
+		saveUserPort.save(user);
+		return tokenCollection;
 	}
 }

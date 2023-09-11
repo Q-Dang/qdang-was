@@ -21,7 +21,7 @@ public class HeaderTokenExtractor {
 			return bearerHeader.substring(HEADER_PREFIX.length());
 		}
 		log.error("Authorization Header does not begin with \"Bearer\" String : [{}]", bearerHeader);
-		throw new UnauthorizedException(ErrorType.INVALID_JWT_TOKEN_EXCEPTION);
+		throw new UnauthorizedException(ErrorType.INVALID_ACCESS_TOKEN_EXCEPTION);
 	}
 
 	public String extractRefreshToken(HttpServletRequest request){

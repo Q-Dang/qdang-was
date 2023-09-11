@@ -8,7 +8,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class LoginResponse {
+public class TokenResponse {
 
 	@Schema(description = "JWT access token", example = "access_token")
 	private String accessToken;
@@ -16,7 +16,7 @@ public class LoginResponse {
 	@Schema(description = "JWT refresh token", example = "refresh_token")
 	private String refreshToken;
 
-	public static LoginResponse from(TokenCollection jwtToken) {
-		return new LoginResponse(jwtToken.getAccessToken(), jwtToken.getRefreshToken());
+	public static TokenResponse from(TokenCollection tokenCollection) {
+		return new TokenResponse(tokenCollection.getAccessToken(), tokenCollection.getRefreshToken());
 	}
 }
