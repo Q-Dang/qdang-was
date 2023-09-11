@@ -41,6 +41,7 @@ CREATE TABLE `q_user` (
                           `slugging_count`	int	NOT NULL	DEFAULT 0,
                           `batting_average`	int	NOT NULL	DEFAULT 0,
                           `slugging_percentage`	int	NOT NULL	DEFAULT 0,
+                          `refresh_token` varchar(255) NULL,
                           FOREIGN KEY (join_staff) REFERENCES q_user (id),
                           CONSTRAINT user_login_id_uq UNIQUE(login_id),
                           CONSTRAINT user_username_uq UNIQUE(username)
