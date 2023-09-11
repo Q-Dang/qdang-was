@@ -63,6 +63,7 @@ public class UserJpaEntity {
 	@Column(nullable = false)
 	private Integer proficiency;
 	private String phone;
+	private String refreshToken;
 	private String fcmToken;
 	private String profileImage;
 	private String address;

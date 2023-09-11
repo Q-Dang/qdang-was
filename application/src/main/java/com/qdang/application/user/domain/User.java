@@ -23,6 +23,7 @@ public class User {
 	private Gender gender;
 	private Integer proficiency;
 	private String phone;
+	private String refreshToken;
 	private String fcmToken;
 	private String profileImage;
 	private String address;
@@ -89,16 +90,28 @@ public class User {
 		}
 	}
 
-	public void encodePassword(PasswordEncoder passwordEncoder) {
-		this.password = passwordEncoder.encode(this.password);
+	public void updateRefreshToken(String refreshToken) {
+		this.refreshToken = refreshToken;
 	}
 
 	public boolean checkPasswordByEncoder(
 			String rawPassword,
 			PasswordEncoder passwordEncoder) {
-		if (passwordEncoder.matches(rawPassword, this.password)) {
+		if (passwordEncoder.matches(rawPassword, password)) {
 			return true;
 		}
 		return false;
+	}
+
+	public void logout() {
+		refreshToken = null;
+	}
+
+	public boolean validateRefreshToken(String refreshToken) {
+		return this.refreshToken.equals(refreshToken);
+	}
+
+	public boolean isNotLoggedIn() {
+		return refreshToken == null;
 	}
 }

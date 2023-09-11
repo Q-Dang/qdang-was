@@ -30,6 +30,7 @@ public class UserMapper implements GenericJpaMapper<User, UserJpaEntity> {
 		user.gender(genderToDomain(jpaEntity.getGender()));
 		user.proficiency(jpaEntity.getProficiency());
 		user.phone(jpaEntity.getPhone());
+		user.refreshToken(jpaEntity.getRefreshToken());
 		user.fcmToken(jpaEntity.getFcmToken());
 		user.profileImage(jpaEntity.getProfileImage());
 		user.address(jpaEntity.getAddress());
@@ -73,6 +74,7 @@ public class UserMapper implements GenericJpaMapper<User, UserJpaEntity> {
 		userJpa.gender(genderToJpa(domain.getGender()));
 		userJpa.proficiency(domain.getProficiency());
 		userJpa.phone(domain.getPhone());
+		userJpa.refreshToken(domain.getRefreshToken());
 		userJpa.fcmToken(domain.getFcmToken());
 		userJpa.profileImage(domain.getProfileImage());
 		userJpa.address(domain.getAddress());
