@@ -49,7 +49,6 @@ public class RecordMatchProcessRequest {
 	List<TurnUserProcessVo> turnUserProcessList;
 
 	public RecordMatchProcessCommand toRecordMatchProcessCommand() {
-
 		List<UserMatchProcess> userMatchProcesses = turnUserProcessList.stream()
 				.map(turnUserProcess -> {
 					return UserMatchProcess.of(
