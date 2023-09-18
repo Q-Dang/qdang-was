@@ -11,7 +11,7 @@ import com.qdang.application.match.port.in.StartMatchUseCase;
 import com.qdang.application.user.domain.User;
 import com.qdang.global.http.WebAdapter;
 import com.qdang.global.pathmatch.V1;
-import com.qdang.global.argument.LoginUser;
+import com.qdang.global.argument.AuthUser;
 import com.qdang.global.response.HttpResponse;
 import com.qdang.global.response.SuccessType;
 import com.qdang.adapter.match.request.StartMatchRequest;
@@ -93,7 +93,7 @@ public class MatchController {
 			description = "경기 종료 성공")
 	@PostMapping("/quit")
 	public ResponseEntity<Void> quitMatch(
-			@LoginUser User user,
+			@AuthUser User user,
 			@Valid @RequestBody QuitMatchRequest request
 	) {
 		quitGameUseCase.quitGame(request.toQuitMatchCommand(user.getId()));

@@ -76,6 +76,17 @@ public class JwtResolver {
 		}
 	}
 
+	public Long getUserIdFromRefreshToken(String refreshToken) {
+		try {
+			Claims claims = getRefreshTokenBody(refreshToken);
+			return Long.parseLong(claims.get("userId").toString());
+		} catch (ExpiredJwtException e) {
+			throw new UnauthorizedException(ErrorType.EXPIRED_REFRESH_TOKEN_EXCEPTION);
+		} catch (Exception e) {
+			throw new UnauthorizedException();
+		}
+	}
+
 	public boolean validateAccessToken(String accessToken) {
 		try {
 			return !getAccessTokenBody(accessToken)

@@ -90,6 +90,9 @@ public class SecurityConfig {
 									"/v1/auth/signup",
 									HttpMethod.POST.name()),
 							new AntPathRequestMatcher(
+									"/v1/auth/refresh",
+									HttpMethod.POST.name()),
+							new AntPathRequestMatcher(
 									"/v1/matches/{matchId}",
 									HttpMethod.GET.name()),
 							new AntPathRequestMatcher(

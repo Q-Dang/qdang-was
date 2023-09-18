@@ -9,5 +9,5 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 @Target(ElementType.PARAMETER)
 @Retention(RetentionPolicy.RUNTIME)
 @AuthenticationPrincipal(expression = "user")
-public @interface LoginUser {
+public @interface AuthUser {
 }

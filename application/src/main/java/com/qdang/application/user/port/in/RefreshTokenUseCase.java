@@ -4,5 +4,5 @@ import com.qdang.application.user.domain.TokenCollection;
 
 public interface RefreshTokenUseCase {
 
-	TokenCollection refreshToken(String accessToken, String refreshToken);
+	TokenCollection refreshToken(String refreshToken);
 }

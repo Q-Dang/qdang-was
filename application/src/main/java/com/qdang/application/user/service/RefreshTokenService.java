@@ -12,6 +12,7 @@ import com.qdang.global.jwt.TokenInfo;
 import com.qdang.global.usecase.UseCase;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @UseCase
@@ -24,10 +25,10 @@ class RefreshTokenService implements RefreshTokenUseCase {
 	private final JwtProvider jwtProvider;
 
 	@Override
-	public TokenCollection refreshToken(String accessToken, String refreshToken) {
-		jwtResolver.validateAccessToken(accessToken);
+	@Transactional
+	public TokenCollection refreshToken(String refreshToken) {
 		jwtResolver.validateRefreshToken(refreshToken);
-		Long userId = jwtResolver.getUserIdFromAccessToken(accessToken);
+		Long userId = jwtResolver.getUserIdFromRefreshToken(refreshToken);
 		User user = loadUserPort.loadById(userId);
 		if (user.isNotLoggedIn()) {
 			throw new InvalidException("로그인이 안 된 유저입니다.");

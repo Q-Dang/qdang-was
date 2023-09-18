@@ -9,7 +9,7 @@ import com.qdang.application.user.port.in.GetUserProfileUseCase;
 import com.qdang.application.user.port.in.SearchUserByUsernameUseCase;
 import com.qdang.global.http.WebAdapter;
 import com.qdang.global.pathmatch.V1;
-import com.qdang.global.argument.LoginUser;
+import com.qdang.global.argument.AuthUser;
 import com.qdang.global.response.HttpResponse;
 import com.qdang.global.response.SuccessType;
 import com.qdang.adapter.user.request.UpdateUserProfileRequest;
@@ -49,7 +49,7 @@ public class UserController {
 			description = "내 프로필 조회 성공")
 	@GetMapping("/profiles")
 	public ResponseEntity<GetUserProfileResponse> getMyProfile(
-			@LoginUser User user
+			@AuthUser User user
 	) {
 		GetUserProfileResponse response =
 				GetUserProfileResponse.from(
@@ -98,7 +98,7 @@ public class UserController {
 			description = "프로필 수정 성공")
 	@PatchMapping("/profile")
 	public ResponseEntity<Void> updateUserProfile(
-			@LoginUser User user,
+			@AuthUser User user,
 			@Valid @RequestBody UpdateUserProfileRequest request
 	) {
 		updateUserProfileUseCase.updateUserProfile(request.toUpdateUserProfileCommand(user.getId()));
@@ -111,7 +111,7 @@ public class UserController {
 			description = "내 경기 전적 조회 성공")
 	@GetMapping("/matches")
 	public ResponseEntity<GetUserMatchHistoryResponse> getUserMatchHistory(
-			@LoginUser User user
+			@AuthUser User user
 	) {
 		GetUserMatchHistoryResponse response =
 				GetUserMatchHistoryResponse.from(
