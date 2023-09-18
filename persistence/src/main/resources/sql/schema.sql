@@ -54,7 +54,7 @@ CREATE TABLE `q_match` (
                            `created_at`	datetime	NOT NULL	DEFAULT now(),
                            `updated_at`	datetime	NOT NULL	DEFAULT now() on update current_timestamp,
                            `is_deleted`	tinyint(1)	NOT NULL	DEFAULT false,
-                           `is_valid`	tinyint(1)	NULL,
+                           `is_valid`	tinyint(1)	NOT NULL	DEFAULT false,
                            `end_at`	datetime	NULL,
                            `duration`	time	NULL,
                            `user_count`	int	NOT NULL	DEFAULT 1
