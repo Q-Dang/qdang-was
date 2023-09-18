@@ -23,12 +23,13 @@ class GetUserMatchHistoryService implements GetUserMatchHistoryUseCase {
 	@Transactional(readOnly = true)
 	public List<MatchHistory> getMatchHistoryByUserId(Long userId) {
 		List<UserMatch> userMatches = loadUserMatchPort.loadAllByUserId(userId);
-		List<MatchHistory> matchHistories = userMatches.stream()
-			.map(userMatch -> {
-				Match match = loadMatchPort.loadById(userMatch.getMatchId());
-				return MatchHistory.of(match, userMatch);
-			})
-			.collect(Collectors.toList());
+		List<MatchHistory> matchHistories = userMatches
+				.stream()
+				.map(userMatch -> {
+					Match match = loadMatchPort.loadById(userMatch.getMatchId());
+					return MatchHistory.of(match, userMatch);
+				})
+				.collect(Collectors.toList());
 		return matchHistories;
 	}
 }
