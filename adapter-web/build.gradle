@@ -1,8 +1,14 @@
-bootWar {enabled = true}
-war {enabled = false}
+bootWar {
+    archiveName("ROOT.war")
+    enabled = true
+}
+war { enabled = false }
 
-bootJar {enabled = true}
-jar {enabled = false}
+bootJar {
+    archiveName("app.jar")
+    enabled = true
+}
+jar { enabled = false }
 
 dependencies {
     implementation project(':adapter-persistence')
@@ -12,6 +18,5 @@ dependencies {
 
     implementation 'org.springframework.boot:spring-boot-starter-validation'
 
-    // Swagger
     implementation "org.springdoc:springdoc-openapi-ui:${springDocVersion}"
 }

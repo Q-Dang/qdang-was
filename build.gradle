@@ -42,11 +42,9 @@ subprojects {
 
         implementation 'org.springframework.boot:spring-boot-starter-aop'
 
-        // Spring Security
         implementation 'org.springframework.boot:spring-boot-starter-security'
         testImplementation 'org.springframework.security:spring-security-test'
 
-        // JWT
         runtimeOnly "io.jsonwebtoken:jjwt-impl:${jjwtVersion}"
         runtimeOnly "io.jsonwebtoken:jjwt-jackson:${jjwtVersion}"
         implementation "io.jsonwebtoken:jjwt-api:${jjwtVersion}"
@@ -57,12 +55,5 @@ subprojects {
 
     tasks.named('test') {
         useJUnitPlatform()
-    }
-
-	war {
-		archiveName("ROOT.war")
-	}
-    bootWar {
-        archiveName("ROOT.war")
     }
 }
