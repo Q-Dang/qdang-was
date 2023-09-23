@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  qdang-was:
+    image: ghcr.io/q-dang/qdang-was:latest
+    container_name: qdang-was
+    expose:
+      - 8080
+    ports:
+      - 8080:8080
+    environment:
+      - PROFILE=prod
+    depends_on:
+      - qdang-redis
+    volumes:
+      - /home/ubuntu/logs:/logs
+
+  qdang-redis:
+    image: redis:latest
+    container_name: qdang-redis
+    ports:
+      - 6379:6379
