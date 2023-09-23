@@ -1,9 +1,0 @@
-rootProject.name = 'WAS'
-include(
-        'adapter-web',
-        'adapter-persistence',
-        'application',
-        'library',
-        'persistence'
-)
-
