@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   qdang-was:
-    image: ghcr.io/q-dang/qdang-was:latest
+    image: qdang-was:latest
     container_name: qdang-was
     expose:
       - 8080
