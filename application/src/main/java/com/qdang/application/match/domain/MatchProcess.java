@@ -20,7 +20,7 @@ public class MatchProcess {
 	private Integer phaseCount;
 	private Boolean isValid;
 
-	public static MatchProcess of(
+	public static MatchProcess newMatchProcess(
 			Long matchId,
 			Long playerId,
 			LocalTime duration,
