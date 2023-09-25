@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Schema(description = "턴에 대한 유저 정보")
-public class TurnUserProcessVo {
+public class TurnUserProcessDto {
 
 	@Schema(description = "유저 아이디")
 	@NotNull(message = "{user.userId.notnull}")

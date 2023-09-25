@@ -28,7 +28,7 @@ public class QuitMatchRequest {
 	@Schema(description = "유저 게임 결과")
 	@Size(min = 1, max = 4, message = "{match.userMatchResults.size.range}")
 	@Valid
-	private List<UserMatchResultVo> userMatchResults;
+	private List<UserMatchResultDto> userMatchResults;
 
 	public QuitMatchCommand toQuitMatchCommand(Long playerId) {
 		return QuitMatchCommand.of(
@@ -37,7 +37,7 @@ public class QuitMatchRequest {
 				playTime,
 				userMatchResults
 						.stream()
-						.map(UserMatchResultVo::toUserMatchResultCommand)
+						.map(UserMatchResultDto::toUserMatchResultCommand)
 						.collect(Collectors.toList()));
 	}
 }

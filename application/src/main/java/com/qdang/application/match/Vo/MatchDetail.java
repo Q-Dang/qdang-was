@@ -1,5 +1,7 @@
 package com.qdang.application.match.Vo;
 
+import com.qdang.application.match.domain.Match;
+import java.util.List;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,17 +10,17 @@ import lombok.Getter;
 @Getter
 @Builder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class MatchDetailInfo {
+public class MatchDetail {
 
-	/**
-	 * match
-	 *
-	 * - 경기 내 유저 기록 List ( UserMatchDetailInfo )
-	 * 		- user Match
-	 * 		- user
-	 * 		- 한 카운트당 유저 기록 List
-	 * 			- match process
-	 * 			- user match process
-	 */
+	private Match match;
+	private List<UserMatchDetail> userMatchDetailList;
 
+	public static MatchDetail of(
+			Match match,
+			List<UserMatchDetail> userMatchDetailList) {
+		return MatchDetail.builder()
+				.match(match)
+				.userMatchDetailList(userMatchDetailList)
+				.build();
+	}
 }

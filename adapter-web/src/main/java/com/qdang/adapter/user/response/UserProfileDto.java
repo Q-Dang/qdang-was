@@ -9,7 +9,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Schema(description = "유저 프로필")
-public class UserProfileVo {
+public class UserProfileDto {
 
 	@Schema(description = "유저 아이디", example = "1")
 	private Long id;
@@ -20,8 +20,8 @@ public class UserProfileVo {
 	@Schema(description = "프로필 이미지")
 	private String profileImage;
 
-	public static UserProfileVo from(User user) {
-		return new UserProfileVo(
+	public static UserProfileDto from(User user) {
+		return new UserProfileDto(
 				user.getId(),
 				user.getUsername(),
 				user.getProfileImage());

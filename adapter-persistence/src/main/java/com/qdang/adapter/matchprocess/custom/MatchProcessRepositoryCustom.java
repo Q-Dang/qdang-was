@@ -1,11 +1,9 @@
 package com.qdang.adapter.matchprocess.custom;
 
 import com.qdang.persistence.matchprocess.MatchProcessJpaEntity;
-import java.util.Optional;
+import java.util.List;
 
 public interface MatchProcessRepositoryCustom {
 
-	Optional<MatchProcessJpaEntity> findById(Long id);
-
-	MatchProcessJpaEntity save(MatchProcessJpaEntity matchProcessJpaEntity);
+	List<MatchProcessJpaEntity> findAllByMatchIdAscPhaseCountDescProcessCount(Long matchId);
 }

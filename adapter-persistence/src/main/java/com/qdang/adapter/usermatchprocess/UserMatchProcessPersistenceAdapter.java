@@ -1,5 +1,7 @@
 package com.qdang.adapter.usermatchprocess;
 
+import com.qdang.application.usermatchprocess.port.out.LoadUserMatchProcessPort;
+import com.qdang.global.exception.NotFoundException;
 import com.qdang.global.persistenceadapter.PersistenceAdapter;
 import com.qdang.application.usermatchprocess.domain.UserMatchProcess;
 import com.qdang.application.usermatchprocess.port.out.SaveUserMatchProcessPort;
@@ -13,10 +15,23 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @Slf4j
 class UserMatchProcessPersistenceAdapter implements
+		LoadUserMatchProcessPort,
 		SaveUserMatchProcessPort {
 
 	private final UserMatchProcessRepository userMatchProcessRepository;
 	private final UserMatchProcessMapper userMatchProcessMapper;
+
+	@Override
+	public UserMatchProcess loadByUserIdAndMatchProcessId(Long userId, Long matchProcessId) {
+		return userMatchProcessMapper
+				.mapToDomainEntity(
+				userMatchProcessRepository
+						.findByUserIdAndMatchProcessId(
+								userId,
+								matchProcessId)
+						.orElseThrow(NotFoundException::new)
+		);
+	}
 
 	@Override
 	public UserMatchProcess save(UserMatchProcess userMatchProcess) {

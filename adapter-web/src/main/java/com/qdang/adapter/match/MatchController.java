@@ -2,9 +2,9 @@ package com.qdang.adapter.match;
 
 import com.qdang.adapter.match.request.QuitMatchRequest;
 import com.qdang.adapter.match.request.RecordMatchProcessRequest;
-import com.qdang.adapter.match.response.GetMatchInfoRequest;
+import com.qdang.adapter.match.response.GetMatchInfoResponse;
 import com.qdang.adapter.match.response.StartMatchResponse;
-import com.qdang.application.match.port.in.GetMatchUseCase;
+import com.qdang.application.match.port.in.GetMatchDetailInfoUseCase;
 import com.qdang.application.match.port.in.QuitGameUseCase;
 import com.qdang.application.match.port.in.RecordMatchProcessUseCase;
 import com.qdang.application.match.port.in.StartMatchUseCase;
@@ -38,7 +38,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Tag(name = "Match", description = "Match API Document")
 public class MatchController {
 
-	private final GetMatchUseCase getMatchUseCase;
+	private final GetMatchDetailInfoUseCase getMatchDetailInfoUseCase;
 	private final StartMatchUseCase startMatchUseCase;
 	private final RecordMatchProcessUseCase recordMatchProcessUseCase;
 	private final QuitGameUseCase quitGameUseCase;
@@ -47,13 +47,15 @@ public class MatchController {
 	@ApiResponse(
 			responseCode = "200",
 			description = "게임 상세 조회 성공")
-	@GetMapping("/{matchId}")
-	public ResponseEntity<GetMatchInfoRequest> getMatchInfo(
-			@PathVariable Long matchId
+	@GetMapping("/{matchId}/users/{userId}")
+	public ResponseEntity<GetMatchInfoResponse> getMatchInfo(
+			@PathVariable Long matchId,
+			@PathVariable Long userId
 	) {
-		GetMatchInfoRequest response =
-				GetMatchInfoRequest.from(
-						getMatchUseCase.getMatchByMatchId(matchId));
+		GetMatchInfoResponse response =
+				GetMatchInfoResponse.of(
+						userId,
+						getMatchDetailInfoUseCase.getMatchDetailInfoByMatchId(matchId));
 		return HttpResponse.success(
 				SuccessType.READ_RESOURCE_SUCCESS,
 				response);

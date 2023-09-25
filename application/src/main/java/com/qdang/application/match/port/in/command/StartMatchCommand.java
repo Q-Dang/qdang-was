@@ -1,6 +1,6 @@
 package com.qdang.application.match.port.in.command;
 
-import com.qdang.application.match.domain.MatchTargetScore;
+import com.qdang.application.match.Vo.MatchTargetScore;
 import com.qdang.application.match.domain.MatchType;
 import java.util.List;
 import lombok.AccessLevel;

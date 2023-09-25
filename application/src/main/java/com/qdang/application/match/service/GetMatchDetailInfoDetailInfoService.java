@@ -4,7 +4,7 @@ import com.qdang.application.match.Vo.MatchDetail;
 import com.qdang.application.match.Vo.UserMatchDetail;
 import com.qdang.application.match.Vo.UserMatchProcessHistory;
 import com.qdang.application.match.domain.Match;
-import com.qdang.application.match.port.in.GetMatchUseCase;
+import com.qdang.application.match.port.in.GetMatchDetailInfoUseCase;
 import com.qdang.application.match.port.out.LoadMatchPort;
 import com.qdang.application.matchprocess.domain.MatchProcess;
 import com.qdang.application.matchprocess.port.out.LoadMatchProcessPort;
@@ -15,6 +15,7 @@ import com.qdang.application.usermatch.port.out.LoadUserMatchPort;
 import com.qdang.application.usermatchprocess.domain.UserMatchProcess;
 import com.qdang.application.usermatchprocess.port.out.LoadUserMatchProcessPort;
 import com.qdang.global.usecase.UseCase;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 @UseCase
 @RequiredArgsConstructor
 @Slf4j
-class GetMatchDetailInfoService implements GetMatchUseCase {
+class GetMatchDetailInfoDetailInfoService implements GetMatchDetailInfoUseCase {
 
 	private final LoadMatchPort loadMatchPort;
 	private final LoadUserPort loadUserPort;
@@ -51,12 +52,16 @@ class GetMatchDetailInfoService implements GetMatchUseCase {
 				.stream()
 				.map(userMatch -> {
 					User user = loadUserPort.loadById(userMatch.getUserId());
-					List<MatchProcess> matchProcesses =
-							loadMatchProcessPort.loadAllByMatchId(matchId);
+					List<MatchProcess> allMatchProcess =
+							loadMatchProcessPort.loadAllByMatchIdAscPhaseCountDescProcessCount(matchId);
+
+					List<MatchProcess> filterMatchProcesses = filterMatchProcessIsMaxProcessCount(
+							allMatchProcess);
+
 					List<UserMatchProcessHistory> userMatchProcessHistories =
 							getUserMatchProcessHistories(
 									user,
-									matchProcesses);
+									filterMatchProcesses);
 					return UserMatchDetail.of(
 							user,
 							userMatch,
@@ -65,20 +70,42 @@ class GetMatchDetailInfoService implements GetMatchUseCase {
 				.collect(Collectors.toList());
 	}
 
+	private List<MatchProcess> filterMatchProcessIsMaxProcessCount(List<MatchProcess> matchProcesses) {
+		List<MatchProcess> filterMatchProcesses = new ArrayList<>();
+		if (matchProcesses.size() == 0) {
+			return filterMatchProcesses;
+		}
+		filterMatchProcesses.add(matchProcesses.get(0));
+		for (int i = 1; i < matchProcesses.size(); i++) {
+			if (!matchProcesses.get(i).getPhaseCount().equals(matchProcesses.get(i - 1).getPhaseCount())) {
+				filterMatchProcesses.add(matchProcesses.get(i));
+			} else {
+				if (matchProcesses.get(i).getProcessCount() > matchProcesses.get(i - 1).getProcessCount()) {
+					filterMatchProcesses.remove(matchProcesses.get(i - 1));
+					filterMatchProcesses.add(matchProcesses.get(i));
+				}
+			}
+		}
+		return filterMatchProcesses;
+	}
+
 	private List<UserMatchProcessHistory> getUserMatchProcessHistories(
 			User user,
 			List<MatchProcess> matchProcesses) {
-		return matchProcesses
-				.stream()
-				.map(matchProcess -> {
-					UserMatchProcess userMatchProcess =
-							loadUserMatchProcessPort.loadByUserIdAndMatchProcessId(
-									user.getId(),
-									matchProcess.getId());
-					return UserMatchProcessHistory.of(
-							matchProcess,
-							userMatchProcess);
-				})
-				.collect(Collectors.toList());
+		List<UserMatchProcessHistory> userMatchProcessHistories =
+				matchProcesses
+						.stream()
+						.map(matchProcess -> {
+							UserMatchProcess userMatchProcess =
+									loadUserMatchProcessPort.loadByUserIdAndMatchProcessId(
+											user.getId(),
+											matchProcess.getId());
+							return UserMatchProcessHistory.of(
+									matchProcess,
+									userMatchProcess);
+						})
+						.collect(Collectors.toList());
+		// userMatchProcessHistories 에서 중복 phaseCount 를 제거하고,
+		return userMatchProcessHistories;
 	}
 }

@@ -2,7 +2,7 @@ package com.qdang.application.match.service;
 
 import com.qdang.global.usecase.UseCase;
 import com.qdang.application.match.domain.Match;
-import com.qdang.application.match.domain.MatchHistory;
+import com.qdang.application.match.Vo.MatchHistory;
 import com.qdang.application.match.port.in.GetUserMatchHistoryUseCase;
 import com.qdang.application.match.port.out.LoadMatchPort;
 import com.qdang.application.usermatch.domain.UserMatch;

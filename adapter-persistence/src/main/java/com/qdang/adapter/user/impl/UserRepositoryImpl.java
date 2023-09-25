@@ -1,6 +1,5 @@
 package com.qdang.adapter.user.impl;
 
-
 import static com.qdang.persistence.user.QUserJpaEntity.*;
 
 import com.qdang.adapter.user.custom.UserRepositoryCustom;

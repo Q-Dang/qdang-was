@@ -1,5 +1,6 @@
-package com.qdang.application.match.domain;
+package com.qdang.application.match.Vo;
 
+import com.qdang.application.match.domain.Match;
 import com.qdang.application.usermatch.domain.UserMatch;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -22,5 +23,4 @@ public class MatchHistory {
 				.userMatch(userMatch)
 				.build();
 	}
-
 }

@@ -1,5 +1,6 @@
 package com.qdang.adapter.match.request;
 
+import com.qdang.application.match.Vo.MatchTargetScore;
 import com.qdang.application.match.domain.MatchType;
 import com.qdang.application.match.port.in.command.StartMatchCommand;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -28,12 +29,12 @@ public class StartMatchRequest {
 
 	@Schema(description = "유저 수 크기만큼")
 	@Size(min = 1, max = 4, message = "{match.matchTargetScoreList.size.range}")
-	private List<MatchTargetScoreVo> matchTargetScoreList;
+	private List<MatchTargetScoreDto> matchTargetScoreList;
 
 
 	public StartMatchCommand toStartMatchCommand() {
-		List<com.qdang.application.match.domain.MatchTargetScore> matchTargetScores = this.matchTargetScoreList.stream()
-			.map(MatchTargetScoreVo::toMatchTargetScore)
+		List<MatchTargetScore> matchTargetScores = this.matchTargetScoreList.stream()
+			.map(MatchTargetScoreDto::toMatchTargetScore)
 			.collect(Collectors.toList());
 		return StartMatchCommand.of(matchType, userCount, matchTargetScores);
 	}

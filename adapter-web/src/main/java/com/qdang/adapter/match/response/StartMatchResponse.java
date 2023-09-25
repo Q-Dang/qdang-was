@@ -19,5 +19,4 @@ public class StartMatchResponse {
 	public static StartMatchResponse from(Match match) {
 		return new StartMatchResponse(match.getId(), match.getUserCount());
 	}
-
 }

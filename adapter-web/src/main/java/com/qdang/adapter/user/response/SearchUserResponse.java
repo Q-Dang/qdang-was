@@ -12,13 +12,13 @@ import lombok.Getter;
 public class SearchUserResponse {
 
 	@Schema(description = "유저 프로필 리스트")
-	private List<UserProfileVo> users;
+	private List<UserProfileDto> users;
 
 	public static SearchUserResponse from(List<User> users) {
 		return new SearchUserResponse(
 				users
 						.stream()
-						.map(UserProfileVo::from)
+						.map(UserProfileDto::from)
 						.collect(Collectors.toList()));
 	}
 }

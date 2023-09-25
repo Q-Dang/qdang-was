@@ -1,6 +1,6 @@
 package com.qdang.adapter.user.response;
 
-import com.qdang.application.match.domain.MatchHistory;
+import com.qdang.application.match.Vo.MatchHistory;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,13 +13,13 @@ import lombok.Getter;
 public class GetUserMatchHistoryResponse {
 
 	@Schema(description = "유저 경기 기록 리스트")
-	List<UserMatchHistoryVo> userMatchHistoryList;
+	List<UserMatchHistoryDto> userMatchHistoryList;
 
 	public static GetUserMatchHistoryResponse from(List<MatchHistory> matchHistoryList) {
 		return new GetUserMatchHistoryResponse(
 				matchHistoryList
 						.stream()
-						.map(UserMatchHistoryVo::from)
+						.map(UserMatchHistoryDto::from)
 						.collect(Collectors.toList()));
 	}
 }

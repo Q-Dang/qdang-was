@@ -11,7 +11,7 @@ import org.hibernate.validator.constraints.Range;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Schema(description = "유저 게임 결과")
-public class UserMatchResultVo {
+public class UserMatchResultDto {
 
 	@Schema(description = "유저 아이디", example = "1")
 	@NotNull(message = "{user.userId.notNull}")
