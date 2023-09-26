@@ -28,6 +28,7 @@ public class Match {
 		return Match.builder()
 				.matchType(matchType)
 				.userCount(userCount)
+				.createdAt(LocalDateTime.now())
 				.build();
 	}
 
