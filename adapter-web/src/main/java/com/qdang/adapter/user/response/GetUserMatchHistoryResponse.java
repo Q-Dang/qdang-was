@@ -1,6 +1,6 @@
 package com.qdang.adapter.user.response;
 
-import com.qdang.application.match.Vo.MatchHistory;
+import com.qdang.application.match.domain.vo.MatchHistory;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 import java.util.stream.Collectors;

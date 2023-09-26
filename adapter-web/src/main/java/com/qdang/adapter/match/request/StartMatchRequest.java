@@ -1,6 +1,6 @@
 package com.qdang.adapter.match.request;
 
-import com.qdang.application.match.Vo.MatchTargetScore;
+import com.qdang.application.match.domain.vo.MatchTargetScore;
 import com.qdang.application.match.domain.MatchType;
 import com.qdang.application.match.port.in.command.StartMatchCommand;
 import io.swagger.v3.oas.annotations.media.Schema;

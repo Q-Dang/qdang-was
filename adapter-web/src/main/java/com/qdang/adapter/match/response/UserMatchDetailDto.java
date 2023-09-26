@@ -1,6 +1,6 @@
 package com.qdang.adapter.match.response;
 
-import com.qdang.application.match.Vo.UserMatchDetail;
+import com.qdang.application.match.domain.vo.UserMatchDetail;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.AccessLevel;

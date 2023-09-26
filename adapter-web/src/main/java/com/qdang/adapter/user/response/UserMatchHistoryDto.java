@@ -1,6 +1,6 @@
 package com.qdang.adapter.user.response;
 
-import com.qdang.application.match.Vo.MatchHistory;
+import com.qdang.application.match.domain.vo.MatchHistory;
 import com.qdang.application.match.domain.MatchType;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.time.LocalDateTime;

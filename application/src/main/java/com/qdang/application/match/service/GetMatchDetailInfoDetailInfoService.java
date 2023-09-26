@@ -1,8 +1,8 @@
 package com.qdang.application.match.service;
 
-import com.qdang.application.match.Vo.MatchDetail;
-import com.qdang.application.match.Vo.UserMatchDetail;
-import com.qdang.application.match.Vo.UserMatchProcessHistory;
+import com.qdang.application.match.domain.vo.MatchDetail;
+import com.qdang.application.match.domain.vo.UserMatchDetail;
+import com.qdang.application.match.domain.vo.UserMatchProcessHistory;
 import com.qdang.application.match.domain.Match;
 import com.qdang.application.match.port.in.GetMatchDetailInfoUseCase;
 import com.qdang.application.match.port.out.LoadMatchPort;

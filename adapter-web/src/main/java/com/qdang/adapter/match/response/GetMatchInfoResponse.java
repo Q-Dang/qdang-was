@@ -1,6 +1,6 @@
 package com.qdang.adapter.match.response;
 
-import com.qdang.application.match.Vo.MatchDetail;
+import com.qdang.application.match.domain.vo.MatchDetail;
 import com.qdang.application.match.domain.MatchType;
 import java.time.LocalDateTime;
 import java.time.LocalTime;

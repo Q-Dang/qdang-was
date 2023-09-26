@@ -1,6 +1,6 @@
 package com.qdang.adapter.match.request;
 
-import com.qdang.application.match.Vo.MatchTargetScore;
+import com.qdang.application.match.domain.vo.MatchTargetScore;
 import io.swagger.v3.oas.annotations.media.Schema;
 import javax.validation.constraints.NotNull;
 import lombok.AccessLevel;

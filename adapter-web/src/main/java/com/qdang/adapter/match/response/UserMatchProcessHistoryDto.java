@@ -1,6 +1,6 @@
 package com.qdang.adapter.match.response;
 
-import com.qdang.application.match.Vo.UserMatchProcessHistory;
+import com.qdang.application.match.domain.vo.UserMatchProcessHistory;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

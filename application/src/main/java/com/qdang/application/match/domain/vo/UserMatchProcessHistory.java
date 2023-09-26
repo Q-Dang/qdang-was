@@ -1,4 +1,4 @@
-package com.qdang.application.match.Vo;
+package com.qdang.application.match.domain.vo;
 
 import com.qdang.application.matchprocess.domain.MatchProcess;
 import com.qdang.application.usermatchprocess.domain.UserMatchProcess;

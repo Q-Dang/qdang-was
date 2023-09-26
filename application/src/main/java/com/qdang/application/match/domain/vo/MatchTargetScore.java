@@ -1,4 +1,4 @@
-package com.qdang.application.match.Vo;
+package com.qdang.application.match.domain.vo;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
