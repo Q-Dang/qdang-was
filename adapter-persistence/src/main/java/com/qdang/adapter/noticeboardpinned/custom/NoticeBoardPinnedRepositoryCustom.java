@@ -1,2 +1,5 @@
-package com.qdang.adapter.noticeboardpinned.custom;public interface NoticeBoardPinnedRepositoryCustom {
+package com.qdang.adapter.noticeboardpinned.custom;
+
+public interface NoticeBoardPinnedRepositoryCustom {
+
 }
