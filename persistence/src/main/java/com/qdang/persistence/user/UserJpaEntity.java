@@ -23,6 +23,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -44,29 +45,43 @@ public class UserJpaEntity {
 	private Long id;
 
 	@Enumerated(value = EnumType.STRING)
-	@Column(nullable = false)
+	@Column(nullable = false, length = 10)
+	@ColumnDefault("MEMBER")
 	private UserRoleJpa userRole;
 
-	@Column(nullable = false)
+	@Column(nullable = false, length = 50)
 	private String loginId;
 
-	@Column(nullable = false)
+	@Column(nullable = false, length = 100)
 	private String password;
 
-	@Column(nullable = false)
+	@Column(nullable = false, length =50)
 	private String username;
 
 	private LocalDate birthday;
+
+	@Column(length = 10)
 	@Enumerated(value = EnumType.STRING)
 	private GenderJpa gender;
 
 	@Column(nullable = false)
+	@ColumnDefault("0")
 	private Integer proficiency;
+
+	@Column(length = 13)
 	private String phone;
+
 	private String refreshToken;
+
 	private String fcmToken;
+
+	@Column(columnDefinition = "text")
 	private String profileImage;
+
+	@Column(length = 100)
 	private String address;
+
+	@Column(length = 100)
 	private String detailAddress;
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -74,57 +89,75 @@ public class UserJpaEntity {
 	private UserJpaEntity joinStaff;
 
 	@Column(nullable = false)
+	@ColumnDefault("false")
 	private Boolean isResting;
 
 	@Column(nullable = false)
+	@ColumnDefault("false")
 	private Boolean isLeaving;
+
+	@Column(length = 6)
 	private String phoneAuthCode;
+
 	private LocalDateTime phoneAuthAt;
+
+	@ColumnDefault("false")
 	private Boolean isPhoneAuth;
 
 	@Column(nullable = false)
+	// Todo : 가입 시 혹은 인증 시 Join At 업데이트
 	private LocalDateTime joinAt;
 
 	@Column(nullable = false)
+	@ColumnDefault("false")
 	private Boolean joinAgree;
+
 	private LocalDateTime agreeUpdateAt;
+
 	private LocalDateTime accessAt;
 
 	@Column(nullable = false)
+	@ColumnDefault("0")
 	private Integer accessCount;
 
 	private String statusMessage;
 
 	@Column(nullable = false)
+	@ColumnDefault("0")
 	private Integer average;
 
 	@Column(nullable = false)
+	@ColumnDefault("0")
 	private Integer matchCount;
 
 	@Column(nullable = false)
+	@ColumnDefault("0")
 	private Integer highRun;
 
 	@Column(nullable = false)
+	@ColumnDefault("0")
 	private Integer totalInningCount;
 
 	@Column(nullable = false)
+	@ColumnDefault("0")
 	private Integer succeedInningCount;
 
 	@Column(nullable = false)
+	@ColumnDefault("0")
 	private Integer failedInningCount;
 
 	@Column(nullable = false)
+	@ColumnDefault("0")
 	private Integer sluggingCount;
 
 	@Column(nullable = false)
+	@ColumnDefault("0")
 	private Integer battingAverage;
 
 	@Column(nullable = false)
+	@ColumnDefault("0")
 	private Integer sluggingPercentage;
 
 	@OneToMany(mappedBy = "user")
 	private List<UserMatchJpaEntity> userMatchList = new ArrayList<>();
-
-//	@OneToMany(mappedBy = "player")
-//	private List<MatchProcessJpaEntity> matchProcessList = new ArrayList<>();
 }

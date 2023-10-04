@@ -17,8 +17,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 @Getter
 @Entity
@@ -46,37 +49,49 @@ public class UserMatchJpaEntity {
 	private Integer targetScore;
 
 	@Column(nullable = false)
+	@ColumnDefault("0")
 	private Integer finishCushionTargetScore;
 
 	@Column(nullable = false)
+	@ColumnDefault("0")
 	private Integer finishBankShotTargetScore;
 
-	@Column(nullable = false)
-	private LocalDateTime createdAt;
+	@CreatedDate
+	@Column(updatable = false, nullable = false)
+	protected LocalDateTime createdAt;
+
+	@LastModifiedDate
+	protected LocalDateTime updatedAt;
 
 	@Column(nullable = false)
-	private LocalDateTime updatedAt;
-
-	@Column(nullable = false)
+	@ColumnDefault("false")
 	private Boolean isDeleted;
+
 	private Integer score;
 	private Integer finishCushionScore;
 	private Integer finishBankShotScore;
+
 	private Integer ranking;
 
 	@Column(nullable = false)
+	@ColumnDefault("0")
 	private Integer maxHighRun;
+
 	private Integer average;
 
 	@Column(nullable = false)
+	@ColumnDefault("0")
 	private Integer inningCount;
 
 	@Column(nullable = false)
+	@ColumnDefault("0")
 	private Integer succeedInningCount;
 
 	@Column(nullable = false)
+	@ColumnDefault("0")
 	private Integer failedInningCount;
 
 	@Column(nullable = false)
+	@ColumnDefault("0")
 	private Integer sluggingCount;
 }

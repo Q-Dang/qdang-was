@@ -18,6 +18,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -56,20 +57,23 @@ public class UserMatchProcessJpaEntity {
     private Integer ranking;
 
     @Enumerated(value = EnumType.STRING)
-    @Column(nullable = false)
+    @Column(nullable = false, length = 10)
     private UserMatchStatusJpa status;
 
     @Column(nullable = false)
+    @ColumnDefault("0")
     private Integer maxHighRun;
 
     @Column(nullable = false)
+    @ColumnDefault("0")
     private Integer highRun;
 
     @Column(nullable = false)
+    @ColumnDefault("0")
     private Integer deltaScore;
 
     @Enumerated(value = EnumType.STRING)
-    @Column(nullable = false)
+    @Column(nullable = false, length = 10)
     private TurnTypeJpa turnType;
 
     @Column(nullable = false)

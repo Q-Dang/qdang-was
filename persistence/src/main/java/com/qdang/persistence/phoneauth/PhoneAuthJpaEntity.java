@@ -1,6 +1,5 @@
 package com.qdang.persistence.phoneauth;
 
-
 import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,14 +10,13 @@ import javax.persistence.Table;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.DynamicInsert;
-import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.ColumnDefault;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 @Getter
 @Entity
 @Table(name = "phone_auth")
-@DynamicInsert
-@DynamicUpdate
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class PhoneAuthJpaEntity {
 
@@ -26,24 +24,27 @@ public class PhoneAuthJpaEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 13)
     private String phone;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 6)
     private String phoneCode;
 
     @Column(nullable = false)
-    private LocalDateTime createdAt;
-
-    @Column(nullable = false)
-    private LocalDateTime updatedAt;
+    @ColumnDefault("false")
+    private Boolean isDeleted;
 
     @Column(nullable = false)
     private LocalDateTime expiredAt;
 
     @Column(nullable = false)
-    private Boolean isDeleted;
-
-    @Column(nullable = false)
+    @ColumnDefault("false")
     private Boolean isPhoneAuth;
+
+    @CreatedDate
+    @Column(updatable = false, nullable = false)
+    protected LocalDateTime createdAt;
+
+    @LastModifiedDate
+    protected LocalDateTime updatedAt;
 }
