@@ -1,10 +1,22 @@
-DROP TABLE IF EXISTS `q_user`;
-DROP TABLE IF EXISTS `q_match`;
-DROP TABLE IF EXISTS `q_user_match`;
-DROP TABLE IF EXISTS `q_match_process`;
-DROP TABLE IF EXISTS `q_user_match_process`;
 DROP TABLE IF EXISTS `phone_auth`;
 DROP TABLE IF EXISTS `access_log`;
+
+DROP TABLE IF EXISTS `q_user_match_process`;
+DROP TABLE IF EXISTS `q_match_process`;
+DROP TABLE IF EXISTS `q_user_match`;
+DROP TABLE IF EXISTS `q_match`;
+
+DROP TABLE IF EXISTS `q_notice_board_pinned`;
+DROP TABLE IF EXISTS `q_comment_reply`;
+DROP TABLE IF EXISTS `q_post_likes`;
+DROP TABLE IF EXISTS `q_scrap`;
+DROP TABLE IF EXISTS `q_comment`;
+DROP TABLE IF EXISTS `q_post`;
+DROP TABLE IF EXISTS `q_notice_board`;
+
+DROP TABLE IF EXISTS `q_user`;
+
+
 
 CREATE TABLE `q_user`
 (
