@@ -1,4 +1,4 @@
-package com.qdang.application.usermatchprocess.exception;
+package com.qdang.application.match.exception;
 
 import com.qdang.global.exception.BusinessException;
 import com.qdang.global.exception.ErrorType;
