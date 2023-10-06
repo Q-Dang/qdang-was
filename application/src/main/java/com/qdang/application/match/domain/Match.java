@@ -22,18 +22,20 @@ public class Match {
 	private LocalTime duration;
 	private Integer userCount;
 
-	public static Match of(
+	public static Match newMatch(
 			MatchType matchType,
 			Integer userCount) {
 		return Match.builder()
 				.matchType(matchType)
 				.userCount(userCount)
 				.createdAt(LocalDateTime.now())
+				.updatedAt(LocalDateTime.now())
 				.build();
 	}
 
 	public void quit(LocalTime duration) {
 		this.isValid = true;
+		this.updatedAt = LocalDateTime.now();
 		this.endAt = LocalDateTime.now();
 		this.duration = duration;
 	}
