@@ -1,7 +1,7 @@
 package com.qdang.application.match.port.in.command;
 
-import com.qdang.application.matchprocess.domain.MatchProcess;
-import com.qdang.application.usermatchprocess.domain.UserMatchProcess;
+import com.qdang.application.match.domain.MatchProcess;
+import com.qdang.application.match.domain.UserMatchProcess;
 import java.util.List;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

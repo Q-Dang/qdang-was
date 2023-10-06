@@ -1,8 +1,8 @@
 package com.qdang.adapter.match.request;
 
 import com.qdang.application.match.port.in.command.RecordMatchProcessCommand;
-import com.qdang.application.matchprocess.domain.MatchProcess;
-import com.qdang.application.usermatchprocess.domain.UserMatchProcess;
+import com.qdang.application.match.domain.MatchProcess;
+import com.qdang.application.match.domain.UserMatchProcess;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.time.LocalTime;
 import java.util.List;
@@ -71,7 +71,7 @@ public class RecordMatchProcessRequest {
 				.collect(Collectors.toList());
 
 		return RecordMatchProcessCommand.of(
-				MatchProcess.of(
+				MatchProcess.newMatchProcess(
 						matchId,
 						playerId,
 						duration,
