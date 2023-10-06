@@ -1,2 +1,5 @@
-package com.qdang.adapter.scrap.custom;public interface ScrapRepositoryCustom {
+package com.qdang.adapter.scrap.custom;
+
+public interface ScrapRepositoryCustom {
+
 }
