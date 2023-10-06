@@ -39,6 +39,9 @@ public enum ErrorType {
 	NOT_FOUND_MATCH_EXCEPTION(HttpStatus.NOT_FOUND, "존재하지 않는 경기입니다"),
 	NOT_FOUND_MATCH_PROCESS_EXCEPTION(HttpStatus.NOT_FOUND, "존재하지 않는 경기 프로세스입니다"),
 	NOT_FOUND_USER_MATCH_PROCESS_EXCEPTION(HttpStatus.NOT_FOUND, "존재하지 않는 유저 경기 프로세스입니다"),
+	NOT_FOUND_NOTICE_BOARD_EXCEPTION(HttpStatus.NOT_FOUND, "존재하지 않는 게시판입니다"),
+	NOT_FOUND_POST_EXCEPTION(HttpStatus.NOT_FOUND, "존재하지 않는 게시글입니다"),
+	NOT_FOUND_COMMENT_EXCEPTION(HttpStatus.NOT_FOUND, "존재하지 않는 댓글입니다"),
 
 	/**
 	 * 405 METHOD NOT ALLOWED
