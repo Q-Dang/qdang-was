@@ -1,7 +1,7 @@
 package com.qdang.adapter.match.request;
 
-import com.qdang.application.usermatchprocess.domain.TurnType;
-import com.qdang.application.usermatchprocess.domain.UserMatchStatus;
+import com.qdang.application.match.domain.TurnType;
+import com.qdang.application.match.domain.UserMatchStatus;
 import io.swagger.v3.oas.annotations.media.Schema;
 import javax.validation.constraints.NotNull;
 import lombok.AccessLevel;

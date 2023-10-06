@@ -1,6 +1,6 @@
-package com.qdang.application.matchprocess.port.out;
+package com.qdang.application.match.port.out;
 
-import com.qdang.application.matchprocess.domain.MatchProcess;
+import com.qdang.application.match.domain.MatchProcess;
 
 public interface SaveMatchProcessPort {
 

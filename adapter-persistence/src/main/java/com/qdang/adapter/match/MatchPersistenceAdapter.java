@@ -1,5 +1,6 @@
 package com.qdang.adapter.match;
 
+import com.qdang.adapter.match.impl.MatchRepository;
 import com.qdang.application.match.exception.NotFoundMatchException;
 import com.qdang.global.persistenceadapter.PersistenceAdapter;
 import com.qdang.application.match.domain.Match;

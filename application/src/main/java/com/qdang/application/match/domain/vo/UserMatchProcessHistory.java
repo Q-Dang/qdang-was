@@ -1,7 +1,7 @@
 package com.qdang.application.match.domain.vo;
 
-import com.qdang.application.matchprocess.domain.MatchProcess;
-import com.qdang.application.usermatchprocess.domain.UserMatchProcess;
+import com.qdang.application.match.domain.MatchProcess;
+import com.qdang.application.match.domain.UserMatchProcess;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

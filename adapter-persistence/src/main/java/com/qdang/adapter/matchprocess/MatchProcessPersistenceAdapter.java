@@ -1,9 +1,10 @@
 package com.qdang.adapter.matchprocess;
 
-import com.qdang.application.matchprocess.port.out.LoadMatchProcessPort;
+import com.qdang.adapter.matchprocess.impl.MatchProcessRepository;
+import com.qdang.application.match.port.out.LoadMatchProcessPort;
 import com.qdang.global.persistenceadapter.PersistenceAdapter;
-import com.qdang.application.matchprocess.domain.MatchProcess;
-import com.qdang.application.matchprocess.port.out.SaveMatchProcessPort;
+import com.qdang.application.match.domain.MatchProcess;
+import com.qdang.application.match.port.out.SaveMatchProcessPort;
 import com.qdang.persistence.matchprocess.MatchProcessJpaEntity;
 import java.util.List;
 import java.util.stream.Collectors;

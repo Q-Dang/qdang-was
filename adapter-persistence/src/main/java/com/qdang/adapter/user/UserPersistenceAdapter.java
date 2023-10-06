@@ -1,5 +1,6 @@
 package com.qdang.adapter.user;
 
+import com.qdang.adapter.user.impl.UserRepository;
 import com.qdang.global.persistenceadapter.PersistenceAdapter;
 import com.qdang.application.user.domain.User;
 import com.qdang.application.user.exception.NotFoundUserException;

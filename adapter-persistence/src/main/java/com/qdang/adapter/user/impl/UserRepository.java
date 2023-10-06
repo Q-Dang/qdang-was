@@ -1,4 +1,4 @@
-package com.qdang.adapter.user;
+package com.qdang.adapter.user.impl;
 
 
 import com.qdang.adapter.user.custom.UserRepositoryCustom;

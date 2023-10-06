@@ -1,4 +1,4 @@
-package com.qdang.application.usermatchprocess.domain;
+package com.qdang.application.match.domain;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

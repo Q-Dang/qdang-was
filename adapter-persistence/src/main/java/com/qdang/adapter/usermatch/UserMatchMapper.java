@@ -1,10 +1,10 @@
 package com.qdang.adapter.usermatch;
 
-import com.qdang.adapter.match.MatchRepository;
-import com.qdang.adapter.user.UserRepository;
+import com.qdang.adapter.match.impl.MatchRepository;
+import com.qdang.adapter.user.impl.UserRepository;
 import com.qdang.application.match.exception.NotFoundMatchException;
 import com.qdang.application.user.exception.NotFoundUserException;
-import com.qdang.application.usermatch.domain.UserMatch;
+import com.qdang.application.match.domain.UserMatch;
 import com.qdang.global.mapper.Mapper;
 import com.qdang.library.mapper.GenericJpaMapper;
 import com.qdang.persistence.match.MatchJpaEntity;

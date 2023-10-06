@@ -1,4 +1,4 @@
-package com.qdang.adapter.usermatchprocess;
+package com.qdang.adapter.usermatchprocess.impl;
 
 import com.qdang.adapter.usermatchprocess.custom.UserMatchProcessRepositoryCustom;
 import com.qdang.persistence.usermatchprocess.UserMatchProcessJpaEntity;

@@ -1,4 +1,4 @@
-package com.qdang.adapter.matchprocess;
+package com.qdang.adapter.matchprocess.impl;
 
 import com.qdang.adapter.matchprocess.custom.MatchProcessRepositoryCustom;
 import com.qdang.persistence.matchprocess.MatchProcessJpaEntity;

@@ -1,6 +1,6 @@
 package com.qdang.application.user.domain;
 
-import com.qdang.application.usermatch.domain.UserMatch;
+import com.qdang.application.match.domain.UserMatch;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import lombok.AccessLevel;
@@ -39,7 +39,6 @@ public class User {
 	private LocalDateTime agreeUpdateAt;
 	private LocalDateTime accessAt;
 	private Integer accessCount;
-
 	private String statusMessage;
 	private Integer average;
 	private Integer matchCount;
@@ -52,7 +51,7 @@ public class User {
 	private Integer sluggingPercentage;
 
 
-	public static User of(
+	public static User newUser(
 			String loginId,
 			String password,
 			String username,
@@ -62,6 +61,7 @@ public class User {
 				.password(password)
 				.username(username)
 				.userRole(userRole)
+				.joinAt(LocalDateTime.now())
 				.build();
 	}
 

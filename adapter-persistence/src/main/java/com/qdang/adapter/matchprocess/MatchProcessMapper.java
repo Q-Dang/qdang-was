@@ -1,9 +1,9 @@
 package com.qdang.adapter.matchprocess;
 
-import com.qdang.adapter.match.MatchRepository;
-import com.qdang.adapter.user.UserRepository;
+import com.qdang.adapter.match.impl.MatchRepository;
+import com.qdang.adapter.user.impl.UserRepository;
 import com.qdang.application.match.exception.NotFoundMatchException;
-import com.qdang.application.matchprocess.domain.MatchProcess;
+import com.qdang.application.match.domain.MatchProcess;
 import com.qdang.application.user.exception.NotFoundUserException;
 import com.qdang.global.mapper.Mapper;
 import com.qdang.library.mapper.GenericJpaMapper;

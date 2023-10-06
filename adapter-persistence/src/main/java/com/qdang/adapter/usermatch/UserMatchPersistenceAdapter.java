@@ -1,9 +1,10 @@
 package com.qdang.adapter.usermatch;
 
+import com.qdang.adapter.usermatch.impl.UserMatchRepository;
 import com.qdang.global.persistenceadapter.PersistenceAdapter;
-import com.qdang.application.usermatch.domain.UserMatch;
-import com.qdang.application.usermatch.port.out.LoadUserMatchPort;
-import com.qdang.application.usermatch.port.out.SaveUserMatchPort;
+import com.qdang.application.match.domain.UserMatch;
+import com.qdang.application.match.port.out.LoadUserMatchPort;
+import com.qdang.application.match.port.out.SaveUserMatchPort;
 import com.qdang.persistence.usermatch.UserMatchJpaEntity;
 import java.util.List;
 import java.util.stream.Collectors;

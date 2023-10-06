@@ -1,10 +1,11 @@
 package com.qdang.adapter.usermatchprocess;
 
-import com.qdang.application.usermatchprocess.port.out.LoadUserMatchProcessPort;
+import com.qdang.adapter.usermatchprocess.impl.UserMatchProcessRepository;
+import com.qdang.application.match.port.out.LoadUserMatchProcessPort;
 import com.qdang.global.exception.NotFoundException;
 import com.qdang.global.persistenceadapter.PersistenceAdapter;
-import com.qdang.application.usermatchprocess.domain.UserMatchProcess;
-import com.qdang.application.usermatchprocess.port.out.SaveUserMatchProcessPort;
+import com.qdang.application.match.domain.UserMatchProcess;
+import com.qdang.application.match.port.out.SaveUserMatchProcessPort;
 import com.qdang.persistence.usermatchprocess.UserMatchProcessJpaEntity;
 import java.util.List;
 import java.util.stream.Collectors;

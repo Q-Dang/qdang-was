@@ -1,4 +1,4 @@
-package com.qdang.application.usermatchprocess.domain;
+package com.qdang.application.match.domain;
 
 public enum TurnType {
 

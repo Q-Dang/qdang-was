@@ -1,7 +1,7 @@
 package com.qdang.application.match.domain.vo;
 
 import com.qdang.application.user.domain.User;
-import com.qdang.application.usermatch.domain.UserMatch;
+import com.qdang.application.match.domain.UserMatch;
 import java.util.List;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

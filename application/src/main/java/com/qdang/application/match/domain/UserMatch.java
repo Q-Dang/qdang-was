@@ -1,4 +1,4 @@
-package com.qdang.application.usermatch.domain;
+package com.qdang.application.match.domain;
 
 import java.time.LocalDateTime;
 import lombok.AccessLevel;

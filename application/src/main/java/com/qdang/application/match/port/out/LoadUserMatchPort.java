@@ -1,6 +1,6 @@
-package com.qdang.application.usermatch.port.out;
+package com.qdang.application.match.port.out;
 
-import com.qdang.application.usermatch.domain.UserMatch;
+import com.qdang.application.match.domain.UserMatch;
 import java.util.List;
 
 public interface LoadUserMatchPort {

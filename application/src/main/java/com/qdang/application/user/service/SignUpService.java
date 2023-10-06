@@ -35,7 +35,7 @@ class SignUpService implements SignUpUseCase {
 		// Todo : Random user name create refactoring
 		User user =
 				saveUserPort.save(
-						User.of(
+						User.newUser(
 								command.getLoginId(),
 								passwordEncoder.encode(
 										command.getPassword()),

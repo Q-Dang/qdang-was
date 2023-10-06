@@ -1,12 +1,12 @@
 package com.qdang.adapter.usermatchprocess;
 
-import com.qdang.adapter.user.UserRepository;
-import com.qdang.adapter.matchprocess.MatchProcessRepository;
+import com.qdang.adapter.user.impl.UserRepository;
+import com.qdang.adapter.matchprocess.impl.MatchProcessRepository;
 import com.qdang.application.user.exception.NotFoundUserException;
-import com.qdang.application.usermatchprocess.domain.TurnType;
-import com.qdang.application.usermatchprocess.domain.UserMatchProcess;
-import com.qdang.application.usermatchprocess.domain.UserMatchStatus;
-import com.qdang.application.usermatchprocess.exception.NotFoundMatchProcessException;
+import com.qdang.application.match.domain.TurnType;
+import com.qdang.application.match.domain.UserMatchProcess;
+import com.qdang.application.match.domain.UserMatchStatus;
+import com.qdang.application.match.exception.NotFoundMatchProcessException;
 import com.qdang.global.mapper.Mapper;
 import com.qdang.library.mapper.GenericJpaMapper;
 import com.qdang.persistence.matchprocess.MatchProcessJpaEntity;

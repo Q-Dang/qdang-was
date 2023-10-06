@@ -1,6 +1,6 @@
-package com.qdang.application.usermatchprocess.port.out;
+package com.qdang.application.match.port.out;
 
-import com.qdang.application.usermatchprocess.domain.UserMatchProcess;
+import com.qdang.application.match.domain.UserMatchProcess;
 import java.util.List;
 
 public interface SaveUserMatchProcessPort {
