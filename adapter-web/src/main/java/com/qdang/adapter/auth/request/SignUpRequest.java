@@ -1,6 +1,6 @@
-package com.qdang.adapter.user.request;
+package com.qdang.adapter.auth.request;
 
-import com.qdang.application.user.port.in.command.LoginCommand;
+import com.qdang.application.user.port.in.command.SignUpCommand;
 import io.swagger.v3.oas.annotations.media.Schema;
 import javax.validation.constraints.NotNull;
 import lombok.AccessLevel;
@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-@Schema(description = "로그인 요청")
-public class LoginRequest {
+@Schema(description = "회원가입 요청")
+public class SignUpRequest {
 
     @Schema(description = "로그인 아이디")
     @NotNull(message = "{auth.loginId.notNull}")
@@ -20,7 +20,7 @@ public class LoginRequest {
     @NotNull(message = "{auth.password.notNull}")
     private String password;
 
-    public LoginCommand toLoginInfo() {
-        return LoginCommand.of(loginId, password);
+    public SignUpCommand toSignUpCommand() {
+        return SignUpCommand.of(loginId, password);
     }
 }
