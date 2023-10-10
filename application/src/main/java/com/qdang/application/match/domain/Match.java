@@ -1,5 +1,7 @@
 package com.qdang.application.match.domain;
 
+import com.qdang.global.exception.BusinessException;
+import com.qdang.global.exception.ErrorType;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import lombok.AccessLevel;
@@ -35,13 +37,12 @@ public class Match {
 	}
 
 	public void quit(LocalTime duration) {
+		if (this.isValid) {
+			throw new BusinessException(ErrorType.INVALID_INPUT_EXCEPTION, "이미 종료된 게임입니다.");
+		}
 		this.isValid = true;
 		this.updatedAt = LocalDateTime.now();
 		this.endAt = LocalDateTime.now();
 		this.duration = duration;
-	}
-
-	public boolean isQuitMatch() {
-		return this.isValid;
 	}
 }

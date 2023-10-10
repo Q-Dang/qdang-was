@@ -46,9 +46,6 @@ class QuitGameService implements QuitGameUseCase {
 				loadUserPort.loadAllByMatchId(match.getId());
 		checkValidationPlayerId(command.getPlayerId(), userMatches);
 		checkValidationPlayerIds(getUserIdsInCommand(command), userMatches);
-		if (match.isQuitMatch()) {
-			throw new BusinessException(ErrorType.INVALID_INPUT_EXCEPTION, "이미 종료된 게임입니다.");
-		}
 		match.quit(command.getPlayTime());
 		command.getUserMatchResultCommand().forEach(userMatchResultCommand -> {
 			UserMatch userMatch =
