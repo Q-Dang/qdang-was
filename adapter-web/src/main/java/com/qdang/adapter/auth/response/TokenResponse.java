@@ -1,4 +1,4 @@
-package com.qdang.adapter.user.response;
+package com.qdang.adapter.auth.response;
 
 import com.qdang.application.user.domain.TokenCollection;
 import io.swagger.v3.oas.annotations.media.Schema;
