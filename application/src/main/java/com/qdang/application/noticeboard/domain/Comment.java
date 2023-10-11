@@ -1,5 +1,6 @@
 package com.qdang.application.noticeboard.domain;
 
+import com.qdang.application.user.domain.User;
 import java.time.LocalDateTime;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -11,10 +12,16 @@ import lombok.Getter;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Comment {
 	private Long id;
-	private Long userId;
-	private Long postId;
+	private User user;
+	private Post post;
 	private String content;
 	private Boolean isDeleted;
-	protected LocalDateTime createdAt;
-	protected LocalDateTime updatedAt;
+	private LocalDateTime createdAt;
+	private LocalDateTime updatedAt;
+
+	public static Comment init(Long id) {
+		return Comment.builder()
+				.id(id)
+				.build();
+	}
 }
