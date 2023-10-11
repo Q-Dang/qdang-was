@@ -8,6 +8,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
+@Schema(description = "토큰 응답")
 public class TokenResponse {
 
 	@Schema(description = "JWT access token", example = "access_token")

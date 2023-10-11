@@ -26,7 +26,7 @@ class GetUserMatchHistoryService implements GetUserMatchHistoryUseCase {
 		List<MatchHistory> matchHistories = userMatches
 				.stream()
 				.map(userMatch -> {
-					Match match = loadMatchPort.loadById(userMatch.getMatchId());
+					Match match = loadMatchPort.loadById(userMatch.getMatch().getId());
 					return MatchHistory.of(match, userMatch);
 				})
 				.collect(Collectors.toList());

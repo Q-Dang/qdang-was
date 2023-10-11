@@ -1,5 +1,6 @@
 package com.qdang.application.match.service;
 
+import com.qdang.application.user.port.out.LoadUserPort;
 import com.qdang.global.usecase.UseCase;
 import com.qdang.application.match.port.in.StartMatchUseCase;
 import com.qdang.application.match.port.in.command.StartMatchCommand;
@@ -16,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 class StartMatchService implements StartMatchUseCase {
 
+	private final LoadUserPort loadUserPort;
 	private final SaveMatchPort saveMatchPort;
 	private final SaveUserMatchPort saveUserMatchPort;
 
@@ -32,8 +34,8 @@ class StartMatchService implements StartMatchUseCase {
 				.stream()
 				.map(matchTargetScore ->
 						UserMatch.newUserMatch(
-								matchTargetScore.getUserId(),
-								match.getId(),
+								loadUserPort.loadById(matchTargetScore.getUserId()),
+								match,
 								matchTargetScore.getTargetScore(),
 								matchTargetScore.getCushionTargetScore(),
 								matchTargetScore.getBankShotTargetScore()))

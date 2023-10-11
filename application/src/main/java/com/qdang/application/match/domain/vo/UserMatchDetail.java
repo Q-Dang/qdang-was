@@ -27,6 +27,4 @@ public class UserMatchDetail {
 				.UserMatchProcessHistoryList(userMatchProcessHistories)
 				.build();
 	}
-
-	// Todo : 모든 UserMatchProcessHistory 들을 리턴하는 것이 아닌, phaseCount 별로 가장 큰 processCount 를 가진 UserMatchProcessHistory 를 리턴하도록 수정
 }

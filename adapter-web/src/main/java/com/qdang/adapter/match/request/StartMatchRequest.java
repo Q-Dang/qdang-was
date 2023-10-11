@@ -1,6 +1,5 @@
 package com.qdang.adapter.match.request;
 
-import com.qdang.application.match.domain.vo.MatchTargetScore;
 import com.qdang.application.match.domain.MatchType;
 import com.qdang.application.match.port.in.command.StartMatchCommand;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -33,9 +32,43 @@ public class StartMatchRequest {
 
 
 	public StartMatchCommand toStartMatchCommand() {
-		List<MatchTargetScore> matchTargetScores = this.matchTargetScoreList.stream()
-			.map(MatchTargetScoreDto::toMatchTargetScore)
-			.collect(Collectors.toList());
-		return StartMatchCommand.of(matchType, userCount, matchTargetScores);
+
+		List<StartMatchCommand.MatchTargetScoreCommand> matchTargetScores =
+				this.matchTargetScoreList
+						.stream()
+						.map(matchTargetScoreDto -> {
+							return StartMatchCommand.MatchTargetScoreCommand.of(
+									matchTargetScoreDto.getUserId(),
+									matchTargetScoreDto.getTargetScore(),
+									matchTargetScoreDto.getCushionTargetScore(),
+									matchTargetScoreDto.getBankShotTargetScore()
+							);
+						})
+						.collect(Collectors.toList());
+
+		return StartMatchCommand.of(
+				matchType,
+				userCount,
+				matchTargetScores);
+	}
+
+	@Getter
+	@NoArgsConstructor(access = AccessLevel.PRIVATE)
+	@Schema(description = "경기 목표 점수")
+	public static class MatchTargetScoreDto {
+
+		@Schema(description = "게임에 참여하는 유저 아이디")
+		@NotNull(message = "{user.userId.notNull}")
+		private Long userId;
+
+		@Schema(description = "목표 점수")
+		@NotNull(message = "{userMatch.targetScore.notNull}")
+		private Integer targetScore;
+
+		@Schema(description = "쿠션 목표 점수")
+		private Integer cushionTargetScore;
+
+		@Schema(description = "뱅크샷 목표 점수")
+		private Integer bankShotTargetScore;
 	}
 }

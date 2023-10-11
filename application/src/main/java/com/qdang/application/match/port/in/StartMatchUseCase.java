@@ -7,5 +7,4 @@ import com.qdang.application.match.port.in.command.StartMatchCommand;
 public interface StartMatchUseCase {
 
 	Match startMatch(StartMatchCommand command);
-
 }

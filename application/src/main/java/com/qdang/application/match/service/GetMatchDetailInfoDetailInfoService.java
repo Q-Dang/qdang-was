@@ -51,7 +51,7 @@ class GetMatchDetailInfoDetailInfoService implements GetMatchDetailInfoUseCase {
 		return userMatches
 				.stream()
 				.map(userMatch -> {
-					User user = loadUserPort.loadById(userMatch.getUserId());
+					User user = loadUserPort.loadById(userMatch.getUser().getId());
 					List<MatchProcess> allMatchProcess =
 							loadMatchProcessPort.loadAllByMatchIdAscPhaseCountDescProcessCount(matchId);
 

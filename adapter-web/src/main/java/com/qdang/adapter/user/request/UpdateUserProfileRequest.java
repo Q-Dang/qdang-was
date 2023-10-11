@@ -27,7 +27,7 @@ public class UpdateUserProfileRequest {
 	@Range(min = 1, max = 5, message = "{user.proficiency.range}")
 	private Integer proficiency;
 
-	public UpdateUserProfileCommand toUpdateUserProfileCommand(Long userId ) {
+	public UpdateUserProfileCommand toUpdateUserProfileCommand(Long userId) {
 		return UpdateUserProfileCommand.of(userId, username, birthday, gender, proficiency);
 	}
 }
