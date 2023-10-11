@@ -61,8 +61,8 @@ public class MatchJpaEntity {
 
 	@CreatedDate
 	@Column(updatable = false, nullable = false)
-	protected LocalDateTime createdAt;
+	private LocalDateTime createdAt;
 
 	@LastModifiedDate
-	protected LocalDateTime updatedAt;
+	private LocalDateTime updatedAt;
 }

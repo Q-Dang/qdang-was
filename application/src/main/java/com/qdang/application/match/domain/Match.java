@@ -4,6 +4,7 @@ import com.qdang.global.exception.BusinessException;
 import com.qdang.global.exception.ErrorType;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.List;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,6 +24,13 @@ public class Match {
 	private LocalDateTime endAt;
 	private LocalTime duration;
 	private Integer userCount;
+	private List<UserMatch> userMatches;
+
+	public static Match init(Long id) {
+		return Match.builder()
+				.id(id)
+				.build();
+	}
 
 	public static Match newMatch(
 			MatchType matchType,
@@ -44,5 +52,9 @@ public class Match {
 		this.updatedAt = LocalDateTime.now();
 		this.endAt = LocalDateTime.now();
 		this.duration = duration;
+	}
+
+	public void setUserMatches(List<UserMatch> userMatches) {
+		this.userMatches = userMatches;
 	}
 }

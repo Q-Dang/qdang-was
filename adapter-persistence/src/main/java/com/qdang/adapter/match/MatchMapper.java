@@ -2,12 +2,16 @@ package com.qdang.adapter.match;
 
 import com.qdang.application.match.domain.Match;
 import com.qdang.application.match.domain.MatchType;
+import com.qdang.global.exception.BusinessException;
+import com.qdang.global.exception.ErrorType;
 import com.qdang.global.mapper.Mapper;
 import com.qdang.library.mapper.GenericJpaMapper;
 import com.qdang.persistence.match.MatchJpaEntity;
 import com.qdang.persistence.match.MatchTypeJpa;
+import lombok.RequiredArgsConstructor;
 
 @Mapper
+@RequiredArgsConstructor
 public class MatchMapper implements GenericJpaMapper<Match, MatchJpaEntity> {
 
 	@Override
@@ -60,7 +64,6 @@ public class MatchMapper implements GenericJpaMapper<Match, MatchJpaEntity> {
 			case POCKET_BALL:
 				return MatchType.POCKET_BALL;
 			default:
-				// Todo : Refactoring
 				throw new IllegalArgumentException("Unknown match type jpa: " + matchTypeJpa);
 		}
 	}
@@ -75,9 +78,9 @@ public class MatchMapper implements GenericJpaMapper<Match, MatchJpaEntity> {
 			case POCKET_BALL:
 				return MatchTypeJpa.POCKET_BALL;
 			default:
-				// Todo : Refactoring
-				throw new IllegalArgumentException("Unknown match type: " + matchType);
+				throw new BusinessException(
+						ErrorType.INVALID_INPUT_EXCEPTION,
+						"Unknown match type jpa: " + matchType.name());
 		}
 	}
-
 }
