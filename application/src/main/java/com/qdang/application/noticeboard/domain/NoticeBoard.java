@@ -20,4 +20,10 @@ public class NoticeBoard {
 	private Boolean isDeleted;
 	private LocalDateTime createdAt;
 	private LocalDateTime updatedAt;
+
+	public static NoticeBoard init(Long id) {
+		return NoticeBoard.builder()
+				.id(id)
+				.build();
+	}
 }

@@ -1,6 +1,7 @@
 package com.qdang.adapter.usermatch;
 
 import com.qdang.adapter.usermatch.impl.UserMatchRepository;
+import com.qdang.application.match.domain.Match;
 import com.qdang.global.persistenceadapter.PersistenceAdapter;
 import com.qdang.application.match.domain.UserMatch;
 import com.qdang.application.match.port.out.LoadUserMatchPort;
@@ -58,5 +59,16 @@ class UserMatchPersistenceAdapter implements
 				.stream()
 				.map(userMatchMapper::mapToDomainEntity)
 				.collect(Collectors.toList());
+	}
+
+	@Override
+	public List<UserMatch> loadAllFetchUserByMatch(Match match) {
+		List<UserMatch> userMatches = userMatchRepository
+				.findAllByMatchIdFetchUser(match.getId())
+				.stream()
+				.map(userMatchMapper::mapToDomainEntity)
+				.collect(Collectors.toList());
+		match.setUserMatches(userMatches);
+		return userMatches;
 	}
 }

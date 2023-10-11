@@ -4,8 +4,10 @@ import com.qdang.application.noticeboard.domain.NoticeBoard;
 import com.qdang.global.mapper.Mapper;
 import com.qdang.library.mapper.GenericJpaMapper;
 import com.qdang.persistence.noticeboard.NoticeBoardJpaEntity;
+import lombok.RequiredArgsConstructor;
 
 @Mapper
+@RequiredArgsConstructor
 public class NoticeBoardMapper implements GenericJpaMapper<NoticeBoard, NoticeBoardJpaEntity> {
 
 	@Override

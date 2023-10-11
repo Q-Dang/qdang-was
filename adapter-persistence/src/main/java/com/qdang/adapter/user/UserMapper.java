@@ -10,9 +10,12 @@ import com.qdang.library.mapper.GenericJpaMapper;
 import com.qdang.persistence.user.GenderJpa;
 import com.qdang.persistence.user.UserJpaEntity;
 import com.qdang.persistence.user.UserRoleJpa;
+import lombok.RequiredArgsConstructor;
 
 @Mapper
-public class UserMapper implements GenericJpaMapper<User, UserJpaEntity> {
+@RequiredArgsConstructor
+public class UserMapper implements
+		GenericJpaMapper<User, UserJpaEntity> {
 
 	@Override
 	public User mapToDomainEntity(UserJpaEntity jpaEntity) {

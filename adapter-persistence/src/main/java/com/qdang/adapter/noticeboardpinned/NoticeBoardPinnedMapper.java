@@ -1,9 +1,13 @@
 package com.qdang.adapter.noticeboardpinned;
 
+import com.qdang.adapter.noticeboard.NoticeBoardMapper;
 import com.qdang.adapter.noticeboard.impl.NoticeBoardRepository;
+import com.qdang.adapter.user.UserMapper;
 import com.qdang.adapter.user.impl.UserRepository;
+import com.qdang.application.noticeboard.domain.NoticeBoard;
 import com.qdang.application.noticeboard.domain.NoticeBoardPinned;
 import com.qdang.application.noticeboard.exception.NotFoundNoticeBoardException;
+import com.qdang.application.user.domain.User;
 import com.qdang.application.user.exception.NotFoundUserException;
 import com.qdang.global.mapper.Mapper;
 import com.qdang.library.mapper.GenericJpaMapper;
@@ -17,7 +21,9 @@ import lombok.RequiredArgsConstructor;
 public class NoticeBoardPinnedMapper implements GenericJpaMapper<NoticeBoardPinned, NoticeBoardPinnedJpaEntity> {
 
 	private final UserRepository userRepository;
+	private final UserMapper userMapper;
 	private final NoticeBoardRepository noticeBoardRepository;
+	private final NoticeBoardMapper noticeBoardMapper;
 
 	@Override
 	public NoticeBoardPinned mapToDomainEntity(NoticeBoardPinnedJpaEntity jpaEntity) {
@@ -26,8 +32,8 @@ public class NoticeBoardPinnedMapper implements GenericJpaMapper<NoticeBoardPinn
 		}
 		NoticeBoardPinned.NoticeBoardPinnedBuilder noticeBoardPinned = NoticeBoardPinned.builder();
 		noticeBoardPinned.id(jpaEntity.getId());
-		noticeBoardPinned.noticeBoardId(jpaEntity.getNoticeBoard().getId());
-		noticeBoardPinned.userId(jpaEntity.getUser().getId());
+		noticeBoardPinned.noticeBoard(getNoticeBoard(jpaEntity));
+		noticeBoardPinned.user(getUser(jpaEntity));
 		return noticeBoardPinned.build();
 	}
 
@@ -36,14 +42,40 @@ public class NoticeBoardPinnedMapper implements GenericJpaMapper<NoticeBoardPinn
 		if (domain == null) {
 			return null;
 		}
-		UserJpaEntity userJpaEntity = userRepository.findById(domain.getUserId())
-				.orElseThrow(NotFoundUserException::new);
-		NoticeBoardJpaEntity noticeBoardJpaEntity = noticeBoardRepository.findById(domain.getNoticeBoardId())
-				.orElseThrow(NotFoundNoticeBoardException::new);
 		NoticeBoardPinnedJpaEntity.NoticeBoardPinnedJpaEntityBuilder noticeBoardPinnedJpaEntity = NoticeBoardPinnedJpaEntity.builder();
 		noticeBoardPinnedJpaEntity.id(domain.getId());
-		noticeBoardPinnedJpaEntity.noticeBoard(noticeBoardJpaEntity);
-		noticeBoardPinnedJpaEntity.user(userJpaEntity);
+		noticeBoardPinnedJpaEntity.user(getUserJpaEntity(domain));
+		noticeBoardPinnedJpaEntity.noticeBoard(getNoticeBoardJpaEntity(domain));
 		return noticeBoardPinnedJpaEntity.build();
+	}
+
+	private User getUser(NoticeBoardPinnedJpaEntity jpaEntity) {
+		if (jpaEntity.getUser().getClass() == UserJpaEntity.class) {
+			return userMapper.mapToDomainEntity(jpaEntity.getUser());
+		}
+		return User.init(jpaEntity.getUser().getId());
+	}
+
+	private NoticeBoard getNoticeBoard(NoticeBoardPinnedJpaEntity jpaEntity) {
+		if (jpaEntity.getNoticeBoard().getClass() == NoticeBoardJpaEntity.class) {
+			return noticeBoardMapper.mapToDomainEntity(jpaEntity.getNoticeBoard());
+		}
+		return NoticeBoard.init(jpaEntity.getNoticeBoard().getId());
+	}
+
+	private UserJpaEntity getUserJpaEntity(NoticeBoardPinned domain) {
+		if (domain.getUser() == null) {
+			return null;
+		}
+		return userRepository.findById(domain.getUser().getId())
+				.orElseThrow(NotFoundUserException::new);
+	}
+
+	private NoticeBoardJpaEntity getNoticeBoardJpaEntity(NoticeBoardPinned domain) {
+		if (domain.getNoticeBoard() == null) {
+			return null;
+		}
+		return noticeBoardRepository.findById(domain.getNoticeBoard().getId())
+				.orElseThrow(NotFoundNoticeBoardException::new);
 	}
 }

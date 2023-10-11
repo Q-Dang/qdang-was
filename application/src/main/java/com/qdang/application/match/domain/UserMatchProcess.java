@@ -1,5 +1,6 @@
 package com.qdang.application.match.domain;
 
+import com.qdang.application.user.domain.User;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,8 +12,8 @@ import lombok.Getter;
 public class UserMatchProcess {
 
 	private Long id;
-	private Long userId;
-	private Long matchProcessId;
+	private User user;
+	private MatchProcess matchProcess;
 	private Integer score;
 	private Integer finishCushionScore;
 	private Integer finishBankShotScore;
@@ -27,8 +28,15 @@ public class UserMatchProcess {
 	private Integer succeedInningCount;
 	private Integer failedInningCount;
 
-	public static UserMatchProcess of(
-			Long userId,
+	public static UserMatchProcess init(Long id) {
+		return UserMatchProcess.builder()
+				.id(id)
+				.build();
+	}
+
+	public static UserMatchProcess newInstance(
+			User user,
+			MatchProcess matchProcess,
 			Integer score,
 			Integer finishCushionScore,
 			Integer finishBankShotScore,
@@ -44,7 +52,8 @@ public class UserMatchProcess {
 			Integer failedInningCount
 	) {
 		return UserMatchProcess.builder()
-				.userId(userId)
+				.user(user)
+				.matchProcess(matchProcess)
 				.score(score)
 				.finishCushionScore(finishCushionScore)
 				.finishBankShotScore(finishBankShotScore)
@@ -59,9 +68,5 @@ public class UserMatchProcess {
 				.succeedInningCount(succeedInningCount)
 				.failedInningCount(failedInningCount)
 				.build();
-	}
-
-	public void setMatchProcessId(Long matchProcessId) {
-		this.matchProcessId = matchProcessId;
 	}
 }

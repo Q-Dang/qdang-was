@@ -1,7 +1,11 @@
 package com.qdang.adapter.usermatchprocess;
 
+import com.qdang.adapter.matchprocess.MatchProcessMapper;
+import com.qdang.adapter.user.UserMapper;
 import com.qdang.adapter.user.impl.UserRepository;
 import com.qdang.adapter.matchprocess.impl.MatchProcessRepository;
+import com.qdang.application.match.domain.MatchProcess;
+import com.qdang.application.user.domain.User;
 import com.qdang.application.user.exception.NotFoundUserException;
 import com.qdang.application.match.domain.TurnType;
 import com.qdang.application.match.domain.UserMatchProcess;
@@ -22,7 +26,9 @@ public class UserMatchProcessMapper implements
 		GenericJpaMapper<UserMatchProcess, UserMatchProcessJpaEntity> {
 
 	private final UserRepository userRepository;
+	private final UserMapper userMapper;
 	private final MatchProcessRepository matchProcessRepository;
+	private final MatchProcessMapper matchProcessMapper;
 
 
 	@Override
@@ -32,8 +38,8 @@ public class UserMatchProcessMapper implements
 		}
 		UserMatchProcess.UserMatchProcessBuilder userMatchProcess = UserMatchProcess.builder();
 		userMatchProcess.id(jpaEntity.getId());
-		userMatchProcess.userId(jpaEntity.getUser().getId());
-		userMatchProcess.matchProcessId(jpaEntity.getMatchProcess().getId());
+		userMatchProcess.user(getUser(jpaEntity));
+		userMatchProcess.matchProcess(getMatchProcess(jpaEntity));
 		userMatchProcess.score(jpaEntity.getScore());
 		userMatchProcess.finishCushionScore(jpaEntity.getFinishCushionScore());
 		userMatchProcess.finishBankShotScore(jpaEntity.getFinishBankShotScore());
@@ -64,18 +70,10 @@ public class UserMatchProcessMapper implements
 		if (domain == null) {
 			return null;
 		}
-		UserJpaEntity userJpaEntity =
-				userRepository.findById(domain.getUserId())
-						.orElseThrow(NotFoundUserException::new);
-		MatchProcessJpaEntity matchProcessJpaEntity =
-				matchProcessRepository.findById(domain.getMatchProcessId())
-				.orElseThrow(NotFoundMatchProcessException::new);
 		UserMatchProcessJpaEntity.UserMatchProcessJpaEntityBuilder userMatchProcessJpaEntity = UserMatchProcessJpaEntity.builder();
-		if(domain.getId() != null) {
-			userMatchProcessJpaEntity.id(domain.getId());
-		}
-		userMatchProcessJpaEntity.user(userJpaEntity);
-		userMatchProcessJpaEntity.matchProcess(matchProcessJpaEntity);
+		userMatchProcessJpaEntity.id(domain.getId());
+		userMatchProcessJpaEntity.user(getUserJpaEntity(domain));
+		userMatchProcessJpaEntity.matchProcess(getMatchProcessJpaEntity(domain));
 		userMatchProcessJpaEntity.score(domain.getScore());
 		userMatchProcessJpaEntity.finishCushionScore(domain.getFinishCushionScore());
 		userMatchProcessJpaEntity.finishBankShotScore(domain.getFinishBankShotScore());
@@ -155,5 +153,35 @@ public class UserMatchProcessMapper implements
 			default:
 				throw new IllegalArgumentException("Unexpected turn type: " + turnType);
 		}
+	}
+
+	private User getUser(UserMatchProcessJpaEntity jpaEntity) {
+		if (jpaEntity.getUser().getClass() == UserJpaEntity.class) {
+			return userMapper.mapToDomainEntity(jpaEntity.getUser());
+		}
+		return User.init(jpaEntity.getUser().getId());
+	}
+
+	private MatchProcess getMatchProcess(UserMatchProcessJpaEntity jpaEntity) {
+		if (jpaEntity.getMatchProcess().getClass() == MatchProcessJpaEntity.class) {
+			return matchProcessMapper.mapToDomainEntity(jpaEntity.getMatchProcess());
+		}
+		return MatchProcess.init(jpaEntity.getMatchProcess().getId());
+	}
+
+	private UserJpaEntity getUserJpaEntity(UserMatchProcess domain) {
+		if (domain.getUser() == null) {
+			return null;
+		}
+		return userRepository.findById(domain.getUser().getId())
+				.orElseThrow(NotFoundUserException::new);
+	}
+
+	private MatchProcessJpaEntity getMatchProcessJpaEntity(UserMatchProcess domain) {
+		if (domain.getMatchProcess() == null) {
+			return null;
+		}
+		return matchProcessRepository.findById(domain.getMatchProcess().getId())
+				.orElseThrow(NotFoundMatchProcessException::new);
 	}
 }

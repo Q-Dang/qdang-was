@@ -1,5 +1,6 @@
 package com.qdang.application.match.domain;
 
+import com.qdang.application.user.domain.User;
 import java.time.LocalDateTime;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -12,8 +13,8 @@ import lombok.Getter;
 public class UserMatch {
 
 	private Long id;
-	private Long userId;
-	private Long matchId;
+	private User user;
+	private Match match;
 	private Integer targetScore;
 	private Integer finishCushionTargetScore;
 	private Integer finishBankShotTargetScore;
@@ -31,15 +32,21 @@ public class UserMatch {
 	private Integer failedInningCount;
 	private Integer sluggingCount;
 
+	public static UserMatch init(Long id) {
+		return UserMatch.builder()
+				.id(id)
+				.build();
+	}
+
 	public static UserMatch newUserMatch(
-			Long userId,
-			Long matchId,
+			User user,
+			Match match,
 			Integer targetScore,
 			Integer finishCushionTargetScore,
 			Integer finishBankShotTargetScore) {
 		return UserMatch.builder()
-				.userId(userId)
-				.matchId(matchId)
+				.user(user)
+				.match(match)
 				.targetScore(targetScore)
 				.finishCushionTargetScore(finishCushionTargetScore)
 				.finishBankShotTargetScore(finishBankShotTargetScore)
@@ -48,7 +55,7 @@ public class UserMatch {
 				.build();
 	}
 
-	public void quit(
+	public void recordMatchResult(
 			Integer score,
 			Integer finishCushionScore,
 			Integer finishBankShotScore,

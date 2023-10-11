@@ -1,5 +1,6 @@
 package com.qdang.application.noticeboard.domain;
 
+import com.qdang.application.user.domain.User;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,6 +12,12 @@ import lombok.Getter;
 public class Scrap {
 
 	private Long id;
-	private Long postId;
-	private Long userId;
+	private Post post;
+	private User user;
+
+	public static Scrap init(Long id) {
+		return Scrap.builder()
+				.id(id)
+				.build();
+	}
 }

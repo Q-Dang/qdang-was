@@ -1,8 +1,12 @@
 package com.qdang.adapter.usermatch;
 
+import com.qdang.adapter.match.MatchMapper;
 import com.qdang.adapter.match.impl.MatchRepository;
+import com.qdang.adapter.user.UserMapper;
 import com.qdang.adapter.user.impl.UserRepository;
+import com.qdang.application.match.domain.Match;
 import com.qdang.application.match.exception.NotFoundMatchException;
+import com.qdang.application.user.domain.User;
 import com.qdang.application.user.exception.NotFoundUserException;
 import com.qdang.application.match.domain.UserMatch;
 import com.qdang.global.mapper.Mapper;
@@ -14,10 +18,13 @@ import lombok.RequiredArgsConstructor;
 
 @Mapper
 @RequiredArgsConstructor
-public class UserMatchMapper implements GenericJpaMapper<UserMatch, UserMatchJpaEntity> {
+public class UserMatchMapper implements
+		GenericJpaMapper<UserMatch, UserMatchJpaEntity> {
 
-	private final UserRepository userRepository;
 	private final MatchRepository matchRepository;
+	private final MatchMapper matchMapper;
+	private final UserRepository userRepository;
+	private final UserMapper userMapper;
 
 	@Override
 	public UserMatch mapToDomainEntity(UserMatchJpaEntity jpaEntity) {
@@ -27,8 +34,8 @@ public class UserMatchMapper implements GenericJpaMapper<UserMatch, UserMatchJpa
 
 		return UserMatch.builder()
 				.id(jpaEntity.getId())
-				.userId(jpaEntity.getUser().getId())
-				.matchId(jpaEntity.getMatch().getId())
+				.user(getUser(jpaEntity))
+				.match(getMatch(jpaEntity))
 				.targetScore(jpaEntity.getTargetScore())
 				.finishCushionTargetScore(jpaEntity.getFinishCushionTargetScore())
 				.finishBankShotTargetScore(jpaEntity.getFinishBankShotTargetScore())
@@ -53,14 +60,10 @@ public class UserMatchMapper implements GenericJpaMapper<UserMatch, UserMatchJpa
 		if (domain == null) {
 			return null;
 		}
-		UserJpaEntity userJpaEntity = userRepository.findById(domain.getUserId())
-				.orElseThrow(NotFoundUserException::new);
-		MatchJpaEntity matchJpaEntity = matchRepository.findById(domain.getMatchId())
-				.orElseThrow(NotFoundMatchException::new);
 		return UserMatchJpaEntity.builder()
 				.id(domain.getId())
-				.user(userJpaEntity)
-				.match(matchJpaEntity)
+				.user(getUserJpaEntity(domain))
+				.match(getMatchJpaEntity(domain))
 				.targetScore(domain.getTargetScore())
 				.finishCushionTargetScore(domain.getFinishCushionTargetScore())
 				.finishBankShotTargetScore(domain.getFinishBankShotTargetScore())
@@ -78,5 +81,35 @@ public class UserMatchMapper implements GenericJpaMapper<UserMatch, UserMatchJpa
 				.failedInningCount(domain.getFailedInningCount())
 				.sluggingCount(domain.getSluggingCount())
 				.build();
+	}
+
+	private Match getMatch(UserMatchJpaEntity jpaEntity) {
+		if (jpaEntity.getMatch().getClass() == MatchJpaEntity.class) {
+			return matchMapper.mapToDomainEntity(jpaEntity.getMatch());
+		}
+		return Match.init(jpaEntity.getMatch().getId());
+	}
+
+	private User getUser(UserMatchJpaEntity jpaEntity) {
+		if (jpaEntity.getUser().getClass() == UserJpaEntity.class) {
+			return userMapper.mapToDomainEntity(jpaEntity.getUser());
+		}
+		return User.init(jpaEntity.getUser().getId());
+	}
+
+	private MatchJpaEntity getMatchJpaEntity(UserMatch domain) {
+		if (domain.getMatch() == null) {
+			return null;
+		}
+		return matchRepository.findById(domain.getMatch().getId())
+				.orElseThrow(NotFoundMatchException::new);
+	}
+
+	private UserJpaEntity getUserJpaEntity(UserMatch domain) {
+		if (domain.getUser() == null) {
+			return null;
+		}
+		return userRepository.findById(domain.getUser().getId())
+				.orElseThrow(NotFoundUserException::new);
 	}
 }

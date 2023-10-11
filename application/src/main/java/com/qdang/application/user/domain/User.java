@@ -28,7 +28,8 @@ public class User {
 	private String profileImage;
 	private String address;
 	private String detailAddress;
-	//	private Integer joinStaffId;
+	// Todo : fix Mapper - Join Staff
+	private User joinStaff;
 	private Boolean isResting;
 	private Boolean isLeaving;
 	private String phoneAuthCode;
@@ -49,6 +50,12 @@ public class User {
 	private Integer sluggingCount;
 	private Integer battingAverage;
 	private Integer sluggingPercentage;
+
+	public static User init(Long id) {
+		return User.builder()
+				.id(id)
+				.build();
+	}
 
 
 	public static User newUser(
@@ -76,7 +83,7 @@ public class User {
 		this.proficiency = proficiency;
 	}
 
-	public void applyUserMatchRecord(UserMatch userMatch) {
+	public void reflectMatchResult(UserMatch userMatch) {
 		this.average = (this.average * this.matchCount + userMatch.getAverage()) / (matchCount + 1);
 		this.matchCount++;
 		this.highRun = Math.max(this.highRun, userMatch.getMaxHighRun());
@@ -85,7 +92,7 @@ public class User {
 		this.failedInningCount += userMatch.getFailedInningCount();
 		this.sluggingCount += userMatch.getSluggingCount();
 		if (totalInningCount != 0) {
-			this.battingAverage = 100 * this.succeedInningCount/ this.totalInningCount;
+			this.battingAverage = 100 * this.succeedInningCount / this.totalInningCount;
 			this.sluggingPercentage = 100 * this.sluggingCount / this.totalInningCount;
 		}
 	}
