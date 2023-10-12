@@ -27,7 +27,7 @@ class GetNoticeBoardListService implements GetNoticeBoardPinnedListUseCase {
 				.map(noticeBoard -> {
 					Optional<NoticeBoardPinned> pinned =
 							loadNoticeBoardPinnedPort
-									.getByUserIdAndNoticeBoardId(
+									.findByUserIdAndNoticeBoardId(
 											userId,
 											noticeBoard.getId());
 					return NoticeBoardPinInfo.of(

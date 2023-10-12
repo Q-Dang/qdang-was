@@ -20,4 +20,13 @@ public class NoticeBoardPinned {
 				.id(id)
 				.build();
 	}
+
+	public static NoticeBoardPinned newNoticeBoardPinned(
+			NoticeBoard noticeBoard,
+			User user) {
+		return NoticeBoardPinned.builder()
+				.noticeBoard(noticeBoard)
+				.user(user)
+				.build();
+	}
 }

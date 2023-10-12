@@ -11,6 +11,10 @@ public interface NoticeBoardPinnedRepository extends
 		Repository<NoticeBoardPinnedJpaEntity, Long>,
 		NoticeBoardPinnedRepositoryCustom {
 
+	NoticeBoardPinnedJpaEntity save(NoticeBoardPinnedJpaEntity noticeBoardPinnedJpaEntity);
+
+	void delete(NoticeBoardPinnedJpaEntity noticeBoardPinnedJpaEntity);
+
 	@Query("select nbp "
 			+ "from NoticeBoardPinnedJpaEntity nbp "
 			+ "join nbp.noticeBoard nb "

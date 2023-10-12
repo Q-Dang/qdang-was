@@ -5,5 +5,5 @@ import java.util.Optional;
 
 public interface LoadNoticeBoardPinnedPort {
 
-	Optional<NoticeBoardPinned> getByUserIdAndNoticeBoardId(Long userId, Long noticeBoardId);
+	Optional<NoticeBoardPinned> findByUserIdAndNoticeBoardId(Long userId, Long noticeBoardId);
 }

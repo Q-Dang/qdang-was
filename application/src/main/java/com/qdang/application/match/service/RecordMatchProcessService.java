@@ -42,7 +42,7 @@ class RecordMatchProcessService implements RecordMatchProcessUseCase {
 		List<UserMatchProcess> userMatchProcesses = command.getUserMatchProcessCommandList()
 				.stream()
 				.map(userMatchProcessCommand -> {
-					return UserMatchProcess.newInstance(
+					return UserMatchProcess.newUserMatchProcess(
 							loadUserPort.loadById(userMatchProcessCommand.getUserId()),
 							matchProcess,
 							userMatchProcessCommand.getScore(),

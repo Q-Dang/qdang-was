@@ -1,7 +1,9 @@
 package com.qdang.adapter.noticeboard;
 
+import com.qdang.adapter.noticeboard.request.PinNoticeBoardRequest;
 import com.qdang.adapter.noticeboard.response.GetNoticeBoardListResponse;
 import com.qdang.application.noticeboard.port.in.GetNoticeBoardPinnedListUseCase;
+import com.qdang.application.noticeboard.port.in.PinNoticeBoardUseCase;
 import com.qdang.application.user.domain.User;
 import com.qdang.global.http.WebAdapter;
 import com.qdang.global.response.HttpResponse;
@@ -16,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 public class NoticeBoardController implements NoticeBoardWebAdapter {
 
 	private final GetNoticeBoardPinnedListUseCase getNoticeBoardPinnedListUseCase;
+	private final PinNoticeBoardUseCase pinNoticeBoardUseCase;
 
 	@Override
 	public ResponseEntity<GetNoticeBoardListResponse> getNoticeBoardList(
@@ -28,6 +31,17 @@ public class NoticeBoardController implements NoticeBoardWebAdapter {
 				SuccessType.READ_RESOURCE_SUCCESS,
 				response);
 	}
+
+	@Override
+	public ResponseEntity<Void> pinNoticeBoard(
+			User user,
+			PinNoticeBoardRequest request) {
+		pinNoticeBoardUseCase.pinNoticeBoard(
+				request.toPinNoticeBoardCommand(user.getId()));
+		return HttpResponse.success(
+				SuccessType.UPDATE_RESOURCE_SUCCESS);
+	}
+
 /*
 	@Operation(summary = "게시판 게시글 조회")
 	@ApiResponse(

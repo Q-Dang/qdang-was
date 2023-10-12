@@ -5,5 +5,7 @@ import java.util.List;
 
 public interface LoadNoticeBoardPort {
 
+	NoticeBoard loadById(Long id);
+
 	List<NoticeBoard> loadAllNotDeleted();
 }

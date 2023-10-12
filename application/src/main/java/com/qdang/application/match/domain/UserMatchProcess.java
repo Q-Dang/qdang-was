@@ -34,7 +34,7 @@ public class UserMatchProcess {
 				.build();
 	}
 
-	public static UserMatchProcess newInstance(
+	public static UserMatchProcess newUserMatchProcess(
 			User user,
 			MatchProcess matchProcess,
 			Integer score,

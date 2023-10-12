@@ -2,6 +2,7 @@ package com.qdang.adapter.noticeboard;
 
 import com.qdang.adapter.noticeboard.impl.NoticeBoardRepository;
 import com.qdang.application.noticeboard.domain.NoticeBoard;
+import com.qdang.application.noticeboard.exception.NotFoundNoticeBoardException;
 import com.qdang.application.noticeboard.port.out.LoadNoticeBoardPort;
 import com.qdang.global.persistenceadapter.PersistenceAdapter;
 import com.qdang.persistence.noticeboard.NoticeBoardJpaEntity;
@@ -20,8 +21,17 @@ class NoticeBoardPersistenceAdapter implements
 	private final NoticeBoardMapper noticeBoardMapper;
 
 	@Override
+	public NoticeBoard loadById(Long id) {
+		NoticeBoardJpaEntity noticeBoardJpaEntity =
+				noticeBoardRepository.findById(id)
+						.orElseThrow(NotFoundNoticeBoardException::new);
+		return noticeBoardMapper.mapToDomainEntity(noticeBoardJpaEntity);
+	}
+
+	@Override
 	public List<NoticeBoard> loadAllNotDeleted() {
-		List<NoticeBoardJpaEntity> noticeBoardJpaEntities = noticeBoardRepository.findAllByIsDeleted(false);
+		List<NoticeBoardJpaEntity> noticeBoardJpaEntities = noticeBoardRepository.findAllByIsDeleted(
+				false);
 		return noticeBoardJpaEntities
 				.stream()
 				.map(noticeBoardMapper::mapToDomainEntity)
