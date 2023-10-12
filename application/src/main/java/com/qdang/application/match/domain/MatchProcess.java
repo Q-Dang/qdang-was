@@ -27,7 +27,7 @@ public class MatchProcess {
 				.build();
 	}
 
-	public static MatchProcess newInstance(
+	public static MatchProcess newMatchProcess(
 			Match match,
 			User player,
 			LocalTime duration,

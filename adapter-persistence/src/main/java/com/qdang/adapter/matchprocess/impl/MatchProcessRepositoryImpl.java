@@ -9,7 +9,7 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public class MatchProcessRepositoryImpl implements MatchProcessRepositoryCustom {
+class MatchProcessRepositoryImpl implements MatchProcessRepositoryCustom {
 
 	private final JPAQueryFactory queryFactory;
 

@@ -30,12 +30,8 @@ class RefreshTokenService implements RefreshTokenUseCase {
 		jwtResolver.validateRefreshToken(refreshToken);
 		Long userId = jwtResolver.getUserIdFromRefreshToken(refreshToken);
 		User user = loadUserPort.loadById(userId);
-		if (user.isNotLoggedIn()) {
-			throw new InvalidException("로그인이 안 된 유저입니다.");
-		}
-		if (!user.validateRefreshToken(refreshToken)) {
-			throw new InvalidException("올바르지 않은 리프레시 토큰입니다.");
-		}
+		user.validateLongin();
+		user.validateRefreshToken(refreshToken);
 		TokenCollection tokenCollection =
 				jwtProvider.createTokenCollection(TokenInfo.from(user));
 		user.updateRefreshToken(tokenCollection.getRefreshToken());

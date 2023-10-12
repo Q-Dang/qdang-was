@@ -36,9 +36,15 @@ class GetMatchDetailInfoDetailInfoService implements GetMatchDetailInfoUseCase {
 	public MatchDetail getMatchDetailInfoByMatchId(Long matchId) {
 		Match match = loadMatchPort.loadById(matchId);
 		List<UserMatch> userMatches = loadUserMatchPort.loadAllByMatchId(matchId);
+		return getMatchDetail(
+				match,
+				userMatches);
+	}
+
+	private MatchDetail getMatchDetail(Match match, List<UserMatch> userMatches) {
 		List<MatchDetail.UserMatchHistory> userMatchHistories =
 				getUserMatchHistories(
-						matchId,
+						match.getId(),
 						userMatches);
 		return MatchDetail.of(
 				match,
@@ -50,11 +56,11 @@ class GetMatchDetailInfoDetailInfoService implements GetMatchDetailInfoUseCase {
 				.stream()
 				.map(userMatch -> {
 					User user = loadUserPort.loadById(userMatch.getUser().getId());
-					List<MatchProcess> allMatchProcess =
+					List<MatchProcess> matchProcesses =
 							loadMatchProcessPort.loadAllByMatchIdAscPhaseCountDescProcessCount(matchId);
 
 					List<MatchProcess> filterMatchProcesses = filterMatchProcessIsMaxProcessCount(
-							allMatchProcess);
+							matchProcesses);
 
 					List<MatchDetail.UserMatchHistory.UserMatchProcessHistory> userMatchProcessHistories =
 							getUserMatchProcessHistories(

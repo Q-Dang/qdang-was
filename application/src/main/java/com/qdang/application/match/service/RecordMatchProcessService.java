@@ -31,7 +31,7 @@ class RecordMatchProcessService implements RecordMatchProcessUseCase {
 		Match match = loadMatchPort.loadById(command.getMatchId());
 		User Player = loadUserPort.loadById(command.getPlayerId());
 		MatchProcess matchProcess = saveMatchProcessPort.save(
-				MatchProcess.newInstance(
+				MatchProcess.newMatchProcess(
 						match,
 						Player,
 						command.getDuration(),
