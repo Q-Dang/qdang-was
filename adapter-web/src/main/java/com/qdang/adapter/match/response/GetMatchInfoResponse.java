@@ -2,8 +2,6 @@ package com.qdang.adapter.match.response;
 
 import com.qdang.application.match.domain.vo.MatchDetail;
 import com.qdang.application.match.domain.MatchType;
-import com.qdang.application.match.domain.vo.UserMatchDetail;
-import com.qdang.application.match.domain.vo.UserMatchProcessHistory;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -57,7 +55,7 @@ public class GetMatchInfoResponse {
 				.playerId(playerId)
 				.userMatchDetailList(
 						matchDetail
-								.getUserMatchDetailList()
+								.getUserMatchHistoryList()
 								.stream()
 								.map(UserMatchDetailDto::from)
 								.collect(Collectors.toList()))
@@ -91,16 +89,16 @@ public class GetMatchInfoResponse {
 		private List<UserMatchProcessHistoryDto> userMatchProcessHistoryList;
 
 		public static UserMatchDetailDto from(
-				UserMatchDetail userMatchDetail) {
+				MatchDetail.UserMatchHistory userMatchHistory) {
 			return UserMatchDetailDto.builder()
-					.userId(userMatchDetail.getUser().getId())
-					.profileImage(userMatchDetail.getUser().getProfileImage())
-					.username(userMatchDetail.getUser().getUsername())
-					.rank(userMatchDetail.getUserMatch().getRanking())
-					.score(userMatchDetail.getUserMatch().getScore())
-					.sluggingPercentage(getSluggingPercentage(userMatchDetail))
+					.userId(userMatchHistory.getUser().getId())
+					.profileImage(userMatchHistory.getUser().getProfileImage())
+					.username(userMatchHistory.getUser().getUsername())
+					.rank(userMatchHistory.getUserMatch().getRanking())
+					.score(userMatchHistory.getUserMatch().getScore())
+					.sluggingPercentage(getSluggingPercentage(userMatchHistory))
 					.userMatchProcessHistoryList(
-							userMatchDetail
+							userMatchHistory
 									.getUserMatchProcessHistoryList()
 									.stream()
 									.map(UserMatchProcessHistoryDto::from)
@@ -108,11 +106,11 @@ public class GetMatchInfoResponse {
 					.build();
 		}
 
-		private static int getSluggingPercentage(UserMatchDetail userMatchDetail) {
-			if (userMatchDetail.getUserMatch().getInningCount() == 0) {
+		private static int getSluggingPercentage(MatchDetail.UserMatchHistory userMatchHistory) {
+			if (userMatchHistory.getUserMatch().getInningCount() == 0) {
 				return 0;
 			}
-			return 100 * userMatchDetail.getUserMatch().getSluggingCount() / userMatchDetail.getUserMatch().getInningCount();
+			return 100 * userMatchHistory.getUserMatch().getSluggingCount() / userMatchHistory.getUserMatch().getInningCount();
 		}
 
 		@Getter
@@ -125,7 +123,7 @@ public class GetMatchInfoResponse {
 			private Integer processCount;
 
 			public static UserMatchProcessHistoryDto from(
-					UserMatchProcessHistory userMatchProcessHistory) {
+					MatchDetail.UserMatchHistory.UserMatchProcessHistory userMatchProcessHistory) {
 				return new UserMatchProcessHistoryDto(
 						userMatchProcessHistory.getUserMatchProcess().getScore(),
 						userMatchProcessHistory.getMatchProcess().getPhaseCount(),

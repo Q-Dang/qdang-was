@@ -1,8 +1,6 @@
 package com.qdang.application.match.service;
 
 import com.qdang.application.match.domain.vo.MatchDetail;
-import com.qdang.application.match.domain.vo.UserMatchDetail;
-import com.qdang.application.match.domain.vo.UserMatchProcessHistory;
 import com.qdang.application.match.domain.Match;
 import com.qdang.application.match.port.in.GetMatchDetailInfoUseCase;
 import com.qdang.application.match.port.out.LoadMatchPort;
@@ -38,16 +36,16 @@ class GetMatchDetailInfoDetailInfoService implements GetMatchDetailInfoUseCase {
 	public MatchDetail getMatchDetailInfoByMatchId(Long matchId) {
 		Match match = loadMatchPort.loadById(matchId);
 		List<UserMatch> userMatches = loadUserMatchPort.loadAllByMatchId(matchId);
-		List<UserMatchDetail> userMatchDetails =
-				getUserMatchDetails(
+		List<MatchDetail.UserMatchHistory> userMatchHistories =
+				getUserMatchHistories(
 						matchId,
 						userMatches);
 		return MatchDetail.of(
 				match,
-				userMatchDetails);
+				userMatchHistories);
 	}
 
-	private List<UserMatchDetail> getUserMatchDetails(Long matchId, List<UserMatch> userMatches) {
+	private List<MatchDetail.UserMatchHistory> getUserMatchHistories(Long matchId, List<UserMatch> userMatches) {
 		return userMatches
 				.stream()
 				.map(userMatch -> {
@@ -58,11 +56,11 @@ class GetMatchDetailInfoDetailInfoService implements GetMatchDetailInfoUseCase {
 					List<MatchProcess> filterMatchProcesses = filterMatchProcessIsMaxProcessCount(
 							allMatchProcess);
 
-					List<UserMatchProcessHistory> userMatchProcessHistories =
+					List<MatchDetail.UserMatchHistory.UserMatchProcessHistory> userMatchProcessHistories =
 							getUserMatchProcessHistories(
 									user,
 									filterMatchProcesses);
-					return UserMatchDetail.of(
+					return MatchDetail.UserMatchHistory.of(
 							user,
 							userMatch,
 							userMatchProcessHistories);
@@ -89,10 +87,10 @@ class GetMatchDetailInfoDetailInfoService implements GetMatchDetailInfoUseCase {
 		return filterMatchProcesses;
 	}
 
-	private List<UserMatchProcessHistory> getUserMatchProcessHistories(
+	private List<MatchDetail.UserMatchHistory.UserMatchProcessHistory> getUserMatchProcessHistories(
 			User user,
 			List<MatchProcess> matchProcesses) {
-		List<UserMatchProcessHistory> userMatchProcessHistories =
+		List<MatchDetail.UserMatchHistory.UserMatchProcessHistory> userMatchProcessHistories =
 				matchProcesses
 						.stream()
 						.map(matchProcess -> {
@@ -100,7 +98,7 @@ class GetMatchDetailInfoDetailInfoService implements GetMatchDetailInfoUseCase {
 									loadUserMatchProcessPort.loadByUserIdAndMatchProcessId(
 											user.getId(),
 											matchProcess.getId());
-							return UserMatchProcessHistory.of(
+							return MatchDetail.UserMatchHistory.UserMatchProcessHistory.of(
 									matchProcess,
 									userMatchProcess);
 						})
