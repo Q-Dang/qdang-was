@@ -18,16 +18,16 @@ import org.hibernate.validator.constraints.Range;
 public class StartMatchRequest {
 
 	@Schema(description = "경기 타입")
-	@NotNull(message = "{match.matchType.notnull}")
+	@NotNull(message = "{notNull.match.matchType}")
 	private MatchType matchType;
 
 	@Schema(description = "유저 수, 1~4명")
-	@NotNull(message = "{match.userCount.notnull}")
-	@Range(min = 1, max = 4, message = "{match.userCount.range}")
+	@NotNull(message = "{notNull.match.userCount}")
+	@Range(min = 1, max = 4, message = "{range.match.userCount}")
 	private Integer userCount;
 
 	@Schema(description = "유저 수 크기만큼")
-	@Size(min = 1, max = 4, message = "{match.matchTargetScoreList.size.range}")
+	@Size(min = 1, max = 4, message = "{range.size.match.matchTargetScoreList}")
 	private List<MatchTargetScoreDto> matchTargetScoreList;
 
 
@@ -58,11 +58,11 @@ public class StartMatchRequest {
 	public static class MatchTargetScoreDto {
 
 		@Schema(description = "게임에 참여하는 유저 아이디")
-		@NotNull(message = "{user.userId.notNull}")
+		@NotNull(message = "{notNull.user.userId}")
 		private Long userId;
 
 		@Schema(description = "목표 점수")
-		@NotNull(message = "{userMatch.targetScore.notNull}")
+		@NotNull(message = "{notNull.userMatch.targetScore}")
 		private Integer targetScore;
 
 		@Schema(description = "쿠션 목표 점수")

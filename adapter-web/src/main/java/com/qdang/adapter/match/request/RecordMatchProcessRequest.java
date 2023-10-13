@@ -20,32 +20,32 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class RecordMatchProcessRequest {
 
 	@Schema(description = "매치 아이디")
-	@NotNull(message = "{match.matchId.notnull}")
+	@NotNull(message = "{notNull.match.matchId}")
 	private Long matchId;
 
 	@Schema(description = "턴 차례인 유저 아이디")
-	@NotNull(message = "{matchProcess.playerId.notnull}")
+	@NotNull(message = "{notNull.matchProcess.playerId}")
 	private Long playerId;
 
 	@Schema(description = "턴에 소요한 시간, 00:00:00 ~ 23:59:59", example = "00:00:00")
-	@NotNull(message = "{matchProcess.duration.notnull}")
+	@NotNull(message = "{notNull.matchProcess.duration}")
 	@DateTimeFormat(pattern = "HH:mm:ss")
 	private LocalTime duration;
 
 	@Schema(description = "친 페이스 횟수")
-	@NotNull(message = "{matchProcess.phaseCount.notnull}")
+	@NotNull(message = "{notNull.matchProcess.phaseCount}")
 	private Integer phaseCount;
 
 	@Schema(description = "페이스별 친 횟수")
-	@NotNull(message = "{matchProcess.turnCount.notnull}")
+	@NotNull(message = "{notNull.matchProcess.turnCount}")
 	private Integer turnCount;
 
 	@Schema(description = "총 기록힌 횟수")
-	@NotNull(message = "{matchProcess.processCount.notnull}")
+	@NotNull(message = "{notNull.matchProcess.processCount}")
 	private Integer processCount;
 
 	@Schema(description = "턴에 대한 유저 정보")
-	@Size(min = 1, max = 4, message = "{matchProcess.turnUserProcessList.size.range}")
+	@Size(min = 1, max = 4, message = "{range.size.matchProcess.turnUserProcessList}")
 	List<TurnUserProcessDto> turnUserProcessList;
 
 	public RecordMatchProcessCommand toRecordMatchProcessCommand() {
@@ -89,11 +89,11 @@ public class RecordMatchProcessRequest {
 	public static class TurnUserProcessDto {
 
 		@Schema(description = "유저 아이디")
-		@NotNull(message = "{user.userId.notnull}")
+		@NotNull(message = "{notNull.user.userId}")
 		private Long userId;
 
 		@Schema(description = "점수")
-		@NotNull(message = "{userMatch.score.notnull}")
+		@NotNull(message = "{notNull.userMatch.score}")
 		private Integer score;
 
 		@Schema(description = "쿠션 점수")
@@ -103,43 +103,43 @@ public class RecordMatchProcessRequest {
 		private Integer finishBankShotScore;
 
 		@Schema(description = "순위")
-		@NotNull(message = "{userMatch.rank.notnull}")
+		@NotNull(message = "{notNull.userMatch.rank}")
 		private Integer rank;
 
 		@Schema(description = "유저 상태", example = "NORMAL, CUSHION, BANK_SHOT, END")
-		@NotNull(message = "{userMatch.status.notnull}")
+		@NotNull(message = "{notNull.userMatch.status}")
 		private UserMatchStatus status;
 
 		@Schema(description = "최고 장타")
-		@NotNull(message = "{userMatch.maxHighRun.notnull}")
+		@NotNull(message = "{notNull.userMatch.maxHighRun}")
 		private Integer maxHighRun;
 
 		@Schema(description = "현재 장타")
-		@NotNull(message = "{userMatch.highRun.notnull}")
+		@NotNull(message = "{notNull.userMatch.highRun}")
 		private Integer highRun;
 
 		@Schema(description = "점수 편차")
-		@NotNull(message = "{userMatch.deltaScore.notnull}")
+		@NotNull(message = "{notNull.userMatch.deltaScore}")
 		private Integer deltaScore;
 
 		@Schema(description = "턴 타입", example = "SUCCESS, FAIL")
-		@NotNull(message = "{userMatch.turnType.notnull}")
+		@NotNull(message = "{notNull.userMatch.turnType}")
 		private TurnType turnType;
 
 		@Schema(description = "턴 차례 여부", defaultValue = "false")
-		@NotNull(message = "{userMatch.isMyTurn.notnull}")
+		@NotNull(message = "{notNull.userMatch.isMyTurn}")
 		private Boolean isMyTurn;
 
 		@Schema(description = "이닝 횟수")
-		@NotNull(message = "{userMatch.inningCount.notnull}")
+		@NotNull(message = "{notNull.userMatch.inningCount}")
 		private Integer inningCount;
 
 		@Schema(description = "성공 이닝 횟수")
-		@NotNull(message = "{userMatch.succeedInningCount.notnull}")
+		@NotNull(message = "{notNull.userMatch.succeedInningCount}")
 		private Integer succeedInningCount;
 
 		@Schema(description = "실패 이닝 횟수")
-		@NotNull(message = "{userMatch.failedInningCount.notnull}")
+		@NotNull(message = "{notNull.userMatch.failedInningCount}")
 		private Integer failedInningCount;
 	}
 }

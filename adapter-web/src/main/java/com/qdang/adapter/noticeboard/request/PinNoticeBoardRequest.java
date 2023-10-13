@@ -13,11 +13,11 @@ import lombok.NoArgsConstructor;
 public class PinNoticeBoardRequest {
 
 	@Schema(description = "게시판 아이디", example = "1")
-	@NotNull(message = "{noticeBoard.noticeBoardId.notnull}")
+	@NotNull(message = "{notNull.noticeBoard.noticeBoardId}")
 	private Long noticeBoardId;
 
 	@Schema(description = "고정 여부", example = "true")
-	@NotNull(message = "{noticeBoard.pin.notnull}")
+	@NotNull(message = "{notNull.noticeBoard.pin}")
 	private Boolean pin;
 
 	public PinNoticeBoardCommand toPinNoticeBoardCommand(Long userId) {

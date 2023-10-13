@@ -24,7 +24,7 @@ public class UpdateUserProfileRequest {
 	private Gender gender;
 
 	@Schema(description = "1~5숙련도")
-	@Range(min = 1, max = 5, message = "{user.proficiency.range}")
+	@Range(min = 1, max = 5, message = "{range.user.proficiency}")
 	private Integer proficiency;
 
 	public UpdateUserProfileCommand toUpdateUserProfileCommand(Long userId) {

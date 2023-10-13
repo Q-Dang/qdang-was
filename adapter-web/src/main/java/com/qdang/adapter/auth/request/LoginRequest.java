@@ -13,11 +13,11 @@ import lombok.NoArgsConstructor;
 public class LoginRequest {
 
     @Schema(description = "로그인 아이디")
-    @NotNull(message = "{auth.loginId.notNull}")
+    @NotNull(message = "{notNull.auth.loginId}")
     private String loginId;
 
     @Schema(description = "비밀번호")
-    @NotNull(message = "{auth.password.notNull}")
+    @NotNull(message = "{notNull.auth.password}")
     private String password;
 
     public LoginCommand toLoginInfo() {
