@@ -6,4 +6,3 @@ include(
         'library',
         'persistence'
 )
-

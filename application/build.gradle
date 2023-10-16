@@ -6,4 +6,8 @@ jar {enabled = true}
 
 dependencies {
     implementation project(':library')
+
+    runtimeOnly "io.jsonwebtoken:jjwt-impl:${jjwtVersion}"
+    runtimeOnly "io.jsonwebtoken:jjwt-jackson:${jjwtVersion}"
+    implementation "io.jsonwebtoken:jjwt-api:${jjwtVersion}"
 }

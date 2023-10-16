@@ -36,18 +36,14 @@ subprojects {
     dependencies {
         // Health Check
         implementation 'org.springframework.boot:spring-boot-starter-web'
-        testImplementation 'org.springframework.boot:spring-boot-starter-test'
         implementation 'org.springframework.boot:spring-boot-starter-actuator'
         providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
         implementation 'org.springframework.boot:spring-boot-starter-aop'
 
         implementation 'org.springframework.boot:spring-boot-starter-security'
         testImplementation 'org.springframework.security:spring-security-test'
-
-        runtimeOnly "io.jsonwebtoken:jjwt-impl:${jjwtVersion}"
-        runtimeOnly "io.jsonwebtoken:jjwt-jackson:${jjwtVersion}"
-        implementation "io.jsonwebtoken:jjwt-api:${jjwtVersion}"
 
         compileOnly 'org.projectlombok:lombok'
         annotationProcessor 'org.projectlombok:lombok'
