@@ -34,21 +34,13 @@ subprojects {
     }
 
     dependencies {
-        // Health Check
-        implementation 'org.springframework.boot:spring-boot-starter-web'
-        implementation 'org.springframework.boot:spring-boot-starter-actuator'
-        providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
-        testImplementation 'org.springframework.boot:spring-boot-starter-test'
-
-        implementation 'org.springframework.boot:spring-boot-starter-aop'
-
         implementation 'org.springframework.boot:spring-boot-starter-security'
         testImplementation 'org.springframework.security:spring-security-test'
+        implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 
         compileOnly 'org.projectlombok:lombok'
         annotationProcessor 'org.projectlombok:lombok'
 
-        implementation 'org.springframework.boot:spring-boot-starter-data-redis'
     }
 
     tasks.named('test') {
