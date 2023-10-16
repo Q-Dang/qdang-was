@@ -9,6 +9,7 @@ import com.qdang.application.match.port.in.QuitGameUseCase;
 import com.qdang.application.match.port.in.RecordMatchProcessUseCase;
 import com.qdang.application.match.port.in.StartMatchUseCase;
 import com.qdang.application.user.domain.User;
+import com.qdang.global.http.WebAdapter;
 import com.qdang.global.response.HttpResponse;
 import com.qdang.global.response.SuccessType;
 import com.qdang.adapter.match.request.StartMatchRequest;
@@ -17,6 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 
 @Slf4j
+@WebAdapter(path = "/matches")
 @RequiredArgsConstructor
 public class MatchController implements MatchWebAdapter {
 

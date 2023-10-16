@@ -4,7 +4,6 @@ import com.qdang.adapter.noticeboard.request.PinNoticeBoardRequest;
 import com.qdang.adapter.noticeboard.response.GetNoticeBoardListResponse;
 import com.qdang.application.user.domain.User;
 import com.qdang.global.argument.AuthUser;
-import com.qdang.global.http.WebAdapter;
 import com.qdang.global.pathmatch.V1;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @V1
-@WebAdapter(path = "/notice-boards")
 @SecurityRequirement(name = "JWT Auth")
 @Tag(name = "Notice Board", description = "Notice Board API Document")
 public interface NoticeBoardWebAdapter {

@@ -1,12 +1,10 @@
 package com.qdang.adapter.post;
 
-import com.qdang.global.http.WebAdapter;
 import com.qdang.global.pathmatch.V1;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @V1
-@WebAdapter(path = "/posts")
 @SecurityRequirement(name = "JWT Auth")
 @Tag(name = "Post", description = "Post API Document")
 public interface PostWebAdapter {
