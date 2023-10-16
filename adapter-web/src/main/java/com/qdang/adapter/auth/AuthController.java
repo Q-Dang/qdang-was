@@ -5,7 +5,6 @@ import com.qdang.application.user.domain.User;
 import com.qdang.application.user.port.in.LogoutUseCase;
 import com.qdang.application.user.port.in.RefreshTokenUseCase;
 import com.qdang.global.http.HeaderTokenExtractor;
-import com.qdang.global.http.WebAdapter;
 import com.qdang.global.response.HttpResponse;
 import com.qdang.global.response.SuccessType;
 import com.qdang.adapter.auth.request.LoginRequest;
@@ -18,7 +17,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 
 @Slf4j
-@WebAdapter
 @RequiredArgsConstructor
 public class AuthController implements AuthAdapter {
 

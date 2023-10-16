@@ -5,6 +5,7 @@ import com.qdang.adapter.auth.request.SignUpRequest;
 import com.qdang.adapter.auth.response.TokenResponse;
 import com.qdang.application.user.domain.User;
 import com.qdang.global.argument.AuthUser;
+import com.qdang.global.http.WebAdapter;
 import com.qdang.global.pathmatch.V1;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -17,10 +18,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @V1
-@RequestMapping("/auth")
+@WebAdapter(path = "/auth")
 @SecurityRequirement(name = "JWT Auth")
 @Tag(name = "Auth", description = "Auth API Document")
 public interface AuthAdapter {

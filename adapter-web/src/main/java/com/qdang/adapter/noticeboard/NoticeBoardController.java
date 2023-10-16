@@ -5,7 +5,6 @@ import com.qdang.adapter.noticeboard.response.GetNoticeBoardListResponse;
 import com.qdang.application.noticeboard.port.in.GetNoticeBoardPinnedListUseCase;
 import com.qdang.application.noticeboard.port.in.PinNoticeBoardUseCase;
 import com.qdang.application.user.domain.User;
-import com.qdang.global.http.WebAdapter;
 import com.qdang.global.response.HttpResponse;
 import com.qdang.global.response.SuccessType;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +12,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 
 @Slf4j
-@WebAdapter
 @RequiredArgsConstructor
 public class NoticeBoardController implements NoticeBoardWebAdapter {
 
