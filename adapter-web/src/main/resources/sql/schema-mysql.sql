@@ -13,6 +13,7 @@ DROP TABLE IF EXISTS `q_scrap`;
 DROP TABLE IF EXISTS `q_comment`;
 DROP TABLE IF EXISTS `q_post`;
 DROP TABLE IF EXISTS `q_notice_board`;
+DROP TABLE IF EXISTS `q_hashtag`;
 
 DROP TABLE IF EXISTS `q_user`;
 
@@ -30,7 +31,7 @@ CREATE TABLE `q_user`
     `proficiency`          int          NOT NULL DEFAULT 0,
     `phone`                VARCHAR(13)  NULL,
     `fcm_token`            varchar(255) NULL,
-    `refresh_token`         varchar(255) NULL,
+    `refresh_token`        varchar(255) NULL,
     `profile_image`        text         NULL,
     `address`              varchar(100) NULL,
     `detail_address`       varchar(100) NULL,
@@ -181,11 +182,19 @@ CREATE TABLE `q_notice_board_pinned`
     FOREIGN KEY (user_id) REFERENCES q_user (id)
 );
 
+CREATE TABLE `q_hashtag`
+(
+    `id`   bigint       NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `name` varchar(255) NULL,
+    CONSTRAINT hashtag_name_uq UNIQUE (name)
+);
+
 CREATE TABLE `q_post`
 (
     `id`              bigint       NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `notice_board_id` bigint       NOT NULL,
     `user_id`         bigint       NOT NULL,
+    `hashtag_id`      bigint       NULL,
     `is_anonymous`    tinyint(1)   NOT NULL,
     `title`           varchar(100) NULL,
     `content`         text         NULL,
@@ -193,18 +202,20 @@ CREATE TABLE `q_post`
     `updated_at`      datetime     NOT NULL,
     `is_deleted`      tinyint(1)   NOT NULL DEFAULT false,
     FOREIGN KEY (user_id) REFERENCES q_user (id),
-    FOREIGN KEY (notice_board_id) REFERENCES q_notice_board (id)
+    FOREIGN KEY (notice_board_id) REFERENCES q_notice_board (id),
+    FOREIGN KEY (hashtag_id) REFERENCES q_hashtag (id)
 );
 
 CREATE TABLE `q_comment`
 (
-    `id`         bigint     NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    `user_id`    bigint     NOT NULL,
-    `post_id`    bigint     NOT NULL,
-    `content`    text       NULL,
-    `created_at` datetime   NOT NULL,
-    `updated_at` datetime   NOT NULL,
-    `is_deleted` tinyint(1) NOT NULL DEFAULT false,
+    `id`           bigint     NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `user_id`      bigint     NOT NULL,
+    `post_id`      bigint     NOT NULL,
+    `content`      text       NULL,
+    `created_at`   datetime   NOT NULL,
+    `updated_at`   datetime   NOT NULL,
+    `is_anonymous` tinyint(1) NOT NULL,
+    `is_deleted`   tinyint(1) NOT NULL DEFAULT false,
     FOREIGN KEY (post_id) REFERENCES q_post (id),
     FOREIGN KEY (user_id) REFERENCES q_user (id)
 );
