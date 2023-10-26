@@ -13,8 +13,6 @@ jar { enabled = false }
 dependencies {
     implementation project(':adapter-persistence')
     implementation project(':application')
-    implementation project(':persistence')
-    implementation project(':library')
 
     implementation 'org.springframework.boot:spring-boot-starter-web'
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
