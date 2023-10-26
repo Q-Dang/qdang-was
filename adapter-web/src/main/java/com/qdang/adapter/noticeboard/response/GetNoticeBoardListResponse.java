@@ -34,6 +34,7 @@ public class GetNoticeBoardListResponse {
 	@Getter
 	@Builder
 	@AllArgsConstructor(access = AccessLevel.PRIVATE)
+	@Schema(description = "게시판 정보")
 	public static class NoticeBoardPinInfoDto {
 
 		@Schema(description = "게시판 아이디")

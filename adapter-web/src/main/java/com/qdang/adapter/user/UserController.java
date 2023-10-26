@@ -8,6 +8,7 @@ import com.qdang.application.user.domain.User;
 import com.qdang.application.user.port.in.GetUserProfileUseCase;
 import com.qdang.application.user.port.in.SearchUserByUsernameUseCase;
 import com.qdang.global.http.WebAdapter;
+import com.qdang.global.pathmatch.V1;
 import com.qdang.global.response.HttpResponse;
 import com.qdang.global.response.SuccessType;
 import com.qdang.adapter.user.request.UpdateUserProfileRequest;
@@ -19,9 +20,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 
 @Slf4j
-@WebAdapter(path = "/users")
+@V1
+@WebAdapter
 @RequiredArgsConstructor
-public class UserController implements UserWebAdapter {
+class UserController implements UserWebAdapter {
 
 	private final CheckValidationUsernameUseCase checkValidationUserNameUseCase;
 	private final UpdateUserProfileUseCase updateUserProfileUseCase;

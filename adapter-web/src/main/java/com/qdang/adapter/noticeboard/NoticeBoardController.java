@@ -2,10 +2,13 @@ package com.qdang.adapter.noticeboard;
 
 import com.qdang.adapter.noticeboard.request.PinNoticeBoardRequest;
 import com.qdang.adapter.noticeboard.response.GetNoticeBoardListResponse;
+import com.qdang.adapter.noticeboard.response.GetPostListInNoticeBoardResponse;
+import com.qdang.application.noticeboard.port.in.GetPostListInNoticeBoardUseCase;
 import com.qdang.application.noticeboard.port.in.GetNoticeBoardPinnedListUseCase;
 import com.qdang.application.noticeboard.port.in.PinNoticeBoardUseCase;
 import com.qdang.application.user.domain.User;
 import com.qdang.global.http.WebAdapter;
+import com.qdang.global.pathmatch.V1;
 import com.qdang.global.response.HttpResponse;
 import com.qdang.global.response.SuccessType;
 import lombok.RequiredArgsConstructor;
@@ -13,12 +16,15 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 
 @Slf4j
-@WebAdapter(path = "/notice-boards")
+@V1
+@WebAdapter
 @RequiredArgsConstructor
-public class NoticeBoardController implements NoticeBoardWebAdapter {
+class NoticeBoardController implements NoticeBoardWebAdapter {
 
 	private final GetNoticeBoardPinnedListUseCase getNoticeBoardPinnedListUseCase;
 	private final PinNoticeBoardUseCase pinNoticeBoardUseCase;
+	private final GetPostListInNoticeBoardUseCase getPostListInNoticeBoardUseCase;
+
 
 	@Override
 	public ResponseEntity<GetNoticeBoardListResponse> getNoticeBoardList(
@@ -35,11 +41,24 @@ public class NoticeBoardController implements NoticeBoardWebAdapter {
 	@Override
 	public ResponseEntity<Void> pinNoticeBoard(
 			User user,
-			PinNoticeBoardRequest request) {
+			PinNoticeBoardRequest request
+	) {
 		pinNoticeBoardUseCase.pinNoticeBoard(
 				request.toPinNoticeBoardCommand(user.getId()));
 		return HttpResponse.success(
 				SuccessType.UPDATE_RESOURCE_SUCCESS);
+	}
+
+	@Override
+	public ResponseEntity<GetPostListInNoticeBoardResponse> getPostListInNoticeBoard(
+			Long noticeBoardId
+	) {
+		GetPostListInNoticeBoardResponse response =
+				GetPostListInNoticeBoardResponse.from(
+						getPostListInNoticeBoardUseCase.getPostListInNoticeBoard(noticeBoardId));
+		return HttpResponse.success(
+				SuccessType.READ_RESOURCE_SUCCESS,
+				response);
 	}
 
 /*

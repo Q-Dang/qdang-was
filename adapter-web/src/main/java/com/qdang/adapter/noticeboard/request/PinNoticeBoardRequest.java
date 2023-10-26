@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-@Schema(description = "게시판 상단 고정하기 api 요청")
+@Schema(description = "게시판 상단 고정하기 요청")
 public class PinNoticeBoardRequest {
 
 	@Schema(description = "게시판 아이디", example = "1")
