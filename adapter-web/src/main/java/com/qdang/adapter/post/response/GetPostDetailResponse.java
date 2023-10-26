@@ -1,7 +1,7 @@
 package com.qdang.adapter.post.response;
 
 import com.qdang.application.noticeboard.domain.Comment;
-import com.qdang.application.noticeboard.domain.vo.PostInfo;
+import com.qdang.application.noticeboard.domain.vo.UserPostDetail;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -34,8 +34,17 @@ public class GetPostDetailResponse {
 	@Schema(description = "게시글 내용")
 	private String content;
 
+	@Schema(description = "해시태그")
+	private String hashtag;
+
 	@Schema(description = "익명 여부")
 	private Boolean isAnonymous;
+
+	@Schema(description = "좋아요 여부")
+	private Boolean isLiked;
+
+	@Schema(description = "스크랩 여부")
+	private Boolean isScrapped;
 
 	@Schema(description = "좋아요 수")
 	private Integer likesCount;
@@ -43,25 +52,32 @@ public class GetPostDetailResponse {
 	@Schema(description = "댓글 수")
 	private Integer commentCount;
 
+	@Schema(description = "스크랩 수")
+	private Integer scrapCount;
+
 	@Schema(description = "댓글 리스트")
 	private List<CommentDto> commentList;
 
-	public static GetPostDetailResponse from(PostInfo postInfo) {
-		String userName = postInfo
+	public static GetPostDetailResponse from(UserPostDetail userPostDetail) {
+		String userName = userPostDetail
 				.getPost()
-				.getIsAnonymous() ? "익명" : postInfo.getPost().getUser().getUsername();
+				.getIsAnonymous() ? "익명" : userPostDetail.getPost().getUser().getUsername();
 		return GetPostDetailResponse.builder()
-				.postId(postInfo.getPost().getId())
+				.postId(userPostDetail.getPost().getId())
 				.userName(userName)
-				.profileImageUrl(postInfo.getPost().getUser().getProfileImage())
-				.createdAt(postInfo.getPost().getCreatedAt())
-				.title(postInfo.getPost().getTitle())
-				.content(postInfo.getPost().getContent())
-				.isAnonymous(postInfo.getPost().getIsAnonymous())
-				.likesCount(postInfo.getPostLikesList().size())
-				.commentCount(postInfo.getComments().size())
+				.profileImageUrl(userPostDetail.getPost().getUser().getProfileImage())
+				.createdAt(userPostDetail.getPost().getCreatedAt())
+				.title(userPostDetail.getPost().getTitle())
+				.content(userPostDetail.getPost().getContent())
+				.hashtag(userPostDetail.getPost().getHashtag().getName())
+				.isAnonymous(userPostDetail.getPost().getIsAnonymous())
+				.isLiked(userPostDetail.getIsLiked())
+				.isScrapped(userPostDetail.getIsScrapped())
+				.likesCount(userPostDetail.getPostLikesList().size())
+				.commentCount(userPostDetail.getComments().size())
+				.scrapCount(userPostDetail.getScraps().size())
 				.commentList(
-						postInfo.getComments()
+						userPostDetail.getComments()
 								.stream()
 								.map(CommentDto::from)
 								.collect(java.util.stream.Collectors.toList())

@@ -4,6 +4,7 @@ import com.qdang.persistence.comment.CommentJpaEntity;
 import com.qdang.persistence.hashtag.HashtagJpaEntity;
 import com.qdang.persistence.noticeboard.NoticeBoardJpaEntity;
 import com.qdang.persistence.postlikes.PostLikesJpaEntity;
+import com.qdang.persistence.scrap.ScrapJpaEntity;
 import com.qdang.persistence.user.UserJpaEntity;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -82,4 +83,8 @@ public class PostJpaEntity {
 	@BatchSize(size = 100)
 	@OneToMany(mappedBy = "post")
 	private List<CommentJpaEntity> comments = new ArrayList<>();
+
+	@BatchSize(size = 100)
+	@OneToMany(mappedBy = "post")
+	private List<ScrapJpaEntity> scraps = new ArrayList<>();
 }

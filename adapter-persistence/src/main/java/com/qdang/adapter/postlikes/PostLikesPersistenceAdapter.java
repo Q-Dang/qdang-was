@@ -9,7 +9,6 @@ import com.qdang.application.noticeboard.port.out.FindPostLikesPort;
 import com.qdang.application.noticeboard.port.out.LoadPostLikesPort;
 import com.qdang.application.noticeboard.port.out.SavePostLikesPort;
 import com.qdang.global.persistenceadapter.PersistenceAdapter;
-import com.qdang.persistence.post.PostJpaEntity;
 import com.qdang.persistence.postlikes.PostLikesJpaEntity;
 import java.util.List;
 import java.util.Optional;
@@ -32,9 +31,8 @@ class PostLikesPersistenceAdapter implements
 
 	@Override
 	public List<PostLikes> loadAllByPostId(Long postId) {
-		PostJpaEntity postJpaEntity = postRepository.findById(postId)
-				.orElseThrow(NotFoundPostException::new);
-		return postJpaEntity
+		return postRepository.findById(postId)
+				.orElseThrow(NotFoundPostException::new)
 				.getPostLikesList()
 				.stream()
 				.map(postLikesMapper::mapToDomainEntity)

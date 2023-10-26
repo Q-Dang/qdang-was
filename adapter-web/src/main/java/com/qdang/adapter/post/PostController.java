@@ -6,7 +6,7 @@ import com.qdang.adapter.post.request.ScrapPostRequest;
 import com.qdang.adapter.post.request.WritePostRequest;
 import com.qdang.adapter.post.response.GetPostDetailResponse;
 import com.qdang.application.noticeboard.port.in.CommentPostUseCase;
-import com.qdang.application.noticeboard.port.in.GetPostDetailUseCase;
+import com.qdang.application.noticeboard.port.in.GetUserPostDetailUseCase;
 import com.qdang.application.noticeboard.port.in.LikePostUseCase;
 import com.qdang.application.noticeboard.port.in.ScrapPostUseCase;
 import com.qdang.application.noticeboard.port.in.WritePostUseCase;
@@ -25,7 +25,7 @@ import org.springframework.http.ResponseEntity;
 @RequiredArgsConstructor
 class PostController implements PostWebAdapter {
 
-	private final GetPostDetailUseCase getPostDetailUseCase;
+	private final GetUserPostDetailUseCase getUserPostDetailUseCase;
 	private final WritePostUseCase writePostUseCase;
 	private final ScrapPostUseCase scrapPostUseCase;
 	private final LikePostUseCase likePostUseCase;
@@ -33,11 +33,12 @@ class PostController implements PostWebAdapter {
 
 	@Override
 	public ResponseEntity<GetPostDetailResponse> getPostDetail(
+			User user,
 			Long postId
 	) {
 		GetPostDetailResponse response =
 				GetPostDetailResponse.from(
-						getPostDetailUseCase.getPostDetail(postId));
+						getUserPostDetailUseCase.getUserPostDetail(user.getId(), postId));
 		return HttpResponse.success(
 				SuccessType.READ_RESOURCE_SUCCESS,
 				response);

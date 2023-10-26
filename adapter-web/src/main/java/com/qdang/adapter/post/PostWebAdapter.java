@@ -1,6 +1,5 @@
 package com.qdang.adapter.post;
 
-import com.qdang.adapter.noticeboard.request.PinNoticeBoardRequest;
 import com.qdang.adapter.post.request.CommentPostRequest;
 import com.qdang.adapter.post.request.LikePostRequest;
 import com.qdang.adapter.post.request.ScrapPostRequest;
@@ -32,6 +31,7 @@ public interface PostWebAdapter {
 			description = "게시글 상세 조회 성공")
 	@GetMapping("/{postId}")
 	ResponseEntity<GetPostDetailResponse> getPostDetail(
+			@AuthUser User user,
 			@PathVariable Long postId
 	);
 
