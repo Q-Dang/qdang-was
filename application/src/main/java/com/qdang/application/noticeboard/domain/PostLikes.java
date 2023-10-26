@@ -15,6 +15,15 @@ public class PostLikes {
 	private Post post;
 	private User user;
 
+	public static PostLikes newPostLikes(
+			Post post,
+			User user) {
+		return PostLikes.builder()
+				.post(post)
+				.user(user)
+				.build();
+	}
+
 	public static PostLikes init(Long id) {
 		return PostLikes.builder()
 				.id(id)

@@ -10,4 +10,6 @@ public interface CommentRepository extends
 		CommentRepositoryCustom {
 
 	Optional<CommentJpaEntity> findById(Long id);
+
+	CommentJpaEntity save(CommentJpaEntity mapToJpaEntity);
 }

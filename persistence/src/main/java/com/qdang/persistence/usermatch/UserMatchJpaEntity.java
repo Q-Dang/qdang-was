@@ -5,6 +5,7 @@ import com.qdang.persistence.user.UserJpaEntity;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,6 +23,7 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Getter
 @Entity
@@ -29,6 +31,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 @DynamicInsert
 @DynamicUpdate
 @Builder
+@EntityListeners(AuditingEntityListener.class)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class UserMatchJpaEntity {

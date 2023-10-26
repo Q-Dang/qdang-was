@@ -59,7 +59,6 @@ public class User {
 				.build();
 	}
 
-
 	public static User newUser(
 			String loginId,
 			String password,
@@ -70,7 +69,6 @@ public class User {
 				.password(password)
 				.username(username)
 				.userRole(userRole)
-				.joinAt(LocalDateTime.now())
 				.build();
 	}
 

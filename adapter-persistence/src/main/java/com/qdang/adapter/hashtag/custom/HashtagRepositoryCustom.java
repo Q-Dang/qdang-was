@@ -1,2 +1,5 @@
-package com.qdang.adapter.hashtag.custom;public interface HashtagRepositoryCustom {
+package com.qdang.adapter.hashtag.custom;
+
+public interface HashtagRepositoryCustom {
+
 }

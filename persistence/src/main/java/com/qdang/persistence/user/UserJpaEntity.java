@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
@@ -26,6 +27,8 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Getter
 @Entity
@@ -36,6 +39,7 @@ import org.hibernate.annotations.DynamicUpdate;
 @DynamicInsert
 @DynamicUpdate
 @Builder
+@EntityListeners(AuditingEntityListener.class)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class UserJpaEntity {
@@ -105,6 +109,7 @@ public class UserJpaEntity {
 	private Boolean isPhoneAuth;
 
 	@Column(nullable = false)
+	@CreatedDate
 	// Todo : 가입 시 혹은 인증 시 Join At 업데이트
 	private LocalDateTime joinAt;
 

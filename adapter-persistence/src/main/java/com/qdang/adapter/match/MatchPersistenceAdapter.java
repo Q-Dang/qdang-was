@@ -24,15 +24,14 @@ class MatchPersistenceAdapter implements
 	public Match save(Match match) {
 		MatchJpaEntity matchJpaEntity = matchMapper.mapToJpaEntity(match);
 		matchRepository.save(matchJpaEntity);
-		match = matchMapper.mapToDomainEntity(matchJpaEntity);
-		return match;
+		return matchMapper.mapToDomainEntity(matchJpaEntity);
 	}
 
 	@Override
 	public Match loadById(Long matchId) {
 		MatchJpaEntity matchJpaEntity =
 				matchRepository.findById(matchId)
-				.orElseThrow(NotFoundMatchException::new);
+						.orElseThrow(NotFoundMatchException::new);
 		return matchMapper.mapToDomainEntity(matchJpaEntity);
 	}
 }

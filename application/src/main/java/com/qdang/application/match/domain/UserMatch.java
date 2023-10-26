@@ -50,8 +50,6 @@ public class UserMatch {
 				.targetScore(targetScore)
 				.finishCushionTargetScore(finishCushionTargetScore)
 				.finishBankShotTargetScore(finishBankShotTargetScore)
-				.createdAt(LocalDateTime.now())
-				.updatedAt(LocalDateTime.now())
 				.build();
 	}
 
@@ -77,6 +75,5 @@ public class UserMatch {
 		this.succeedInningCount = succeedInningCount;
 		this.failedInningCount = failedInningCount;
 		this.sluggingCount = sluggingCount;
-		this.updatedAt = LocalDateTime.now();
 	}
 }

@@ -3,7 +3,7 @@ package com.qdang.adapter.noticeboardpinned;
 import com.qdang.adapter.noticeboardpinned.impl.NoticeBoardPinnedRepository;
 import com.qdang.application.noticeboard.domain.NoticeBoardPinned;
 import com.qdang.application.noticeboard.port.out.DeleteNoticeBoardPinnedPort;
-import com.qdang.application.noticeboard.port.out.LoadNoticeBoardPinnedPort;
+import com.qdang.application.noticeboard.port.out.FindNoticeBoardPinnedPort;
 import com.qdang.application.noticeboard.port.out.SaveNoticeBoardPinnedPort;
 import com.qdang.global.persistenceadapter.PersistenceAdapter;
 import com.qdang.persistence.noticeboardpinned.NoticeBoardPinnedJpaEntity;
@@ -15,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 @PersistenceAdapter
 @RequiredArgsConstructor
 class NoticeBoardPinnedPersistenceAdapter implements
-		LoadNoticeBoardPinnedPort,
+		FindNoticeBoardPinnedPort,
 		SaveNoticeBoardPinnedPort,
 		DeleteNoticeBoardPinnedPort {
 

@@ -1,19 +1,32 @@
 package com.qdang.application.noticeboard.service;
 
+import com.qdang.application.noticeboard.domain.Comment;
 import com.qdang.application.noticeboard.domain.Post;
-import com.qdang.application.noticeboard.port.in.GetPostUseCase;
+import com.qdang.application.noticeboard.domain.PostLikes;
+import com.qdang.application.noticeboard.domain.vo.PostInfo;
+import com.qdang.application.noticeboard.port.in.GetPostDetailUseCase;
+import com.qdang.application.noticeboard.port.out.LoadCommentPort;
+import com.qdang.application.noticeboard.port.out.LoadPostLikesPort;
 import com.qdang.application.noticeboard.port.out.LoadPostPort;
 import com.qdang.global.usecase.UseCase;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 
 @UseCase
 @RequiredArgsConstructor
-class GetPostService implements GetPostUseCase {
+class GetPostDetailService implements GetPostDetailUseCase {
 
 	private final LoadPostPort loadPostPort;
+	private final LoadPostLikesPort loadPostLikesPort;
+	private final LoadCommentPort loadCommentPort;
+
 	@Override
-	public Post getPost(Long postId) {
-		// 스크랩 정보, 좋아요 정보 해시태그 등을 가져온다.
-		return loadPostPort.loadById(postId);
+	@Transactional(readOnly = true)
+	public PostInfo getPostDetail(Long postId) {
+		Post post = loadPostPort.loadFetchHashtagById(postId);
+		List<PostLikes> postLikes = loadPostLikesPort.loadAllByPostId(post.getId());
+		List<Comment> comments = loadCommentPort.loadAllByPostId(post.getId());
+		return PostInfo.of(post, postLikes, comments);
 	}
 }

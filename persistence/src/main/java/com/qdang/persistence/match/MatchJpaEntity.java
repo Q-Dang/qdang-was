@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
@@ -20,6 +21,7 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 
 @Getter
@@ -28,6 +30,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 @DynamicInsert
 @DynamicUpdate
 @Builder
+@EntityListeners(AuditingEntityListener.class)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class MatchJpaEntity {

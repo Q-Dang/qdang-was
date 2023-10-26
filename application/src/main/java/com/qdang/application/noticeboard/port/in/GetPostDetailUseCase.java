@@ -1,8 +1,8 @@
 package com.qdang.application.noticeboard.port.in;
 
-import com.qdang.application.noticeboard.domain.Post;
+import com.qdang.application.noticeboard.domain.vo.PostInfo;
 
-public interface GetPostUseCase {
+public interface GetPostDetailUseCase {
 
-	Post getPost(Long postId);
+	PostInfo getPostDetail(Long postId);
 }

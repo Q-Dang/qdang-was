@@ -10,9 +10,19 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class PostSummary {
+public class PostInfo {
 
 	private Post post;
-	private PostLikes postLikes;
+	private List<PostLikes> postLikesList;
 	private List<Comment> comments;
+
+	public static PostInfo of(
+			Post post,
+			List<PostLikes> postLikesList,
+			List<Comment> comments) {
+		return new PostInfo(
+				post,
+				postLikesList,
+				comments);
+	}
 }

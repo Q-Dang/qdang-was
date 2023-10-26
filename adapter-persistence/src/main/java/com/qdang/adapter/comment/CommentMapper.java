@@ -36,6 +36,7 @@ public class CommentMapper implements
 		comment.user(getUser(jpaEntity));
 		comment.post(getPost(jpaEntity));
 		comment.content(jpaEntity.getContent());
+		comment.isAnonymous(jpaEntity.getIsAnonymous());
 		comment.isDeleted(jpaEntity.getIsDeleted());
 		comment.createdAt(jpaEntity.getCreatedAt());
 		comment.updatedAt(jpaEntity.getUpdatedAt());
@@ -52,6 +53,7 @@ public class CommentMapper implements
 		commentJpaEntity.user(getUserJpaEntity(domain));
 		commentJpaEntity.post(getPostJpaEntity(domain));
 		commentJpaEntity.content(domain.getContent());
+		commentJpaEntity.isAnonymous(domain.getIsAnonymous());
 		commentJpaEntity.isDeleted(domain.getIsDeleted());
 		commentJpaEntity.createdAt(domain.getCreatedAt());
 		commentJpaEntity.updatedAt(domain.getUpdatedAt());

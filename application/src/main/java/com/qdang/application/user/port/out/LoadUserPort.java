@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface LoadUserPort {
 
-	User loadById(Long userId);
+	User loadById(Long id);
 
 	User loadByUsername(String username);
 

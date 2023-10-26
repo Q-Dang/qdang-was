@@ -5,6 +5,7 @@ import com.qdang.persistence.user.UserJpaEntity;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,11 +21,13 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Getter
 @Entity
 @Table(name = "q_comment")
 @Builder
+@EntityListeners(AuditingEntityListener.class)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class CommentJpaEntity {
@@ -43,6 +46,9 @@ public class CommentJpaEntity {
 
 	@Column(columnDefinition = "text")
 	private String content;
+
+	@Column(nullable = false)
+	private Boolean isAnonymous;
 
 	@Column(nullable = false)
 	@ColumnDefault("false")

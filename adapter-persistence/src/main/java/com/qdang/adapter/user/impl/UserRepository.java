@@ -21,7 +21,11 @@ public interface UserRepository extends
 
 	Optional<UserJpaEntity> findByUsername(String username);
 
+	Boolean existsByUsername(String username);
+
 	Optional<UserJpaEntity> findByLoginId(String loginId);
+
+	Boolean existsByLoginId(String loginId);
 
 	@Query("select u "
 			+ "from UserJpaEntity u "

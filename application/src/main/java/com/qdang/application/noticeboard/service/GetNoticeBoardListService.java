@@ -3,22 +3,24 @@ package com.qdang.application.noticeboard.service;
 import com.qdang.application.noticeboard.domain.NoticeBoard;
 import com.qdang.application.noticeboard.domain.vo.NoticeBoardPinInfo;
 import com.qdang.application.noticeboard.port.in.GetNoticeBoardPinnedListUseCase;
-import com.qdang.application.noticeboard.port.out.LoadNoticeBoardPinnedPort;
+import com.qdang.application.noticeboard.port.out.FindNoticeBoardPinnedPort;
 import com.qdang.application.noticeboard.port.out.LoadNoticeBoardPort;
 import com.qdang.global.usecase.UseCase;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 
 @UseCase
 @RequiredArgsConstructor
 class GetNoticeBoardListService implements GetNoticeBoardPinnedListUseCase {
 
 	private final LoadNoticeBoardPort loadNoticeBoardPort;
-	private final LoadNoticeBoardPinnedPort loadNoticeBoardPinnedPort;
+	private final FindNoticeBoardPinnedPort findNoticeBoardPinnedPort;
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<NoticeBoardPinInfo> getNoticeBoardPinnedList(Long userId) {
 		List<NoticeBoard> noticeBoards = loadNoticeBoardPort.loadAllNotDeleted();
 		List<NoticeBoardPinInfo> noticeBoardPinInfos = noticeBoards
@@ -33,7 +35,7 @@ class GetNoticeBoardListService implements GetNoticeBoardPinnedListUseCase {
 	}
 
 	private boolean isPinned(Long userId, NoticeBoard noticeBoard) {
-		return loadNoticeBoardPinnedPort
+		return findNoticeBoardPinnedPort
 				.findByUserIdAndNoticeBoardId(
 						userId,
 						noticeBoard.getId())

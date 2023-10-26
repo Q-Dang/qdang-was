@@ -39,8 +39,6 @@ public class Match {
 				.matchType(matchType)
 				.userCount(userCount)
 				.isValid(false)
-				.createdAt(LocalDateTime.now())
-				.updatedAt(LocalDateTime.now())
 				.build();
 	}
 
@@ -49,7 +47,6 @@ public class Match {
 			throw new BusinessException(ErrorType.INVALID_INPUT_EXCEPTION, "이미 종료된 게임입니다.");
 		}
 		this.isValid = true;
-		this.updatedAt = LocalDateTime.now();
 		this.endAt = LocalDateTime.now();
 		this.duration = duration;
 	}

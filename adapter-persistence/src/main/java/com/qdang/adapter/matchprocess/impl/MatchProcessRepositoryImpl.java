@@ -18,7 +18,10 @@ class MatchProcessRepositoryImpl implements MatchProcessRepositoryCustom {
 		return queryFactory
 				.selectFrom(matchProcessJpaEntity)
 				.where(matchProcessJpaEntity.match.id.eq(matchId))
-				.orderBy(matchProcessJpaEntity.phaseCount.asc(), matchProcessJpaEntity.processCount.desc())
+				.orderBy(
+						matchProcessJpaEntity.phaseCount.asc(),
+						matchProcessJpaEntity.processCount.desc()
+				)
 				.fetch();
 	}
 }

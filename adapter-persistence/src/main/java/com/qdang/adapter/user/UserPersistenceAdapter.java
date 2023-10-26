@@ -26,14 +26,12 @@ class UserPersistenceAdapter implements
 
 	@Override
 	public boolean isPresentUsername(String username) {
-		return userRepository.findByUsername(username)
-				.isPresent();
+		return userRepository.existsByUsername(username);
 	}
 
 	@Override
 	public boolean isPresentLoginId(String loginId) {
-		return userRepository.findByLoginId(loginId)
-				.isPresent();
+		return userRepository.existsByLoginId(loginId);
 	}
 
 	@Override
