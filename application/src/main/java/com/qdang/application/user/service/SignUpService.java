@@ -1,5 +1,7 @@
 package com.qdang.application.user.service;
 
+import com.qdang.application.user.port.out.SaveRefreshTokenPort;
+import com.qdang.global.jwt.JwtProperty;
 import com.qdang.global.jwt.JwtProvider;
 import com.qdang.global.jwt.TokenInfo;
 import com.qdang.global.usecase.UseCase;
@@ -11,6 +13,8 @@ import com.qdang.application.user.port.in.command.SignUpCommand;
 import com.qdang.application.user.port.out.CheckUserPort;
 import com.qdang.application.user.port.out.SaveUserPort;
 import com.qdang.application.user.domain.User;
+import java.time.temporal.ChronoUnit;
+import java.util.concurrent.TimeUnit;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -25,6 +29,8 @@ class SignUpService implements SignUpUseCase {
 	private final JwtProvider jwtProvider;
 	private final SaveUserPort saveUserPort;
 	private final CheckUserPort checkUserPort;
+	private final JwtProperty jwtProperty;
+	private final SaveRefreshTokenPort saveRefreshTokenPort;
 
 	@Override
 	@Transactional
@@ -41,9 +47,14 @@ class SignUpService implements SignUpUseCase {
 										command.getPassword()),
 								generateRandomUsername(),
 								UserRole.MEMBER));
-		TokenCollection tokenCollection =
+		TokenCollection
+				tokenCollection =
 				jwtProvider.createTokenCollection(TokenInfo.from(user));
-		user.updateRefreshToken(tokenCollection.getRefreshToken());
+		saveRefreshTokenPort.save(
+				user.getId(),
+				tokenCollection.getRefreshToken(),
+				jwtProperty.getRefreshExpiredDay(),
+				TimeUnit.DAYS);
 		saveUserPort.save(user);
 		return tokenCollection;
 	}

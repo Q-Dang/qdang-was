@@ -75,8 +75,6 @@ public class UserJpaEntity {
 	@Column(length = 13)
 	private String phone;
 
-	private String refreshToken;
-
 	private String fcmToken;
 
 	@Column(columnDefinition = "text")

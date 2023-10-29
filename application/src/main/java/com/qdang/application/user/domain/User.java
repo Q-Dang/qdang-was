@@ -2,7 +2,6 @@ package com.qdang.application.user.domain;
 
 import com.qdang.application.match.domain.UserMatch;
 import com.qdang.application.user.exception.InvalidPasswordException;
-import com.qdang.global.exception.InvalidException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import lombok.AccessLevel;
@@ -25,7 +24,6 @@ public class User {
 	private Gender gender;
 	private Integer proficiency;
 	private String phone;
-	private String refreshToken;
 	private String fcmToken;
 	private String profileImage;
 	private String address;
@@ -97,31 +95,11 @@ public class User {
 		}
 	}
 
-	public void updateRefreshToken(String refreshToken) {
-		this.refreshToken = refreshToken;
-	}
-
 	public void checkPasswordByEncoder(
 			String rawPassword,
 			PasswordEncoder passwordEncoder) {
 		if (!passwordEncoder.matches(rawPassword, password)) {
 			throw new InvalidPasswordException();
-		}
-	}
-
-	public void logout() {
-		refreshToken = null;
-	}
-
-	public void validateRefreshToken(String refreshToken) {
-		if (!this.refreshToken.equals(refreshToken)) {
-			throw new InvalidException("올바르지 않은 리프레시 토큰입니다.");
-		}
-	}
-
-	public void validateLongin() {
-		if (refreshToken == null) {
-			throw new InvalidException("로그인이 안 된 유저입니다.");
 		}
 	}
 }
