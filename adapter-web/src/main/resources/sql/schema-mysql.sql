@@ -31,7 +31,6 @@ CREATE TABLE `q_user`
     `proficiency`          int          NOT NULL DEFAULT 0,
     `phone`                VARCHAR(13)  NULL,
     `fcm_token`            varchar(255) NULL,
-    `refresh_token`        varchar(255) NULL,
     `profile_image`        text         NULL,
     `address`              varchar(100) NULL,
     `detail_address`       varchar(100) NULL,
