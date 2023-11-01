@@ -3,7 +3,9 @@ package com.qdang.adapter.token;
 import com.qdang.application.user.port.out.CheckRefreshTokenPort;
 import com.qdang.application.user.port.out.DeleteRefreshTokenPort;
 import com.qdang.application.user.port.out.SaveRefreshTokenPort;
+import com.qdang.global.exception.ErrorType;
 import com.qdang.global.exception.InvalidException;
+import com.qdang.global.exception.UnauthorizedException;
 import com.qdang.global.redis.RedisKey;
 import com.qdang.global.persistenceadapter.PersistenceAdapter;
 import java.util.concurrent.TimeUnit;
@@ -39,7 +41,7 @@ class TokenPersistenceAdapter implements
 			throw new InvalidException("로그인이 안 된 유저입니다.");
 		}
 		if (!refreshToken.equals(savedRefreshToken)) {
-			throw new InvalidException("올바르지 않은 리프레시 토큰입니다.");
+			throw new UnauthorizedException(ErrorType.INVALID_REFRESH_TOKEN_EXCEPTION);
 		}
 	}
 
