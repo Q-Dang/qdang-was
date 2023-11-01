@@ -5,10 +5,12 @@ import com.qdang.adapter.post.request.LikePostRequest;
 import com.qdang.adapter.post.request.ScrapPostRequest;
 import com.qdang.adapter.post.request.WritePostRequest;
 import com.qdang.adapter.post.response.GetPostDetailResponse;
+import com.qdang.adapter.post.response.SearchPostResponse;
 import com.qdang.application.noticeboard.port.in.CommentPostUseCase;
 import com.qdang.application.noticeboard.port.in.GetUserPostDetailUseCase;
 import com.qdang.application.noticeboard.port.in.LikePostUseCase;
 import com.qdang.application.noticeboard.port.in.ScrapPostUseCase;
+import com.qdang.application.noticeboard.port.in.SearchPostUseCase;
 import com.qdang.application.noticeboard.port.in.WritePostUseCase;
 import com.qdang.application.user.domain.User;
 import com.qdang.global.http.WebAdapter;
@@ -30,6 +32,7 @@ class PostController implements PostWebAdapter {
 	private final ScrapPostUseCase scrapPostUseCase;
 	private final LikePostUseCase likePostUseCase;
 	private final CommentPostUseCase commentPostUseCase;
+	private final SearchPostUseCase searchPostUseCase;
 
 	@Override
 	public ResponseEntity<GetPostDetailResponse> getPostDetail(
@@ -88,8 +91,11 @@ class PostController implements PostWebAdapter {
 	}
 
 	@Override
-	public ResponseEntity<Void> searchPost(String keyword) {
-		return null;
+	public ResponseEntity<SearchPostResponse> searchPost(String keyword) {
+		searchPostUseCase.searchPost(keyword);
+		return HttpResponse.success(
+				SuccessType.READ_RESOURCE_SUCCESS,
+				null);
 	}
 
 }

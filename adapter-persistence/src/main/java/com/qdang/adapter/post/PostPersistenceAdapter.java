@@ -15,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @PersistenceAdapter
 @RequiredArgsConstructor
-public class PostPersistenceAdapter implements
+class PostPersistenceAdapter implements
 		LoadPostPort,
 		SavePostPort {
 
@@ -42,6 +42,12 @@ public class PostPersistenceAdapter implements
 		return postMapper.mapToDomainEntity(
 				postRepository.findFetchHashtagById(id)
 						.orElseThrow(NotFoundPostException::new));
+	}
+
+	@Override
+	public List<Post> loadByTitleAndContent(String keyword) {
+		// Todo : implement
+		return null;
 	}
 
 	@Override

@@ -10,4 +10,6 @@ public interface LoadPostPort {
 	Post loadById(Long id);
 
 	Post loadFetchHashtagById(Long id);
+
+	List<Post> loadByTitleAndContent(String keyword);
 }

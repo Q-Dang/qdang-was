@@ -5,6 +5,7 @@ import com.qdang.adapter.post.request.LikePostRequest;
 import com.qdang.adapter.post.request.ScrapPostRequest;
 import com.qdang.adapter.post.request.WritePostRequest;
 import com.qdang.adapter.post.response.GetPostDetailResponse;
+import com.qdang.adapter.post.response.SearchPostResponse;
 import com.qdang.application.user.domain.User;
 import com.qdang.global.argument.AuthUser;
 import io.swagger.v3.oas.annotations.Operation;
@@ -80,7 +81,7 @@ public interface PostWebAdapter {
 			responseCode = "200",
 			description = "게시글 검색하기 성공")
 	@GetMapping("/search")
-	ResponseEntity<Void> searchPost(
+	ResponseEntity<SearchPostResponse> searchPost(
 			@RequestParam(value = "keyword") String keyword
 	);
 
