@@ -1,5 +1,6 @@
 package com.qdang.global.config;
 
+import com.qdang.global.redis.RedisKey;
 import java.time.Duration;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.cache.RedisCacheManagerBuilderCustomizer;
@@ -51,14 +52,13 @@ public class RedisConfig {
 				);
 	}
 
-	//
 	@Bean
 	public RedisCacheManagerBuilderCustomizer redisCacheManagerBuilderCustomizer() {
 		return (builder) -> builder
 				.withCacheConfiguration("noticeBoard",
 						RedisCacheConfiguration.defaultCacheConfig()
 								.entryTtl(Duration.ofHours(12))
-								.computePrefixWith(cacheName -> "prefix::" + cacheName + "::")
+								.computePrefixWith(cacheName -> RedisKey.ANNOUNCEMENT.of(cacheName))
 								.disableCachingNullValues()
 								.serializeKeysWith(
 										RedisSerializationContext.SerializationPair.fromSerializer(new StringRedisSerializer())

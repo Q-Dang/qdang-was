@@ -28,7 +28,7 @@ class TokenPersistenceAdapter implements
 	public void save(Long userId, String refreshToken, Integer ttl, TimeUnit unit) {
 		ValueOperations<String, String> valueOperations = stringRedisTemplate.opsForValue();
 		valueOperations.set(
-				RedisKey.REFRESH_TOKEN.of(userId),
+				RedisKey.REFRESH_TOKEN.of(String.valueOf(userId)),
 				refreshToken);
 	}
 
@@ -36,7 +36,7 @@ class TokenPersistenceAdapter implements
 	public void checkValidRefreshToken(Long userId, String refreshToken) {
 		ValueOperations<String, String> valueOperations = stringRedisTemplate.opsForValue();
 		String savedRefreshToken =
-				valueOperations.get(RedisKey.REFRESH_TOKEN.of(userId));
+				valueOperations.get(RedisKey.REFRESH_TOKEN.of(String.valueOf(userId)));
 		if (savedRefreshToken == null) {
 			throw new InvalidException("로그인이 안 된 유저입니다.");
 		}
@@ -47,6 +47,6 @@ class TokenPersistenceAdapter implements
 
 	@Override
 	public void delete(Long userId) {
-		stringRedisTemplate.delete(RedisKey.REFRESH_TOKEN.of(userId));
+		stringRedisTemplate.delete(RedisKey.REFRESH_TOKEN.of(String.valueOf(userId)));
 	}
 }

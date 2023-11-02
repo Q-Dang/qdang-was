@@ -10,6 +10,7 @@ import com.qdang.global.usecase.UseCase;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.transaction.annotation.Transactional;
 
 @UseCase
@@ -22,6 +23,7 @@ class GetPostListInNoticeBoardService implements GetPostListInNoticeBoardUseCase
 
 	@Override
 	@Transactional(readOnly = true)
+	@Cacheable(value = "noticeBoard", key = "#noticeBoardId", condition = "#noticeBoardId == 1")
 	public List<PostInfo> getPostListInNoticeBoard(Long noticeBoardId) {
 		List<Post> posts = loadPostPort.loadAllFetchHashtagByNoticeBoardId(noticeBoardId);
 		return posts
