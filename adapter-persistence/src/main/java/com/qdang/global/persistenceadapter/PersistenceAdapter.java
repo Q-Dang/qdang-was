@@ -7,10 +7,12 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import org.springframework.core.annotation.AliasFor;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
+@Repository
 @Component
 public @interface PersistenceAdapter {
 

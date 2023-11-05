@@ -13,7 +13,6 @@ import com.qdang.application.user.port.in.command.SignUpCommand;
 import com.qdang.application.user.port.out.CheckUserPort;
 import com.qdang.application.user.port.out.SaveUserPort;
 import com.qdang.application.user.domain.User;
-import java.time.temporal.ChronoUnit;
 import java.util.concurrent.TimeUnit;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -47,8 +46,7 @@ class SignUpService implements SignUpUseCase {
 										command.getPassword()),
 								generateRandomUsername(),
 								UserRole.MEMBER));
-		TokenCollection
-				tokenCollection =
+		TokenCollection tokenCollection =
 				jwtProvider.createTokenCollection(TokenInfo.from(user));
 		saveRefreshTokenPort.save(
 				user.getId(),
