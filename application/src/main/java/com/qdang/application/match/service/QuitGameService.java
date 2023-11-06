@@ -6,7 +6,6 @@ import com.qdang.application.match.port.in.QuitGameUseCase;
 import com.qdang.application.match.port.in.command.QuitMatchCommand;
 import com.qdang.application.match.port.out.LoadMatchPort;
 import com.qdang.application.match.port.out.SaveMatchPort;
-import com.qdang.application.user.domain.User;
 import com.qdang.application.user.port.out.LoadUserPort;
 import com.qdang.application.user.port.out.SaveUserPort;
 import com.qdang.application.match.domain.UserMatch;
@@ -14,6 +13,7 @@ import com.qdang.application.match.port.out.LoadUserMatchPort;
 import com.qdang.application.match.port.out.SaveUserMatchPort;
 import com.qdang.global.usecase.UseCase;
 import java.util.List;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,8 +37,6 @@ class QuitGameService implements QuitGameUseCase {
 				loadMatchPort.loadById(command.getMatchId());
 		List<UserMatch> userMatches =
 				loadUserMatchPort.loadAllFetchUserByMatch(match);
-		List<User> users =
-				loadUserPort.loadAllByMatchId(match.getId());
 		// player Id validation
 		match.quit(command.getPlayTime());
 		command.getUserMatchResultCommand()
@@ -63,7 +61,11 @@ class QuitGameService implements QuitGameUseCase {
 				});
 		saveMatchPort.save(match);
 		saveUserMatchPort.saveAll(userMatches);
-		saveUserPort.saveAll(users);
+		saveUserPort.saveAll(
+				userMatches
+						.stream()
+						.map(UserMatch::getUser)
+						.collect(Collectors.toList()));
 	}
 
 	private UserMatch getUserMatch(Long userId, List<UserMatch> userMatches) {
