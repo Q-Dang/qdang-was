@@ -83,6 +83,7 @@ public class SecurityConfig {
 					.antMatchers("/actuator/**")
 					.requestMatchers(PathRequest.toStaticResources().atCommonLocations())
 					.requestMatchers(
+							new AntPathRequestMatcher("/privacy"),
 							new AntPathRequestMatcher(
 									"/v1/auth/login",
 									HttpMethod.POST.name()),

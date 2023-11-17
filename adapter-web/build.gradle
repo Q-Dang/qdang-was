@@ -24,5 +24,10 @@ dependencies {
     // Health Check
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-aop'
+
+    // Swagger
     implementation "org.springdoc:springdoc-openapi-ui:${springDocVersion}"
+
+    // thyemeleaf
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 }
