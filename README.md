@@ -1,6 +1,7 @@
 # Q-dang <a href="https://f-it.oopy.io/"> <img src="https://github.com/Q-Dang/qdang-was/assets/81281190/63768eff-6699-41fc-99a7-9aadb35813ad" align="left" width="100"></a>
 ### 당구 경기 기록 서비스
 <br>
+<img src="https://github.com/Q-Dang/qdang-was/assets/81281190/87dc7cfc-f9dd-403e-ab3a-54d2fe158523"
 
 ## 주요 기능
 - 당구 경기 기록
