@@ -1,9 +1,8 @@
-# Q-dang <a href="https://f-it.oopy.io/"> <img src="https://github.com/Q-Dang/qdang-was/assets/81281190/63768eff-6699-41fc-99a7-9aadb35813ad" align="left" width="100"></a>
-### 당구 경기 기록 서비스
-<br>
-<img src="https://github.com/Q-Dang/qdang-was/assets/81281190/87dc7cfc-f9dd-403e-ab3a-54d2fe158523"
+# Q-dang <a href="https://play.google.com/store/apps/details?id=com.q_dang"> <img src="https://github.com/Q-Dang/qdang-was/assets/81281190/63768eff-6699-41fc-99a7-9aadb35813ad" align="left" width="100"></a>
+### 당구 경기 기록 서비스 - <a href="https://play.google.com/store/apps/details?id=com.q_dang">Google Store</a>
+<img src="https://github.com/Q-Dang/qdang-was/assets/81281190/87dc7cfc-f9dd-403e-ab3a-54d2fe158523">
 
-## 주요 기능
+### 주요 기능
 - 당구 경기 기록
 - 당구 커뮤니티
 - 주변 당구장 검색
