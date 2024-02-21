@@ -30,4 +30,9 @@
 **Api Docs** - <img src="https://img.shields.io/badge/Swagger-85EA2D?style=for-the-social&logo=swagger&logoColor=white">
 
 ## Database Schema
-<img src="https://github.com/Q-Dang/qdang-was/assets/81281190/6c8f9af6-84e0-4154-85ae-7c4fe824def3" align="left" width="700"></a>
+<img src="https://github.com/Q-Dang/qdang-was/assets/81281190/6c8f9af6-84e0-4154-85ae-7c4fe824def3" width="700">
+<br>
+
+## Cloud Architecture
+<img src="https://github.com/Q-Dang/qdang-was/assets/81281190/ca1c2067-d240-49bb-a014-310d8b955485" width="700">
+
